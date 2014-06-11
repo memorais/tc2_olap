@@ -1,4 +1,4 @@
-tc2_olap
+PP-LaTeX
 ========
 
-TC2 - OLAP
+LaTeX class for the accepted standard for theses and dissertations at PPGCC/PUCRS, Brazil
