@@ -77,13 +77,23 @@ A simulação por DM se mostra um método versátil e acessível, sendo consider
 
 \section{Docagem Molecular}
 
-A Docagem Molecular é considerada um dos principais processo do CADD, e é através dela que são produzidos os dados detalhados sobre a interação entre receptores e seus ligantes \cite{LEN96}. No processo de Docagem Molecular, algoritmos de docagem são executados para testar e analisar virtualmente a interação entre um ligante e um receptor, estes algoritmos geram um grande número de interações, onde em todas elas, o ligante é  testado em diferentes orientações e conformações dentro do sítio de ligação do receptor de modo a formar um complexo estável.
+A Docagem Molecular é considerada um dos principais processo do CADD, e é através dela que são produzidos os dados detalhados sobre a interação entre receptores e seus ligantes \cite{LEN96}. 
+
+No processo de Docagem Molecular, algoritmos de docagem são executados para testar e analisar virtualmente a interação entre um ligante e um receptor, estes algoritmos geram um grande número de interações, onde em todas elas, o ligante é testado em diferentes orientações e conformações dentro do sítio de ligação do receptor, de modo a formar um complexo estável. 
+Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o ligante pode ser uma pequena molécula ou até mesmo outra proteína. A Figura \ref{fig:docking} \cite{ALE13} ilustra cada um destes elementos e apresenta como é feita a interação entre eles.
+
+\begin{figure}[h]
+	\center
+	\includegraphics[width=14cm]{images/docking.png}
+	\label{fig:docking}
+	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor.}
+\end{figure}
 
 Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida. 
 
+A complexidade aumenta quando, neste processo, são considerados fatores externos, como por exemplo, a flexibilidade do ligante e do 
 
- 
-O processo de Docagem Molecular consiste no teste e análise virtual da interação entre uma molécula e uma proteína
+
 
 fornecendo estimativas sobre a aﬁnidade e maneira que certa proteína e ligante estão
 interagindo. N
