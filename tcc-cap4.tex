@@ -12,7 +12,7 @@ A execução da simulação de docagem é realizada por vários algoritmos, e pa
 
 Com objetivo de automatizar o processo de preparação dos dados de simulações de docagem molecular, foram criados dois scripts utilizando as linguagens Python e Bash. O primeiro script é responsável pela sumarização dos dados resultante da simulação para posteriormente alimentar o modelo OLAP com os dados já organizados. O segundo script foi criado para manipular as colunas de um arquivo CSV contendo o resultado dos processos de docagem.
 
-Através da distância euclidiana ($d(P, Q)= \xsqrt{(x - a)^{2} +(y - b)^{2} + (z - c)^{2}}$), faz-se um filtro para obtenção das ligações mais estáveis, enquanto as ligações que apresentam valores ruins, consideradas instáveis, são descartadas.
+Através da distância euclidiana ($d(P, Q)= \sqrt{(x - a)^{2} +(y - b)^{2} + (z - c)^{2}}$), faz-se um filtro para obtenção das ligações mais estáveis, enquanto as ligações que apresentam valores ruins, consideradas instáveis, são descartadas.
 
 Os dados de entrada no primeiro script de carga recebem três parâmetros. O primeiro parâmetro é um arquivo texto contendo a lista de resíduos, o segundo é um arquivo texto contendo a lista de ligantes e o terceiro é o arquivo delimitado por vírgula (CSV) contendo o resultado da simulação dos processos de docagem molecular. Após a execução deste script, tem-se como resultado os dados sumarizados e organizados, prontos para alimentar o modelo OLAP. O segundo script é responsável por excluir ou manter determinadas colunas dos arquivos CSV. Ele recebe como primeiro parâmetro uma lista de colunas separadas por vírgula, o segundo parâmetro prove as opções para excluir (-x) ou manter apenas (-m) as linhas e o terceiro é o arquivo CSV a ser manipulado.
 
