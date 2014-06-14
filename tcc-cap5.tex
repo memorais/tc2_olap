@@ -7,6 +7,31 @@ descrever como  adicionar novas dimensoes baseadas em novos residuos
 \section{Identificação de métricas}
 
 \section{Identificação dos resíduos relevantes}
+Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, era saber quais eram os resíduos mais relevantes. A enzima InhA possui 268 resíduos \cite{KARANADUNOSM09} e o processo de identificação dos mais importantes leva em consideração o número de contatos do resíduo com o ligante. Na base de informações que foi resultado do processo de simulação de docagem, cada resíduo é representado por uma tripla contendo a sua localização espacial nos eixos x, y e z.
+
+De acordo com o especialista de domínio, para ser considerado contato do resíduo com o ligante é preciso estar em uma distância entre 2 e 4 angstrom. Valores inferiores a 2 angstrom são descartados por serem considerados uma sobreposição. Desta forma é utilizado o cálculo da distância euclidiana entre os átomos do resíduo e do ligante \cite{KARANADUNOSM09} para encontrar estes valores, desprezando os átomos de hidrogênio conforme determinação dos especialistas de domínio. Quanto maior o número de contatos do resíduo com o ligante, mais relevante para o especialista é o resíduo. As regras para elencar os resíduos mais relevantes podem ser sumarizadas da seguinte forma:
+
+\begin{enumerate}
+    \item Distância de 2 a 4 angstrom são considerados contatos.
+    \item Distância inferior a 2 angstrom são desconsideradas. 
+    \item Descarte do cálculo para os átomos de hidrogênio.
+    \item Quanto mais contatos, mais relevante.
+\end{enumerate} 
+
+Com base nestas prerrogativas foram selecionados os 10 principais resíduos mais relevantes para responder às questões dos especialistas conforme mostrado.
+
+\begin{itemize}
+	PHE_148 (Phenylalanine)
+	ILE_193 (Isoleucine)
+	GLY_95 (Glycine)
+	THR_195 (Threonine)
+	ILE_94 (Isoleucine)
+	MET_198 (Methionine)
+	MET_160 (Methionine)
+	SER_19 (Serine)
+	ILE_15 (Isoleucine)
+	TYR_157 (Tyrosine)
+\end{itemize}
 
 \section{Dimensões}
 	mostrar hierarquias de dimensoes
