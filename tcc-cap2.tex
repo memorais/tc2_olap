@@ -86,17 +86,24 @@ Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o
 	\center
 	\includegraphics[width=14cm]{images/docking.png}
 	\label{fig:docking}
-	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor.}
+	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor \cite{ALE13}.}
 \end{figure}
 
-Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida. 
+Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:TCLdocking} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
 
-A complexidade aumenta quando, neste processo, são considerados fatores externos, como por exemplo, a flexibilidade do ligante e do 
+\begin{figure}[h]
+	\center
+	\includegraphics[width=14cm]{images/TCLdocking.png}
+	\label{fig:TCLdocking}
+	\caption{Representação da superfície molecular do sítio de ligação da enzima receptora InhA na estrutura de cristal. O ligante TCL é  representado na forma de palitos. A conformação inicial do ligante TCL aparece em cor laranja, e a conformação final após uma simulação de docagem molecular é representada em ciano \cite{REN13}.}
+\end{figure}
+
+As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como corpos rígidos \cite{SOU06}.
+Os esforços inicial envolvendo a docagem de protínas e ligantes 
 
 
+A complexidade aumenta quando, neste processo, são considerados fatores externos, como por exemplo, a flexibilidade do ligante.
 
-fornecendo estimativas sobre a aﬁnidade e maneira que certa proteína e ligante estão
-interagindo. N
 
 \section{Modelagem OLAP}
 	Explicação didática sobre o modelo olap para o professor osmar
