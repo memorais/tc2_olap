@@ -89,7 +89,7 @@ Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o
 	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor \cite{ALE13}.}
 \end{figure}
 
-Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:TCLdocking} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
+Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor, ou então, a região ou o sítio de ligação deve ser previamente conhecido. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:TCLdocking} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
 
 \begin{figure}[h]
 	\center
@@ -98,7 +98,13 @@ Diversas interações devem ser testadas para que seja identificado o melhor enc
 	\caption{Representação da superfície molecular do sítio de ligação da enzima receptora InhA na estrutura de cristal. O ligante TCL é  representado na forma de palitos. A conformação inicial do ligante TCL aparece em cor laranja, e a conformação final após uma simulação de docagem molecular é representada em ciano \cite{REN13}.}
 \end{figure}
 
-As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como corpos rígidos \cite{SOU06}.
+As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como sendo corpos rígidos. O modelo conhecido como "chave e fechadura" (do inglês \emph{lock-and-key}, proposto por Emil Fisher em 1894, prevê um encaixe perfeito do ligante no sítio de ligação do receptor, tal como uma chave encaixa em sua fechadura correspondente \cite{kar07}. 
+
+No entanto, ambos proteína e ligante são moléculas flexíveis. Desta forma, o modelo histórico de "chave e fechadura" deu seu lugar à novas teorias, as quais passaram a considerar totalmente ou parcialmente a flexibilidade do ligante e do receptor \cite{SOU06}.
+
+Atualmente um dos maiores desafios na área de docagem molecular é conseguir manipular, de forma eficience, a flexibilidade do receptor da proteína. A eficiência da busca pela melhor conformação é determinada pelo número de graus de liberdade  \cite{SOU06}.
+
+
 Os esforços inicial envolvendo a docagem de protínas e ligantes 
 
 
