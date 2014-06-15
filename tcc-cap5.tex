@@ -5,6 +5,9 @@ descrever como foi feito o levantamento dos residuos mais interesantes. Explicar
 descrever como  adicionar novas dimensoes baseadas em novos residuos
 
 \section{Identificação de métricas}
+Conforme visto no capítulo de referencial teórico, a FEB é um dos métodos utilizados para mensurar a qualidade de uma docagem molecular. Consequentemente a FEB se torna uma das métricas a ser levada em consideração para responder às questões de negócio elaboradas pelos especialistas de domínio. Outra métrica que será utilizada é o RMSD pois assim como a FEB ele também fornece uma forma de avaliar a qualidade da docagem. Estas duas métricas em conjunto dão uma visão para os especialistas de quão satisfatório foi o processo de docagem para uma determinada iteração.
+
+A importância destas duas métricas para os especialistas se deve ao proposito distinto de cada uma delas. Enquanto a FEB mede a qualidade da docagem no aspecto termodinâmico da questão, o RMSD tem como natureza avaliar geometricamente como estão dispostas as moléculas do resíduo e ligante.
 
 \section{Identificação dos resíduos relevantes}
 Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, era saber quais eram os resíduos mais relevantes. A enzima InhA possui 268 resíduos \cite{KARANADUNOSM09} e o processo de identificação dos mais importantes leva em consideração o número de contatos do resíduo com o ligante. Na base de informações que foi resultado do processo de simulação de docagem, cada resíduo é representado por uma tripla contendo a sua localização espacial nos eixos x, y e z.
@@ -16,7 +19,25 @@ De acordo com o especialista de domínio, para ser considerado contato do resíd
     \item Distância inferior a 2 angstrom são desconsideradas. 
     \item Descarte do cálculo para os átomos de hidrogênio.
     \item Quanto mais contatos, mais relevante.
-\end{enumerate} 
+\end{enumerate}
+
+Após execução dos algoritmos elaborados dentro do trabalho para coletar estas informações, foram identificados 15 resíduos mais relevantes que posteriormente foram avaliados pelos especialistas e reduzidos a uma lista de 10 resíduos. Com base em uma lista anteriormente elaborada por um especialista de domínio, conforme mostrado na figura 5.1, os 5 resíduos que sobraram dos 15 iniciais foram identificados como casos onde a proteína, devido a flexibilidade, abriu uma cavidade acima da cavidade do substrato, permitindo ligações do ligante fora da cavidade do substrato.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[width=12cm]{images/ListaProfOsmar.png}
+        \label{fig:rddworkflow}
+        \caption{Lista dos principais resíduos do Professor Osmar}
+\end{figure}
+
+A figura 5.2 mostra os 15 resíduos que foram identificados inicialmente. Aqueles indicados em vermelho são os considerados importantes e os indicados em branco foram descartados porque ficaram fora do sítio de ligação.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[width=10cm]{images/avaliacao_Residuos_nomes.png}
+        \label{fig:rddworkflow}
+        \caption{Lista inicial dos 15 resíduos mais relevantes}
+\end{figure}
 
 Com base nestas prerrogativas foram selecionados os 10 principais resíduos mais relevantes para responder às questões dos especialistas conforme mostrado.
 
@@ -32,6 +53,8 @@ Com base nestas prerrogativas foram selecionados os 10 principais resíduos mais
 	\item ILE\_15 (Isoleucine)
 	\item TYR\_157 (Tyrosine)
 \end{itemize}
+
+
 
 \section{Dimensões}
 	mostrar hierarquias de dimensoes
