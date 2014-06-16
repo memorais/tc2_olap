@@ -6,13 +6,41 @@ possibilitar ao especialista de domínio uma agilidade na identificação das me
 \section{Caracterização do Problema}
 O processo de desenvolvimento de novos fármacos é uma atividade fundamental para a indústria farmacêutica, na qual é utilizado não somente para o desenvolvimento de novos compostos para atender uma determinada necessidade, mas também tem como objetivo evoluir os compostos já existentes em busca de um resultado aprimorado e mais eficaz. 
 
-Este processo exige o envolvimento de profissionais e organizações das mais diversas áreas, como companhias de biotecnologia, autoridades reguladoras, pesquisadores acadêmicos, entre outros. Além de ser uma tarefa interdisciplinar ela é consideravelmente complexa dada a natureza do comportamento existente para as ligações químicas.
+Este processo possui uma alta complexidade e exige, em média, 14 anos desde a identificação até a liberação pelo órgão regulador. As etapas envolvidas neste processo vão desde a identificação de um possivel candidato à fármaco, seguido por uma pesquisa de otimização, testes \emph{in-silico} e \emph{in-vitro}, análises toxicológicas até os ensaios clínicos. Estima-se que os custos de desenvolvimento de um novo fármaco seja aproximadamente de 1,2 bilhões de dólares \cite{kun92}. 
 
+A área de bioinformática tem como um de seus objetivos, através do uso de recursos e técnicas computacionais, auxiliar o processo de descobrimento de novos fármacos. A partir de algoritmos computacionais é possível realizar simulações para identificar possíveis candidatos a novos fármacos e, posteriormente, submetê-los a testes mais específicos. Estes testes e simulações executados com auxílio computacional são denominados \emph{in-silico}.
 
-Este processo é complexo e exige, em média, 14 anos desde a identificação até a liberação pelo órgão regulador. As etapas envolvidas neste processo vão desde a identificação de um possivel candidato à fármaco, seguido por uma pesquisa de otimização, testes \emph{in-silico} e \emph{in-vitro}, análises toxicológicas até os ensaios clínicos. Estima-se que os custos de desenvolvimento de um novo fármaco seja aproximadamente de 1,2 bilhões de dólares \cite{kun92}. 
+O fator de desenvolvimento constante de novos \emph{softwares} e \emph{hardwares} contribui para que experimentos deste tipo sejam executados de forma cada vez mais rápida e com um maior nível de precisão. Esta metodologia passou a ser utilizada exaustivamente pelas indústrias farmacêuticas por se tratar de um método que exige um menor custo financeiro, se comparado com os tradicionais testes em laboratório \cite{art08}. 
+
+O LABIO (Laboratório de Bioinformática, Modelagem e Simulação de Biossistemas) da Faculdade de Informática da Pontifícia Universidade 
+Católica do Rio Grande do Sul (PUCRS) realiza pesquisas e estudos \emph{in-silico} de interações entre a enzima InhA (\emph{Mycobacterium 
+tuberculosis}) e demais resíduos que possam a vir manter ligações receptor-ligante estáveis através de simulações de docagem molecular.
+
+Dentro do processo de desenvolvimento de fármacos, a docagem molecular pode ser considerada como o principal método para avaliar a eficácia das combinações químicas entre as conformações. A docagem molecular é um método a qual prediz a orientação preferencial de encaixe de uma molécula à outra, com o objetivo de formar um complexo receptor-ligante estável. Este método pode ser simulado computacionalmente através dos algoritmos de docagem. 
+
+A docagem basicamente envolve duas moléculas, uma chamada de receptor, que normalmente é uma proteína, e um ligante que á a molécula complementar que se conecta ao receptor. Como forma de avaliar o resultado da ligação entre as duas moléculas, podem ser usadas duas propriedades para medição qualitativa. Uma é chamada de energia livre de ligação (Free energy of binding) e a outra é chamada de RMSD (Root mean square deviation). Analisar esta interação entre o receptor e o ligante não é uma tarefa simples visto que estes são influenciados por uma série de fatores ambientais.
+
+Os algoritmos de docagem precisam levar em consideração todas as formas de ligação entre o ligante e o receptor, o que inclui a exploração de todos os seis graus de liberdade translacionais e rotacionais do ligante, além dos graus de liberdade conformacionais do receptor.
+
+O principal desafio da realização de testes \emph{in-silico} é quando a flexibilidade da molécula receptora passa a ser considerada. Devido ao tamanho da molécula e sua complexidade, as simulações com receptores flexíveis requerem um grande esforço computacional para realização dos cálculos necessários \cite{art08}.
+Existem diversas abordagens para contornar este problema, e uma delas é a utilização de conjuntos de conformações gerados em simulações por Dinâmica Molecular (DM). Esta técnica consiste em gerar um conjunto de conformações de uma proteina em um intervalo de tempo, tendo como objetivo principal o estudo do comportamento dinâmico de uma proteína. Cada conformação em um instante de tempo específico é denominada como \emph{snapshot} e possui propriedades que podem ser calculadas. Com isso, é executado uma simulação de docagem molecular para cada \emph{snapshot} do conjunto gerado por DM.
+
+Todavia, apesar das metologias que geram um conjunto de conformações representativas do comportamento dinâmico de um receptor, a análise dos dados resultantes das simulações de docagem molecular ainda se faz de forma manual pelo especialista de domíno. A análise das interações ligante-receptor acaba se tornando humanamente inviável de ser feita para todos os resultados da docagem, pois o especialista possui um protocolo utilizado para avaliar de forma manual estes resultados, através dos valores de FEB (Free Energy of Binding) e RMSD (Root-mean-square Deviation), e também a geometria resultante.
+
+Estima-se que a análise dos dados resultantes, seguindo o protocolo utilizado pelo especialista, necessitaria de aproximadamente 516 horas (mais de 21 dias) para ser concluída para todos os resultados de apenas uma molécula ligante, se fosse utilizado uma dinâmica molecular de 3.100 conformações (levando em consideração o tempo médio de análise de 10 minutos por conformação). Este número se torna ainda mais expressivo para uma simulação utilizando uma dinâmica molecular de 20.000 conformações.
 
 
 \section{Motivação}
+
+Dados da Organização Mundial da Saúde confirmam que a Tuberculose (TB) é a segunda doença infecciosa que mais causa mortes em todo o mundo, perdendo apenas para o HIV/AIDS. No ano de 2012, 8.6 milhões de pessoas foram diagnosticadas com Tuberculose e 1.3 milhões morreram por estarem infectadas. A Tuberculose, causada pela bactéria \emph{Mycobacterium tuberculosis}, embora seja curável, é uma preocupação de nível mundial.
+
+Atualmente existem programas governamentais que se esforçam no controle e no combate à TB, que tem como objetivo principal evitar que a doença seja difundida entre a população. Para o tratamento da doença, existem três principais fármacos que são utilizados: isoniazida (INH), rifampicina (RMP) e pirazinamida (PZA). O tratamento realizados com estes fármacos tem duração, em média, de 6 meses. Se não houver colaboração do paciente e o tratamento for interrompido de forma precoce, pode gerar bactérias resistentes à estes compostos químicos, sendo mais difíceis de combater. Devido aos efeitos colaterais destes medicamentos, muitas vezes o tratamento não é concluído adaquadamente, criando bactérias mais resistentes.
+
+O desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose. O processo de CADD é utilizado em larga escala para testes \emph{in-silico}, com objetivo de identificar novos compostos que mostrem eficácia e minimizem os efetos colaterais usados aos pacientes.
+
+Além da motivação relacionada ao receptor InhA que está sendo utilizado neste trabalho, uma das principais motivações está em contribuir com a comunidade de bioinformática e com o LABIO da PUCRS na pesquisa e desenvolvimento de métodos para cura e controle desta doença, através do desenvolvimento de uma ferramenta que auxilie a análise dos dados resultantes de experimentos realizados. 
+
+A utilização da ferramenta desenvolvida neste trabalho permitirá ao especialista de domínio uma maior chance de identificar ligações estáveis em um menor período de tempo, sem que haja conhecimentos avançados de informática e sem necessitar de recursos computacionais de alta capacidade.
 
 \section{Objetivos}
 \subsection{Objetivo Geral}
