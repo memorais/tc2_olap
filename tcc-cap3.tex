@@ -4,19 +4,29 @@
 \chapter{Ferramentas de Desenvolvimento}
 
 \section{Linguagem Python}
-A escolha da linguagem Python foi uma peça-chave para possibilitar o desenvolvimento de um script para preparação dos dados utilizados neste trabalho. Uma simulação de docagem molecular gera um alto volume de dados, e para tratá-los, foi necessário a utilização de uma linguagem que suportasse esta massa de dados e apresentasse uma forma simples de desenvolvimento.
+A escolha de uma linguagem de programação foi uma peça-chave para possibilitar o desenvolvimento de scripts para preparação dos dados utilizados neste trabalho. Uma simulação de docagem molecular gera um grande volume de dados, e para tratá-los, foi necessário a utilização de uma linguagem que suportasse a manipulação desta massa de dados através de uma forma simples de desenvolvimento.
 
-O Python é uma linguagem na qual possui uma curva de aprendizado relativamente simples se comparada com as outras linguagens utilizadas no mercado, isto se deve ao fato de o Python possuir uma estrutura de dados mais alto nível e uma abordagem simples, mas efetiva para programação orientada à objeto. Por possuir uma sintaxe clara e de tipagem dinâmica, se torna simples a compreensão \cite{pyt00}. 
+Python é uma linguagem na qual possui uma curva de aprendizado relativamente simples se comparada com as outras linguagens utilizadas no mercado atualmente. Esta característica é explicada pelo fato desta linguagem possuir uma estrutura de dados mais alto nível e uma abordagem simples, mas efetiva para programação orientada à objeto. Por possuir uma sintaxe clara e de tipagem dinâmica, se torna simples a legibilidade do código fonte \cite{pyt00}. 
 
-Outra característica importante desta linguagem é ser multiplataforma. Dessa forma, é possível a execução em ambientes Windows, Mac e todas as distribuições Linux. Esta característica possibilita que programas escritos nesta linguagem sejam portáveis para qualquer outra plataforma com facilidade \cite{pyt01}.
+A linguagem possui eficientes estruturas de dados de alto nível, como: listas, dicionário, data/hora e outros. Dessa forma, o desenvolvedor não se envolve com detalhes de baixo nível tais como manipulação de ponteiros, alocação de memória, etc. A biblioteca nativa do Python possui uma vasta coleção de módulos prontos para uso, inclusive para processamento de texto e expressões regulares. Também existe a possibilidade de adicionar \emph{frameworks} desenvolvidos por terceiros.
 
-A biblioteca padrão da linguagem Python possui módulos nativos para processamento de texto e expressões regulares. Observando à estas características, o Python apresentou-se como uma linguagem ideal para ser empregada neste trabalho.
+Outra característica importante desta linguagem é ser multiplataforma. Portanto, é possível a execução em ambientes Windows, Mac e todas as distribuições Linux. Esta característica possibilita que programas escritos nesta linguagem sejam portáveis para qualquer outra plataforma com facilidade \cite{pyt01}.
+
+Pelo que se pode observar através de pesquisas, a linguagem Python está sendo amplamente empregada na área de bioinformática para auxiliar atividades de manipulação de dados, análise de arquivos e interações com banco de dados. Dessa maneira, observando as características citadas, o Python apresenta-se como uma linguagem ideal para ser empregada neste trabalho.
 
 \section{Microsoft SQL Server Analysis Services}
-O Microsoft SQL Server Analysis Services é um banco de dados multi dimensional OLAP, que também pode ser utilizado para data mining, e trabalha em cima do banco de dados relacional Microsoft SQL Server \cite{SIVSTE05}. Esta ferramenta foi utilizada para o desenvolvimento do cubo, bem como para toda criação de estrutura de tabelas e população dos dados.
+O Microsoft SQL Server Analysis Services, ou SSAS como é conhecido, é uma ferramenta \emph{desktop} de \emph{Business Intelligence} desenvolvida pela empresa Microsoft que permite trabalhar com modelos multidimensionais OLAP e mineração de dados. O Analysis Services funciona como uma camada independente para visualização dos dados armazenados em um banco de dados, seja ele SQL Server ou não. A partir desta ferramenta é possivel criar modelagens multidimensionais, realizar consultas e relatórios, através de uma interface totalmente uniforme \cite{MIC13}.
 
-Assim como outras ferramentas OLAP, o Analysis Services é utilizado dentro das organizações principalmente para auxiliar no processo de tomada de decisão. Como o modelo OLAP permite um método de acessar e analisar dados com grande flexibilidade, as empresas viram nestas características uma plataforma perfeita para integração e consolidação de informações gerenciais.
+Assim como outras ferramentas OLAP existentes no mercado, o Analysis Services é utilizado nas organizações principalmente para apoiar o processo de tomada de decisão. Como o modelo OLAP permite acessar a analisar os dados com uma grande flexibilidade, as empresas viram nestas características uma plataforma perfeita para integração e consolidação de informações de processos de negócio.
 
-A ferramenta é de implementação rápida, já que todo o processo de instalação stand-alone da solução não leva mais que 50 minutos, o Analysis Services assim como a linguagem de programação Python, possui uma curva de aprendizado simples. Outro aspecto que contribuiu para adoção desta tecnologia foi a parceria Microsoft DreamSpark com a PUCRS que permite a utilização desta ferramenta sem a necessidade de compra das suas licenças de uso.
+Por se tratar de uma ferramenta da Microsoft, as ferramentas do Microsoft Office possuem suporte para integração com o Analysis Services. Esta integração permite que ferramentas do pacote Office se tornem um fron-end para acesso aos dados corporativos e recursos de \emph{Business Intelligence}. Para as organizações esta integração se torna um benefício direto, pois a interface das ferramentas do pacote Office é conhecida pela maioria de seus usuários, não sendo necessário o investimento para treinamentos específicos.
 
-explicar didaticamente sobre o que é e pra que serve
+Qualquer tipo de dado que esteja armazenado em um banco do Analisys Services pode ser importado para o Microsoft Excel através de uma conexão ativa. Este procedimento simplifica expressivamente a análise dos dados, realização de consultas \emph{on-line}, geração de relatórios, etc. O processo de setup e implantação do Analysis Services não requer conhecimentos avançados, e a sua utilização em conjunto com o Microsoft SQL Server apresenta uma curva de aprendizado rápida.
+
+Para o desenvolvimento deste trabalho foi utilizado o Analisys Services em conjunto com o banco de dados Microsoft SQL Server. Um aspecto que contribuiu para utilização destas ferramentas foi a parceria existente entre a PUCRS e a Microsoft. O programa Microsoft DreamSpark permite aos alunos o uso destas e outras ferramentas sem que seja necessário a aquisição de licenças de uso.
+
+
+
+
+
+
