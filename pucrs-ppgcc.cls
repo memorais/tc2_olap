@@ -216,7 +216,8 @@ e-mail <rfbpiccoli at gmail dot com>^^J
 %\addto\captionsbrazil{%
     \newcommand*{\PP@Uni}{Pontif\'{i}cia Universidade Cat\'{o}lica do Rio Grande do Sul}
     \newcommand*{\PP@Fac}{Faculdade de Inform\'{a}tica}
-    \newcommand*{\PP@Dep}{Programa de P\'{o}s-Gradua\c{c}\~{a}o em Ci\^{e}ncia da Computa\c{c}\~{a}o}
+    % \newcommand*{\PP@Dep}{Programa de P\'{o}s-Gradua\c{c}\~{a}o em Ci\^{e}ncia da Computa\c{c}\~{a}o}
+    \newcommand*{\PP@Dep}{Sistemas de Informa\c{c}\~{a}o}
     %\edef\PP@undef{n\~{a}o definido}
     \newcommand*{\tese}{Tese}
     \newcommand*{\pep}{Plano de estudo e pesquisa}
