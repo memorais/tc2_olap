@@ -13,8 +13,8 @@ Em sua estrutura, a proteína InhA contém um conjunto de 268 resíduos, que por
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/inha.png}
-	\label{fig:inha}
 	\caption{Estrutura 3D em formato de fita da proteína InhA. Imagem obtida em RCSB PDB (www.rcsb.org) do PDB ID 1ENY}
+	\label{fig:inha}
 \end{figure}
 
 \section{Ligantes Considerados}
@@ -28,8 +28,8 @@ A estrutura do TCL consiste em uma pequena molécula composta por um conjunto de
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/tcl.png}
-	\label{fig:tcl}
 	\caption{Representação 3D da estrutura do ligante Triclosano \cite{kar11}.}
+	\label{fig:tcl}
 \end{figure}
 
 Outro ligante empregado nos experimentos de docagem molecular utilizados neste trabalho é o Etionamida (do inglês ETH - \emph{Ethionamide}). O ETH é um antibiótico utilizado no tratamento da tuberculose. É um componente quimico eficaz contra microorganismos do gênero \emph{Mycobacterium}, especialmente as espécies \emph{M. tuberculosis}. 
@@ -41,8 +41,8 @@ A estrutura do ETH consiste em uma pequena molécula composta por um conjunto de
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/eth.png}
-	\label{fig:eth}
 	\caption{Representação 3D da estrutura do ligante Etionamida \cite{kar11}.}
+	\label{fig:eth}
 \end{figure}
 
 \section{Banco de simulações de docagem}
@@ -58,17 +58,19 @@ Cada átomo da proteína está representado no \emph{dataset} por três colunas,
 \begin{table}[h]
 \label{tab:dataset}
 \caption{Estrutura do \emph{dataset} contendo os dados resultantes de experimentos de docagem molecular para os ligantes TCL e ETH.}
-\begin{tabular}{c|l|l|l|l|l|l|l|l|l}
+\scalebox{0.7}{
+\begin{tabular}{c|l|l|l|l|l|l|l|l}
 \hline
-\textbf{SS}   & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_x}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_y}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_z}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_H1\_x}} & \multicolumn{1}{c|}{\textbf{...}} & \multicolumn{1}{c|}{\textbf{ETHBESTFEB}} & \multicolumn{1}{c|}{\textbf{ETHBESTRMSD}} & \multicolumn{1}{c|}{\textbf{TCLBESTFEB}} & \multicolumn{1}{c}{\textbf{TCLBESTRMSD}} \\ \hline
-\textbf{1}    & 15.834                                     & -20.243                                    & 8.161                                      & 15.925                                      & ...                               & -8.74                                    & 3.79                                      & -10.52                                   & 5.52                                     \\ \hline
-\textbf{2}    & 15.641                                     & -20.046                                    & 8.011                                      & 15.564                                      & ...                               & -9.34                                    & 3.86                                      & -9.71                                    & 5.77                                     \\ \hline
-\textbf{3}    & 15.954                                     & -20.459                                    & 7.796                                      & 16.085                                      & ...                               & -9.38                                    & 3.60                                      & -9.86                                    & 5.45                                     \\ \hline
-\textbf{4}    & 16.321                                     & -20.608                                    & 7.448                                      & 16.481                                      & ...                               & -9.28                                    & 3.72                                      & -9.23                                    & 5.18                                     \\ \hline
-\textbf{...}  & ...                                        & ...                                        & ...                                        & ...                                         & ...                               & ...                                      & ...                                       & ...                                      & ...                                      \\ \hline
-\textbf{3100} & 18.591                                     & -17.334                                    & 11.449                                     & 17.882                                      & ...                               & -9.28                                    & 5.28                                      & 1.25                                     & 7.50                                     \\ \hline
+\textbf{SS}   & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_x}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_y}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_z}} & \multicolumn{1}{c|}{\textbf{...}} & \multicolumn{1}{c|}{\textbf{ETHBESTFEB}} & \multicolumn{1}{c|}{\textbf{ETHBESTRMSD}} & \multicolumn{1}{c|}{\textbf{TCLBESTFEB}} & \multicolumn{1}{c}{\textbf{TCLBESTRMSD}} \\ \hline
+\textbf{1}    & 15.834                                     & -20.243                                    & 8.161                                      & ...                               & -8.74                                    & 3.79                                      & -10.52                                   & 5.52                                     \\ \hline
+\textbf{2}    & 15.641                                     & -20.046                                    & 8.011                                      & ...                               & -9.34                                    & 3.86                                      & -9.71                                    & 5.77                                     \\ \hline
+\textbf{3}    & 15.954                                     & -20.459                                    & 7.796                                      & ...                               & -9.38                                    & 3.60                                      & -9.86                                    & 5.45                                     \\ \hline
+\textbf{4}    & 16.321                                     & -20.608                                    & 7.448                                      & ...                               & -9.28                                    & 3.72                                      & -9.23                                    & 5.18                                     \\ \hline
+\textbf{...}  & ...                                        & ...                                        & ...                                        & ...                                         & ...                               & ...                                      & ...                                       & ...                                   \\ \hline
+\textbf{3100} & 18.591                                     & -17.334                                    & 11.449                                     & ...                               & -9.28                                    & 5.28                                      & 1.25                                     & 7.50                                     \\ \hline
 \end{tabular}
-\end{table}
+}
+\end{table} 
 
 Relacionando com o processo de ETL, o \emph{dataset} recebido representa uma fonte de dados que deve ser utilizada para extração das informações relevantes para o negócio. Os dados contidos nele não possuem um tratamento, mas foi possível observar uma padronização de nomenclatura das colunas.
 

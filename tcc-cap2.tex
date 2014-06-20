@@ -9,8 +9,8 @@ Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolv
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/rdd_workflow.png}
-	\label{fig:rddworkflow}
 	\caption{\emph{Workflow} do processo de planejamento racional de fármacos assistido por computador \cite{kar11}}
+	\label{fig:rddworkflow}
 \end{figure}
 
 
@@ -73,8 +73,8 @@ As proteínas são corpos flexíveis que não possuem uma conformação única e
 \begin{figure}[h]
 	\center
 	\includegraphics[scale=0.4]{images/dm_inha.png}
-	\label{fig:dm}
 	\caption{Flexibilidade da enzima receptora InhA. Sobreposição de diferentes conformações da InhA, representadas em fitas, durante uma simulação de DM. A conformação inicial da simulação está representada pela cor verde. Outras duas conformações foram capturadas pela simulação de DM nos intervalos de 1,000 ps (cor azul) e 3,000 ps (cor magenta). O retângulo tracejado identifica a região com maior flexibilidade \cite{REN13}.}
+	\label{fig:dm}
 \end{figure}
 
 A conformação de uma proteína pode ser especificada pela lista de átomos na estrutura, por suas coordenadas e pelo conjunto de ligações químicas entre eles. A avaliação de uma conformação é feita através do cálculo de conjuntos de potenciais de energia. Estes calculos são computacionalmente complexos e intensivos, mas com a evolução rápida da capacidade de processamento dos computadores esta técnica é beneficiada diretamente \cite{art08}.
@@ -92,8 +92,8 @@ Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/docking.png}
-	\label{fig:docking}
 	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma pequena molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor \cite{ALE13}.}
+	\label{fig:docking}
 \end{figure}
 
 Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor, ou então, a região ou o sítio de ligação deve ser previamente conhecido. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês FEB - \emph{Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:tcldock} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
@@ -101,8 +101,8 @@ Diversas interações devem ser testadas para que seja identificado o melhor enc
 \begin{figure}[h]
 	\center
 	\includegraphics[scale=0.65]{images/TCLdocking.png}
-	\label{fig:tcldock}
 	\caption{Representação da superfície molecular do sítio de ligação da enzima receptora InhA na estrutura de cristal. O ligante TCL é  representado na forma de palitos. A conformação inicial do ligante TCL aparece em cor laranja, e a conformação final após uma simulação de docagem molecular é representada em ciano \cite{REN13}.}
+	\label{fig:tcldock}
 \end{figure}
 
 As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como sendo corpos rígidos. O modelo conhecido como "chave e fechadura" (do inglês \emph{lock-and-key}, proposto por Emil Fisher em 1894, prevê um encaixe perfeito do ligante no sítio de ligação do receptor, tal como uma chave encaixa em sua fechadura correspondente \cite{kar07}. 
@@ -128,8 +128,8 @@ Quando o modelo dimensional passa a ser implementado em um banco de dados multid
 \begin{figure}[h]
 	\center
 	\includegraphics[width=14cm]{images/starvsolap.png}
-	\label{fig:starVSolap}
 	\caption{Representação da organização estrutural dos dados nos modelos do tipo estrela e cubo. (Material adaptado de \cite{KIM13})}
+	\label{fig:starVSolap}
 \end{figure}
 
 As dimensões representam os elementos "quem, o quê, onde, quando, como e porquê" de um processo de negócio de uma organização, por exemplo: "produto", "vendedor" e "loja". Cada dimensão possui uma chave primária e um conjunto de atributos que descrevem de forma textual os elementos envolvidos no processo de negócio. Os atributos servem para detalhar as características de uma dimensão e são essenciais para auxiliar na tomada de decisão \cite{KIM13}. Utilizando como exemplo a dimensão "produto", ela poderia conter os atributos "nome", "preço" e "categoria".
@@ -139,8 +139,8 @@ A tabela fato é onde as informações produzidas pela execução de um processo
 \begin{figure}[h]
 	\center
 	\includegraphics[width=13cm]{images/ex_olap.png}
-	\label{fig:exOlap}
 	\caption{Representação de um modelo dimensional em um banco de dados relacional do tipo estrela.}
+	\label{fig:exOlap}
 \end{figure}
 
 Os dados armazenados em um cubo OLAP passam por algoritmos de indexação, técnicas de armazenamento e outras otimizações que fazem com que as consultas realizadas nesta estrutura de dados, mesmo sendo complexas, tenham um alto desempenho no tempo de resposta para o usuário.
