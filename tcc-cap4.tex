@@ -1,12 +1,36 @@
 \chapter{Materiais utilizados}
-	
-\section{Banco de simulações de docagem}
 
-A execução da simulação de docagem é realizada por vários algoritmos, e para este caso tem como resultado um arquivo CSV que contém cada estado, também chamado de snapshot, da execução. Cada linha deste arquivo se refere a um snapshot e contém todos os resíduos, todos os ligantes envolvidos e qual foi o melhor FEB e RMSD dos ligantes para aquele determinado snapshot. Este banco de simulações possui 3100 snapshots que resultam em 3101 linhas no arquivo, levando em consideração o cabeçalho, e 12335 colunas.
+\section{Receptor Investigado}
 
-\section{Receptores Investigados}
+A Tuberculose, causada pela bactéria \emph{Mycobacterium tuberculosis}, é a segunda doença infecciosa que mais causa mortes em todo o mundo. O tratamento com os principais fármacos utilizados atualmente tem duração, em média, de 6 meses e apresenta diversos efeitos colaterais. Muitas vezes o paciente interrompe precocemente o tratamento, propiciando o surgimento de bactérias resistentes aos compostos químicos. Em função disso, O desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose.
+
+Dentro deste cenário, o LABIO da PUCRS realiza pesquisas e estudos \emph{in-silico} utilizando como receptor a enzima InhA da \emph{Mycobacterium tuberculosis} e através de experimentos de docagem molecular procura identificar potenciais candidatos à fármaco. A enzima em estudo é essencial para a sobrevivência da bactéria \emph{Mycobacterium tuberculosis} e se torna alvo para realização de experimentos\cite{kar11}.
+
+Em sua estrutura, a proteína InhA contém um conjunto de 268 resíduos, que por sua vez são compostos por um total de 4.008 átomos.
 
 \section{Ligantes Considerados}
+
+% -----------------------
+%
+% TO DO: descrever ligantes TCL e ETH
+%
+% -----------------------
+
+\section{Banco de simulações de docagem}
+
+Primeiramente, os especialistas de domínio do LABIO executaram dois experimentos de docagem molecular, cada um deles envolvendo um ligante diferente. Para o primeiro experimento, foi considerado o TCL como ligante. Já para o segundo, foi utilizado o ligante ETH. Ambos experimentos empregaram a enzima InhA como receptora, e sua flexibilidade foi representada por um conjunto de 3.100 \emph{snapshots} resultantes de simulações por DM. 
+
+Cada ligante foi submetido a 3.100 simulações de docagem, uma para cada conformação do conjunto. Os atributos calculados por estes experimentos foram FEB e RMSD, e após a execução, os dados resultantes dos experimentos foram exportados para um \emph{dataset} em formato CSV (\emph{Comma-separated values}).
+
+Neste \emph{dataset} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína, e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
+
+No \emph{dataset} utilizado, cada átomo está representado por três colunas, cada uma delas contendo respectivamente as coordenadas X, Y e Z de seu posicionamento. A Figura \ ilustra o conteúdo dos dados existentes no \emph{dataset} utilizado neste trabalho.
+
+% -----------------------
+%
+% TO DO: colocar figura ou montar tabela para ilustrar as informações contidas no dataset.
+%
+% -----------------------
 
 \section{Scripts para preparação dos dados}
 
