@@ -53,13 +53,24 @@ Cada ligante foi submetido a 3.100 simulações de docagem, uma para cada confor
 
 Neste \emph{dataset} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
 
-No \emph{dataset} utilizado, cada átomo está representado por três colunas, cada uma delas contendo respectivamente as coordenadas X, Y e Z de seu posicionamento. A Figura \ ilustra o conteúdo dos dados existentes no \emph{dataset} utilizado neste trabalho.
+Cada átomo da proteína está representado no \emph{dataset} por três colunas, cada uma delas contém respectivamente as coordenadas X, Y e Z de seu posicionamento. As colunas finais apresentam os melhores valores para as métricas FEB e RMSD para cada ligante do experimento. A Tabela \ref{tab:dataset} apresenta a estrutura em que os dados estão organizados no \emph{dataset}.
 
-% -----------------------
-%
-% TO DO: colocar figura ou montar tabela para ilustrar as informações contidas no dataset.
-%
-% -----------------------
+\begin{table}[h]
+\label{tab:dataset}
+\caption{Estrutura do \emph{dataset} contendo os dados resultantes de experimentos de docagem molecular para os ligantes TCL e ETH.}
+\begin{tabular}{c|l|l|l|l|l|l|l|l|l}
+\hline
+\textbf{SS}   & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_x}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_y}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_z}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_H1\_x}} & \multicolumn{1}{c|}{\textbf{...}} & \multicolumn{1}{c|}{\textbf{ETHBESTFEB}} & \multicolumn{1}{c|}{\textbf{ETHBESTRMSD}} & \multicolumn{1}{c|}{\textbf{TCLBESTFEB}} & \multicolumn{1}{c}{\textbf{TCLBESTRMSD}} \\ \hline
+\textbf{1}    & 15.834                                     & -20.243                                    & 8.161                                      & 15.925                                      & ...                               & -8.74                                    & 3.79                                      & -10.52                                   & 5.52                                     \\ \hline
+\textbf{2}    & 15.641                                     & -20.046                                    & 8.011                                      & 15.564                                      & ...                               & -9.34                                    & 3.86                                      & -9.71                                    & 5.77                                     \\ \hline
+\textbf{3}    & 15.954                                     & -20.459                                    & 7.796                                      & 16.085                                      & ...                               & -9.38                                    & 3.60                                      & -9.86                                    & 5.45                                     \\ \hline
+\textbf{4}    & 16.321                                     & -20.608                                    & 7.448                                      & 16.481                                      & ...                               & -9.28                                    & 3.72                                      & -9.23                                    & 5.18                                     \\ \hline
+\textbf{...}  & ...                                        & ...                                        & ...                                        & ...                                         & ...                               & ...                                      & ...                                       & ...                                      & ...                                      \\ \hline
+\textbf{3100} & 18.591                                     & -17.334                                    & 11.449                                     & 17.882                                      & ...                               & -9.28                                    & 5.28                                      & 1.25                                     & 7.50                                     \\ \hline
+\end{tabular}
+\end{table}
+
+Relacionando com o processo de ETL, o \emph{dataset} recebido representa uma fonte de dados que deve ser utilizada para extração das informações relevantes para o negócio. Os dados contidos nele não possuem um tratamento, mas foi possível observar uma padronização de nomenclatura das colunas.
 
 \section{Scripts para preparação dos dados}
 
