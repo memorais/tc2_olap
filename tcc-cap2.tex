@@ -4,7 +4,7 @@
 \chapter{Referencial Teórico}
 
 \section{Planejamento Racional de Fármacos}
-Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolvimento de novos compostos químicos capazes de prevenir ou curar doenças passou a seguir um planejamento racional, com embasamento lógico e teórico \cite{rdd}. Esse processo é denominado “Planejamento Racional de Fármacos” (do inglês \emph{RDD - Rational Drug Design}) e, de acordo com Kuntz \cite{kun92}, ele se divide em quatro etapas e está reprensentados através do \emph{workflow} da Figura \ref{fig:rddworkflow} \cite{kar11}: 
+Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolvimento de novos compostos químicos capazes de prevenir ou curar doenças passou a seguir um planejamento racional, com embasamento lógico e teórico \cite{rdd}. Esse processo é denominado “Planejamento Racional de Fármacos” (do inglês RDD - \emph{Rational Drug Design}) e, de acordo com Kuntz \cite{kun92}, ele se divide em quatro etapas e está reprensentados através do \emph{workflow} da Figura \ref{fig:rddworkflow} \cite{kar11}: 
 
 \begin{figure}[h]
 	\center
@@ -49,7 +49,7 @@ A Tabela \ref{tab:rddtempo} apresenta, de uma forma geral, as etapas que envolve
 	\end{tabular}
 \end{table}
 
-O desenvolvimento de fármacos auxiliado por computador (do inglês CADD - Computer-aided drug design) consiste na utilização de recursos, ferramentas e técnicas computacionais contribui de forma significativa para as etapas de desenvolvimento de um fármaco.  Diferentes estágios deste processo podem ser beneficiados pelo uso da computação, podendo ser aplicado na identificação da molécula-alvo, planejamento, análise e melhoramento de ligantes.
+O desenvolvimento de fármacos auxiliado por computador (do inglês CADD - \emph{Computer-aided drug design}) consiste na utilização de recursos, ferramentas e técnicas computacionais contribui de forma significativa para as etapas de desenvolvimento de um fármaco.  Diferentes estágios deste processo podem ser beneficiados pelo uso da computação, podendo ser aplicado na identificação da molécula-alvo, planejamento, análise e melhoramento de ligantes.
 
 
 \section{Dinâmica Molecular}
@@ -96,7 +96,7 @@ Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o
 	\caption{Representação do processo de docagem molecular em três dimensões (3D) entre uma proteína como receptor e uma pequena molécula como ligante, na qual se estabelece uma interação entre eles no sítio de ligação do receptor \cite{ALE13}.}
 \end{figure}
 
-Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor, ou então, a região ou o sítio de ligação deve ser previamente conhecido. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês \emph{FEB - Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:TCLdocking} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
+Diversas interações devem ser testadas para que seja identificado o melhor encaixe do ligante no sítio de ligação do receptor, ou então, a região ou o sítio de ligação deve ser previamente conhecido. Um dos critérios utilizados para avaliar as interações é pelo cálculo da energia livre de ligação (do inglês FEB - \emph{Free Energy of Binding}). Quanto mais negativo for o valor resultante, melhor é a ligação estabelecida \cite{kar07}. A Figura \ref{fig:TCLdocking} \cite{REN13} ilustra o processo de docagem em três dimensões, a posição inicial da molécula do ligante TCL no sítio de ligação da molécula InhA e a posição do ligante TCL após a simulação de docagem molecular.
 
 \begin{figure}[h]
 	\center
@@ -114,9 +114,6 @@ Considerar a flexibilidade do ligante não requer um grande esforço computacion
 Existem diversos estudos e abordagens que contemplam a flexibilidade do receptor em simulações de docagem molecular. Entretanto, no presente trabalho, os dados utilizados foram previamente desenvolvidos no LABIO (Laboratório de Bioinformática, Modelagem e Simulação de Biossistemas) combinando técnicas de docagem molecular com dados resultantes de simulações por DM. A partir disso, foi gerado um conjunto de \emph{snapshots} sequenciais que representam as diferentes conformações da proteína receptora InhA em um intervalo de tempo.bilidade do ligante \cite{kar11}.
 
 \section{Modelagem OLAP}
-% 	Explicação didática sobre o modelo olap para o professor osmar
-% 	Cubos de dados 
-% 	Processo de carga de dados - ETL
 
 Com o desenvolvimento tecnológico, ficou cada vez mais fácil a obtenção de dados sobre um determinado assunto. Atualmente, qualquer aparelho eletrônico é capaz de gerar uma imensa massa de dados. Porém, estes dados se tornam irrelevantes se não estiverem devidamente organizados e não possuirem uma ferramenta capaz de tratá-los. Para as organizações, o tratamento destes dados significa transformá-los em algo que possa agregar valor.
 
@@ -146,8 +143,14 @@ A tabela fato é onde as informações produzidas pela execução de um processo
 	\caption{Representação de um modelo dimensional em um banco de dados relacional do tipo estrela.}
 \end{figure}
 
-Os dados armazenados em um cubo OLAP passam por algoritmos de indexação, técnicas de armazenamento e outras otimizações que fazem com que as consultas realizadas nesta estrutura de dados tenham um bom desempenho. 
- 
+Os dados armazenados em um cubo OLAP passam por algoritmos de indexação, técnicas de armazenamento e outras otimizações que fazem com que as consultas realizadas nesta estrutura de dados, mesmo sendo complexas, tenham um alto desempenho no tempo de resposta para o usuário.
+
+Um dos processo que fazem parte da modelagem de dados OLAP é o de extração, transformação e carga (do inglês ETL - \emph{Extract, Transform and Load}). Este processo consiste na extração de dados de fontes externas e na transformação dos mesmos, para que possam atender às necessidades de negócio. Posteriormente, estes dados são carregados em um \emph{Data Warehouse} ou em outros ambientes de banco de dados.
+
+O processo de ETL é considerado o mais complexo e que consome mais tempo durante a criação de um ambiente de \emph{Data Warehouse/Business Intelligence}, pois consiste em movimentar e transformar os dados que irão servir como base para futuras decisões gerenciais. Portanto, os dados precisam estar precisos e consistentes. Muitas vezes as informações estão armazenadas em diferentes fontes de dados e não possuem um padrão de estrutural de dados \cite{kim13}. Nestes casos, as etapas de extração e transformação precisam de um esforço para que os dados sejam tratados de forma homogênea.
+
+
+
 
 
 

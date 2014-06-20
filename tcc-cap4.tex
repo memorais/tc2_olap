@@ -4,17 +4,46 @@
 
 A Tuberculose, causada pela bactéria \emph{Mycobacterium tuberculosis}, é a segunda doença infecciosa que mais causa mortes em todo o mundo. O tratamento com os principais fármacos utilizados atualmente tem duração, em média, de 6 meses e apresenta diversos efeitos colaterais. Muitas vezes o paciente interrompe precocemente o tratamento, propiciando o surgimento de bactérias resistentes aos compostos químicos. Em função disso, O desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose.
 
-Dentro deste cenário, o LABIO da PUCRS realiza pesquisas e estudos \emph{in-silico} utilizando como receptor a enzima InhA da \emph{Mycobacterium tuberculosis} e através de experimentos de docagem molecular procura identificar potenciais candidatos à fármaco. A enzima em estudo é essencial para a sobrevivência da bactéria \emph{Mycobacterium tuberculosis} e se torna alvo para realização de experimentos\cite{kar11}.
+Dentro deste cenário, o LABIO da PUCRS realiza pesquisas e estudos \emph{in-silico} utilizando como receptor a enzima InhA da \emph{Mycobacterium tuberculosis} e através de experimentos de docagem molecular procura identificar potenciais candidatos à fármaco. 
 
-Em sua estrutura, a proteína InhA contém um conjunto de 268 resíduos, que por sua vez são compostos por um total de 4.008 átomos.
+Conforme descrito em \cite{kar11}, "A InhA é uma enzima importante no mecanismo de ação da tuberculose pois é responsável pela biossíntese de ácidos graxos, um importante componente da parede celular da micobactéria, e, consequentemente, uma das estruturas essenciais para a sua sobrevivência. Por esse motivo, desperta atenção especial como alvo atraente para o desenvolvimento de novos fármacos para a tuberculose."
+
+Em sua estrutura, a proteína InhA contém um conjunto de 268 resíduos, que por sua vez são compostos por um total de 4.008 átomos. No PDB (\emph{Protein Data Bank}), a proteína em estudo está identificada pelo código 1ENY. A Figura \ref{fig:inha} ilustra a estrutura 3D em formato de fita da proteína InhA.
+
+\begin{figure}[h]
+	\center
+	\includegraphics[width=14cm]{images/inha.png}
+	\label{fig:inha}
+	\caption{Estrutura 3D em formato de fita da proteína InhA. Imagem obtida em RCSB PDB (www.rcsb.org) do PDB ID 1ENY}
+\end{figure}
 
 \section{Ligantes Considerados}
 
-% -----------------------
-%
-% TO DO: descrever ligantes TCL e ETH
-%
-% -----------------------
+O Triclosano (do inglês TCL - \emph{Triclosan}) é um componente químico utilizado para contenção ou prevenção de contaminações bacterianas. É comumente encontrado em produtos domésticos como medicamentos, loções e cremes dentais \cite{TCL}. O TCL está sendo testado como uma alternativa para o desenvolvimento da tuberculose pois age diretamente na inibição do crescimento da bactéria.
+
+De acordo com \cite{GAU08} "estudos demonstraram que o triclosan também inibe uma enoil-redutase presente em \emph{M. smegmatis} e M. \emph{tuberculosis}. Essa enzima está envolvida com a síntese de ácidos micólicos que são componentes essenciais para a parede celular das  micobactérias e é o principal alvo da INH, um dos mais importantes antimicrobianos utilizados no tratamento da TB."
+
+A estrutura do TCL consiste em uma pequena molécula composta por um conjunto de 24 átomos. A Figura \ref{fig:tcl} ilustra a estrutura 3D do ligante TCL.
+
+\begin{figure}[h]
+	\center
+	\includegraphics[width=14cm]{images/tcl.png}
+	\label{fig:tcl}
+	\caption{Representação 3D da estrutura do ligante Triclosano \cite{kar11}.}
+\end{figure}
+
+Outro ligante empregado em experimentos de docagem molecular utilizados neste trabalho é o Etionamida (do inglês ETH - \emph{Ethionamide}). O ETH é um antibiótico utilizado no tratamento da tuberculose. É um componente quimico eficaz contra microorganismos do gênero \emph{Mycobacterium}, especialmente as espécies \emph{M. tuberculosis}. 
+
+Conforme descrito em \cite{COH10} "A ETH se liga covalentemente ao carbono 4 da porção nicotinamida do NADH formando o aduto ETH-NADH, […], este aduto desestabiliza as ligações covalentes que mantêm o NADH em posição no sitio ativo da proteína inibindo a ação da mesma."
+
+A estrutura do ETH consiste em uma pequena molécula composta por um conjunto de 21 átomos. A Figura \ref{fig:eth} ilustra a estrutura 3D do ligante ETH.
+
+\begin{figure}[h]
+	\center
+	\includegraphics[width=14cm]{images/eth.png}
+	\label{fig:eth}
+	\caption{Representação 3D da estrutura do ligante Etionamida \cite{kar11}.}
+\end{figure}
 
 \section{Banco de simulações de docagem}
 
@@ -22,7 +51,7 @@ Primeiramente, os especialistas de domínio do LABIO executaram dois experimento
 
 Cada ligante foi submetido a 3.100 simulações de docagem, uma para cada conformação do conjunto. Os atributos calculados por estes experimentos foram FEB e RMSD, e após a execução, os dados resultantes dos experimentos foram exportados para um \emph{dataset} em formato CSV (\emph{Comma-separated values}).
 
-Neste \emph{dataset} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína, e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
+Neste \emph{dataset} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
 
 No \emph{dataset} utilizado, cada átomo está representado por três colunas, cada uma delas contendo respectivamente as coordenadas X, Y e Z de seu posicionamento. A Figura \ ilustra o conteúdo dos dados existentes no \emph{dataset} utilizado neste trabalho.
 
