@@ -26,6 +26,7 @@ A Tabela \ref{tab:questaoNegocio} descreve as questões de negócio que foram id
 \end{table}
 
 \section{Identificação de métricas}
+\label{sec:IdentificacaoDeMetricas}
 
 Durante as entrevistas realizadas, pode-se perceber que informações baseadas nas métricas de FEB e RMSD possuíam grande relevância para responder as questões de negócio. Entretanto foi necessário definir certas propriedades e limitações de valores para adequar os cálculos às necessidades do negócio. Dessa maneira, todas as definições citadas nesta seção foram estabelecidas em conjunto com os especialistas de domínio do LABIO, para que os resultados apresentados pudessem representar a realidade.
 
@@ -39,7 +40,7 @@ Tanto a FEB quando o RMSD dão uma visão para o especialista de quão satisfat�
 
 Além disso, para ser possível responder ao item 3 da Tabela \ref{tab:questaoNegocio}, foi necessário incluir uma métrica para contabilizar o número de contatos entre o ligante e um resíduo da molécula receptora. 
 
-Um contato pode ser identificado pelo cálculo da medida em {\AA}ngstr\"om entre os átomos do resíduo do receptor e do ligante. Ou seja, para cada resíduo do receptor \emph{R} é calculada a distância Euclidiana entre todos seus átomos e os átomos de um ligante \emph{L}. Sendo $R=(r_{x},r_{y},r_{z})$ representando as coordenadas dos átomos dos resíduos do receptor, e $L=(l_{x},l_{y},l_{z})$ representando as coordenadas dos átomos do ligante, o cálculo da distância se dá pela equação \ref{eqt:distEuclid}.
+Um contato pode ser identificado pelo cálculo da medida em {\AA}ngstr\"om ({\AA}) entre os átomos do resíduo do receptor e do ligante. Ou seja, para cada resíduo do receptor \emph{R} é calculada a distância Euclidiana entre todos seus átomos e os átomos de um ligante \emph{L}. Sendo $R=(r_{x},r_{y},r_{z})$ representando as coordenadas dos átomos dos resíduos do receptor, e $L=(l_{x},l_{y},l_{z})$ representando as coordenadas dos átomos do ligante, o cálculo da distância se dá pela equação \ref{eqt:distEuclid}.
 
 \begin{equation}
 \label{eqt:distEuclid}
@@ -48,7 +49,7 @@ Um contato pode ser identificado pelo cálculo da medida em {\AA}ngstr\"om entre
 
 Em suma, para cada snapshot devem ser calculadas todas as coodernadas do receptor com todas as coordenadas de cada ligante, neste caso para o TCL e para o ETH. Entretanto, de todas as distâncias calculadas para um resíduo, apenas a menor delas deve ser considerada. 
 
-A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as distâncias entre os átomos do ligante PIF (cor preto) e do resíduo GLY95 (cor cinza) do receptor InhA. Para todas as distâncias calculadas, a menor delas é de 2.72 {\AA} \cite{MAC10}.
+A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as distâncias entre os átomos do ligante PIF (cor preto) e do resíduo GLY95 (cor cinza) do receptor InhA. Para todas as distâncias calculadas, a menor delas é de 2.72 {\AA} \cite{KARANADUNOSM09}.
 
 \begin{figure}[h]
 	\center
@@ -58,21 +59,43 @@ A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as 
 \end{figure} 
 
 \section{Identificação dos resíduos relevantes}
-%-------------------
-% TO DO: explicar como foi feito o cálculo para obter o número de contatos
-%        descrever limitação de 2 e 4 angstrons.
-%-------------------
 
-Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, era saber quais eram os resíduos mais relevantes. A enzima InhA possui 268 resíduos \cite{KARANADUNOSM09} e o processo de identificação dos mais importantes leva em consideração o número de contatos do resíduo com o ligante. Na base de informações que foi resultado do processo de simulação de docagem, cada resíduo é representado por uma tripla contendo a sua localização espacial nos eixos x, y e z.
+Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvedo os ligantes TCL e ETH com o receptor InhA. 
 
-De acordo com o especialista de domínio, para ser considerado contato do resíduo com o ligante é preciso estar em uma distância entre 2 e 4 angstrom. Valores inferiores a 2 angstrom são descartados por serem considerados uma sobreposição. Desta forma é utilizado o cálculo da distância euclidiana entre os átomos do resíduo e do ligante \cite{KARANADUNOSM09} para encontrar estes valores, desprezando os átomos de hidrogênio conforme determinação dos especialistas de domínio. Quanto maior o número de contatos do resíduo com o ligante, mais relevante para o especialista é o resíduo. As regras para elencar os resíduos mais relevantes podem ser sumarizadas da seguinte forma:
+A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre átomos do resíduo e o ligante. No \emph{dataset} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
+
+De acordo com o especialista de domínio, para ser considerado contato do resíduo com o ligante é preciso estar em uma distância entre 2{\AA} e 4{\AA}. Valores inferiores a 2{\AA} são descartados por serem considerados uma sobreposição, enquanto valores superiores a 4{\AA} indicam que não foi estabelecido contato. 
+
+Desta forma, para se obter os valores de todo o conjunto presente no \emph{dataset} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio pois devem ser tratados de outra forma.
+
+Quanto maior o número de contatos estabelecidos entre os átomos do resíduo e o ligante, mais relevante o resíduo se torna para o experimento de 
+docagem. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 
 \begin{enumerate}
-    \item Distância de 2 a 4 angstrom são considerados contatos.
-    \item Distância inferior a 2 angstrom são desconsideradas. 
-    \item Descarte do cálculo para os átomos de hidrogênio.
-    \item Quanto mais contatos, mais relevante.
+	\item São considerados contatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
+	\item Distâncias inferiores a 2 {\AA}ngstr\"ons são desconsideradas.
+	\item Átomos de hidrogênio são descartados.
+	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
 \end{enumerate}
+
+Além disso, um outro artefato foi utilizado para identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. 
+A Tabela \ref{tab:listaOsmar} apresenta a listagem dos resíduos representados pela sua sigla e seu número de ordem na enzima.
+
+\begin{table}[h]
+\caption{Lista dos principais resíduos para experimentos de docagem utilizando a enzima InhA.}
+\label{tab:listaOsmar}
+\centering
+\begin{tabular}{@{}lllllll@{}}
+GLY\_13	&	PHE\_40 &	PHE\_96	&	PHE\_148 &	PRO\_191 &	ILE\_201 &	GLU\_209 		\\
+ILE\_14	&	LEU\_62 &	MET\_97	&	PRO\_155 &	ILE\_193 &	VAL\_202 &	ALA\_210 		\\
+ILE\_15	&	ASP\_63 &	GLN\_99	&	ALA\_156 &	THR\_195 &	GLY\_203 &	ILE\_214 		\\
+THR\_16	&	VAL\_64 &	MET\_102 &	TYR\_157 &	LEU\_196 &	GLY\_204 &	LEU\_217 		\\
+SER\_18	&	GLN\_65 &	GLY\_103 &	MET\_160 &	ALA\_197 &	ALA\_205 &					\\
+SER\_19	&	SER\_93 &	ILE\_121 &	LYS\_164 &	MET\_198 &	LEU\_206 &					\\
+ILE\_20	&	ILE\_94	&	MET\_146 &	ALA\_190 &	SER\_199 &	GLY\_207 &					\\
+ALA\_21 &	GLY\_95	&	ASP\_147 &	GLY\_191 &	ALA\_200 &	GLU\_208 &					\\ 
+\end{tabular}
+\end{table}
 
 Após execução dos algoritmos elaborados dentro do trabalho para coletar estas informações, foram identificados 15 resíduos mais relevantes que posteriormente foram avaliados pelos especialistas e reduzidos a uma lista de 10 resíduos. Com base em uma lista anteriormente elaborada por um especialista de domínio, conforme mostrado na Figura \ref{fig:ListaOsmar}, os 5 resíduos que sobraram dos 15 iniciais foram identificados como casos onde a proteína, devido a flexibilidade, abriu uma cavidade acima da cavidade do substrato, permitindo ligações do ligante fora da cavidade do substrato.
 
@@ -108,6 +131,7 @@ Com base nestas prerrogativas foram selecionados os 10 principais resíduos mais
 \end{itemize}
 
 \section{Scripts para preparação dos dados}
+\label{sec:ScriptsParaPreparacaoDosDados}
 
 Com objetivo de automatizar o processo de preparação dos dados de simulações de docagem molecular, foram criados dois scripts utilizando as linguagens Python e Bash. O primeiro script é responsável pela sumarização dos dados resultante da simulação para posteriormente alimentar o modelo OLAP com os dados já organizados. O segundo script foi criado para manipular as colunas de um arquivo CSV contendo o resultado dos processos de docagem.
 
