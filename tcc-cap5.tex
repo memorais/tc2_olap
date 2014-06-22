@@ -48,7 +48,7 @@ Um contato pode ser identificado pelo cálculo da medida em {\AA}ngstr\"om ({\AA
 	d(R,L)=\sqrt{(r_{x}-l_{x})^{2}+(r_{y}-l_{y})^{2}+(r_{z}-l_{z})^{2}}
 \end{equation}
 
-Em suma, para cada snapshot devem ser calculadas todas as coodernadas do receptor com todas as coordenadas de cada ligante, neste caso para o TCL e para o ETH. Entretanto, de todas as distâncias calculadas para um resíduo, apenas a menor delas deve ser considerada. 
+Em suma, para cada snapshot devem ser calculadas todas as coordenadas do receptor com todas as coordenadas de cada ligante, neste caso para o TCL e para o ETH. Entretanto, de todas as distâncias calculadas para um resíduo, apenas a menor delas deve ser considerada. 
 
 A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as distâncias entre os átomos do ligante PIF (cor preto) e do resíduo GLY95 (cor cinza) do receptor InhA. Para todas as distâncias calculadas, a menor delas é de 2.72 {\AA} \cite{KARANADUNOSM09}.
 
@@ -61,7 +61,7 @@ A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as 
 
 \section{Identificação dos resíduos relevantes}
 
-Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvedo os ligantes TCL e ETH com o receptor InhA. 
+Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvendo os ligantes TCL e ETH com o receptor InhA. 
 
 A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{data set} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
 
@@ -134,39 +134,25 @@ Por fim, com base nestas comparações e nos experimentos realizados foi possív
 \begin{tabular}{@{}ll@{}}
 \toprule
 \multicolumn{1}{c}{Resíduo} & \multicolumn{1}{c}{Nome} \\ \midrule
-SER\_19                     & Serine                   \\
-ILE\_15                     & Isoleucine               \\
-ILE\_94                     & Isoleucine               \\
-GLY\_95                     & Glycine                  \\
-PHE\_148                    & Phenylalanine            \\
-TYR\_157                    & Tyrosine                 \\
-MET\_160                    & Methionine               \\
-ILE\_193                    & Isoleucine               \\
-THR\_195                    & Threonine                \\
-MET\_198                    & Methionine               \\ \bottomrule
+SER\_19                     & Serina                   \\
+ILE\_15                     & Isoleucina               \\
+ILE\_94                     & Isoleucina               \\
+GLY\_95                     & Glicina                  \\
+PHE\_148                    & Fenilalanina             \\
+TYR\_157                    & Tirosina                 \\
+MET\_160                    & Metionina                \\
+ILE\_193                    & Isoleucina               \\
+THR\_195                    & Treonina                 \\
+MET\_198                    & Metionina                \\ \bottomrule
 \end{tabular}
 \end{table}
 
 \section{Scripts para preparação dos dados}
 \label{sec:ScriptsParaPreparacaoDosDados}
 
-Com objetivo de automatizar o processo de preparação dos dados de simulações de docagem molecular, foram criados dois scripts utilizando as linguagens Python e Bash. O primeiro script é responsável pela sumarização dos dados resultante da simulação para posteriormente alimentar o modelo OLAP com os dados já organizados. O segundo script foi criado para manipular as colunas de um arquivo CSV contendo o resultado dos processos de docagem.
+Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python e Bash. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI e exibem seus resultados diretamente em STDOUT. Estes resultados podem ser redirecionados para outro arquivo através de um \emph{pipe}.
 
-Através da distância euclidiana ($d(P, Q)= \sqrt{(x - a)^{2} +(y - b)^{2} + (z - c)^{2}}$), faz-se um filtro para obtenção das ligações mais estáveis, enquanto as ligações que apresentam valores ruins, consideradas instáveis, são descartadas.
-
-Os dados de entrada no primeiro script de carga recebem três parâmetros. O primeiro parâmetro é um arquivo texto contendo a lista de resíduos, o segundo é um arquivo texto contendo a lista de ligantes e o terceiro é o arquivo delimitado por vírgula (CSV) contendo o resultado da simulação dos processos de docagem molecular. Após a execução deste script, tem-se como resultado os dados sumarizados e organizados, prontos para alimentar o modelo OLAP. O segundo script é responsável por excluir ou manter determinadas colunas dos arquivos CSV. Ele recebe como primeiro parâmetro uma lista de colunas separadas por vírgula, o segundo parâmetro prove as opções para excluir (-x) ou manter apenas (-m) as linhas e o terceiro é o arquivo CSV a ser manipulado.
-
-O procedimento de execução destas rotinas pode ser definido na seguinte sequência:
-
-\begin{enumerate}
-    \item Remoção de espaços em branco do arquivo contendo o processo de simulação da docagem. 
-    \item Criação das listas de resíduos e ligantes levando em consideração o arquivo com a simulação.
-    \item Execução do script de manipulação do arquivo de simulação de docagem para separar os resíduos NAH e o ligante TCL, conforme determinação do especialista de domínio.
-    \item Execução do script para avaliação dos melhores resultados.
-    \item Sumarização dos resultados.
-\end{enumerate}
-
-% Algoritmos
+O primeiro \emph{script} criado foi chamado de calculaDistancia, ele foi elaborado com o objetivo de elencar quais são os resíduos mais relevantes, atendendo assim a uma necessidade dos especialistas de domínio. O número de contatos do resíduo com o ligante é a medida qualitativa para elencar quais são estes melhores resíduos. Para identificar se houve contato ou não é necessário realizar o cálculo da distância euclidiana entre resíduo e ligante, conforme descrito na fórmula \ref{eqt:distEuclid}. O calculaDistancia recebe três parâmetros na sua execução, o primeiro é um arquivo texto contendo a lista de resíduos, o segundo é um arquivo texto contendo a lista de ligantes e o terceiro é a base de dados das simulações de docagem molecular no formato CSV. A saída do calculaDistancia é também no formato CSV e é composta do número do snapshot, nome do resíduo, nome do ligante e o resultado do cálculo da distância euclidiana. Um último campo foi adicionado a pedido dos especialistas para classificação da distância euclidiana, se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons. O algoritmo \ref{alg:CalculoDistancia} demonstra o funcionamento do calculaDistancia.
 
 \renewcommand{\algorithmicfor}{\textbf{para}}
 \renewcommand{\algorithmicif}{\textbf{se}}
@@ -208,6 +194,8 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 }
 \end{algorithm}
 
+O segundo \emph{script} criado foi batizado de ajustaColunasDocking e tem como objetivo realizar a manipulação das colunas contidas no CSV resultante da simulação do processo de docagem molecular. Como o arquivo CSV utilizado possui 12335 colunas, fica difícil realizar a manipulação das mesas através de um software de planilha eletrônica como o \emph{Microsoft Excel}, por exemplo. A necessidade de manipulação destas colunas surgiu após os especialistas de domínio identificarem que o resíduo NAH deveria ter a sua distância euclidiana calculada apenas com o ligante Triclosano. Desta forma foi necessário dividir o arquivo CSV original em dois, um contendo apenas as informações do resíduo NAH e o ligante Triclosano, e o segundo contendo todo o conteúdo original exceto o resíduo NAH. Para esta manipulação o ajustaColunasDocking foi desenvolvido e ele recebe quarto parâmetros de entrada para execução. O primeiro parâmetro é a respeito de qual operação será executada, se serão mantidas apenas as colunas descritas (-m) ou se serão excluída apenas as colunas descritas. O segundo parâmetro é a lista de colunas separadas por vírgula, o terceiro é o arquivo CSV de entrada e o último parâmetro é onde será gravado o novo arquivo. O algoritmo \ref{alg:ajustaColunaDocking} descreve o comportamento do ajustaColunasDocking.
+
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para manipulação da base de dados da simulação de docagem molecular}
@@ -237,6 +225,8 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 }
 \end{algorithm}
 
+O terceiro script está relacionado com o processo de carga dos dados e foi chamado de criaDadosDIMTempo. O objetivo dele é fornecer o \emph{script} SQL para inserção dos dados na dimensão tempo. O detalhamento a respeito das dimensões será visto na seção \ref{sec:Dimensoes}. O criaDadosDIMTempo recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela dentro do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do criaDadosDIMTempo.
+
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para popular os dados na dimensão tempo}
@@ -264,10 +254,12 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 }
 \end{algorithm}
 
+O quarto e último \emph{script} foi chamado de criaDados e é responsável por realizar a carga de todo o restante das informações dentro da base de dados. O criaDados recebe oito parâmetros de entrada para sua execução. Os 4 primeiros parâmetros são referentes a composição das dimensões, que será mais detalhadamente descrito na seção \ref{sec:Dimensoes}. O primeiro parâmetro é um arquivo CSV contendo a composição da dimensão ligante, o segundo referente a dimensão grupo, o terceiro referente a dimensão modelo dinâmico e o quarto referente a composição da dimensão experimento. O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes, o sexto é o arquivo com a relação do número de contatos de cada um dos resíduos. Estas informações foram extraídas após sumarização dos dados de saída do \emph{script} calculaDistancia. O sétimo parâmetro é o arquivo CSV contendo a base de resultados das simulações de docagem molecular. O último parâmetro é um arquivo contendo o agrupamento das conformações existentes no arquivo do parâmetro anterior. A saída do criaDados são os comandos \emph{INSERT} em SQL para popular as informações no banco de dados. O algoritmo \ref{alg:criaDadosFato} descreve o funcionamento do \emph{script} criaDados.
+
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para popular os dados na fato}
-\label{ciraDadosFato}
+\label{alg:criaDadosFato}
 {\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
 	\STATE Seja L uma lista de ligantes
@@ -320,11 +312,21 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 }
 \end{algorithm}
 
+Desta forma o procedimento de execução destas rotinas pode ser definido na seguinte sequência:
+
+\begin{enumerate}
+    \item Execução do ajustaColunasDocking para criação de dois arquivos CSV, separando o NAH do restante.
+    \item Execução do calculaDistancia para cada um dos arquivos CSV.
+    \item Execução do criaDadosDIMTempo para popular a dimensão tempo no banco de dados.
+    \item Execução do criaDados para popular o restante das informações no banco de dados.
+\end{enumerate}
+
 %-------------------
 % TO DO:  mostrar tabela de exemplo do resultado de saída do script.
 %-------------------
 
 \section{Dimensões}
+\label{sec:Dimensoes}
 	mostrar hierarquias de dimensoes
 	
 \section{Construção do modelo no Analisys Services}
