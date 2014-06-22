@@ -222,6 +222,8 @@ O segundo \emph{script} criado foi batizado de ajustaColunasDocking e tem como o
 }
 \end{algorithm}
 
+\newpage
+
 O terceiro script está relacionado com o processo de carga dos dados e foi chamado de criaDadosDIMTempo. O objetivo dele é fornecer o \emph{script} SQL para inserção dos dados na dimensão tempo. O detalhamento a respeito das dimensões será visto na seção \ref{sec:Dimensoes}. O criaDadosDIMTempo recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela dentro do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do criaDadosDIMTempo.
 
 \floatname{algorithm}{Algoritmo}
@@ -311,7 +313,7 @@ O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes,
 }
 \end{algorithm}
 
-Desta forma o procedimento de execução destas rotinas pode ser definido na seguinte sequência:
+Desta forma o procedimento de execução destas rotinas neste projeto pode ser definido na seguinte sequência:
 
 \begin{enumerate}
     \item Execução do ajustaColunasDocking para criação de dois arquivos CSV, separando o NAH do restante.
@@ -326,7 +328,35 @@ Desta forma o procedimento de execução destas rotinas pode ser definido na seg
 
 \section{Dimensões}
 \label{sec:Dimensoes}
-	mostrar hierarquias de dimensoes
+
+Para atender o processo de análise das simulações de docagem molecular e principalmente para atender às questões de negócio levantadas pelos especialistas de domínio conforme descrito na tabela \ref{tab:questaoNegocio}, foram construídas 15 dimensões. O modelo OLAP proposto teve o foco na resolução das questões apresentadas pelos especialistas mas, este mesmo modelo também pode ser utilizado para outros experimentos.
+
+A figura \ref{fig:DiagModeloOLAP} mostra o modelo OLAP completo que foi desenvolvido, com as dimensões e a tabela FATO. As primeiras 10 dimensões (DIM\_R1 até DIM\_R10) são os 10 resíduos mais importantes, levando em consideração o número de contatos entre o resíduo e o ligante. As outras dimensões são, a DIM\_Grupo criada para identificar os tipos de agrupamento realizados para as conformações de uma determinada simulação, a DIM\_Ligante que compreende os ligantes utilizados naquele experimento, a DIM\_Tempo que apresenta o instante de tempo de execução da simulação em picosegundos, a DIM\_Experimento responsável pela identificação do experimento executado e por fim a DIM\_Modelo\_Dinamico.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.7]{images/ModelagemOLAP.PNG}
+        \caption{Diagrama do modelo OLAP}
+        \label{fig:DiagModeloOLAP}
+\end{figure}
+
+A figura \ref{fig:hierarGrupoLiganteExperimentoModelo} mostra a composição das hierarquias para as dimensões DIM\_Grupo, DIM\_Experimento, DIM\_Ligante e DIM\_Modelo\_Dinamico respectivamente. Já a figura \ref{fig:HierarR1ateR10} apresenta a hierarquia para as dimensões dos resíduos de 1 à 10.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.6]{images/Hierar_Grupo_Ligante_Experimento_Modelo.png}
+        \caption{Hierarquias das dimensões Grupo, Ligante, Experimento e Modelo Dinâmico}
+        \label{fig:hierarGrupoLiganteExperimentoModelo}
+\end{figure}
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.6]{images/Hierar_DIMR1_ate_10.png}
+        \caption{Hierarquia das dimensões R1, R2, R3, R4, R5, R6, R7, R8, R9 e R10}
+        \label{fig:HierarR1ateR10}
+\end{figure}
+
+mostrar hierarquias de dimensoes
 	
 \section{Construção do modelo no Analisys Services}
 	exibir a tabela pivotante com os valores medios (feb,rmsd)
