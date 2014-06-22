@@ -1,5 +1,5 @@
 \chapter{Introdução}
-\section{Caracterização do Problema}
+\section{Caracterização do problema}
 O processo de desenvolvimento de novos fármacos é uma atividade fundamental para a indústria farmacêutica, na qual é utilizado não somente para o desenvolvimento de novos compostos para atender uma determinada necessidade, mas também tem como objetivo evoluir os compostos já existentes em busca de um resultado aprimorado e mais eficaz. 
 
 Este processo possui uma alta complexidade e exige, em média, 14 anos desde a identificação até a liberação pelo órgão regulador. As etapas envolvidas neste processo vão desde a identificação de um possivel candidato à fármaco, seguido por uma pesquisa de otimização, testes \emph{in-silico} e \emph{in-vitro}, análises toxicológicas até os ensaios clínicos. Estima-se que os custos de desenvolvimento de um novo fármaco seja aproximadamente de 1,2 bilhões de dólares \cite{kun92}. 
@@ -39,15 +39,26 @@ Além da motivação relacionada ao receptor InhA que está sendo utilizado nest
 A utilização da ferramenta desenvolvida neste trabalho permitirá ao especialista de domínio uma maior chance de identificar ligações estáveis em um menor período de tempo, sem que haja conhecimentos avançados de informática e sem necessitar de recursos computacionais de alta capacidade.
 
 \section{Objetivos}
-\subsection{Objetivo Geral}
+\subsection{Objetivo geral}
 O objetivo deste trabalho é contribuir com a análise dos resultados de simulações de docagem molecular através do desenvolvimento de um modelo OLAP e de todo o processo de extração, transformação e carga de dados, de forma a organizar estes resultados sob uma estrutura de cubos, e possibilitar, ao especialista de domínio, a realização de uma análise multidimensional das informações ali presentes e a obtenção de informações relevante de uma maneira mais rápida e menos custosa.
 
-\subsection{Objetivos Específicos}
-\begin{enumerate}
+\subsection{Objetivos específicos}
+\begin{itemize}
 	\item Desenvolver uma ferramenta para preparação de dados de simulações de docagem molecular para carga no modelo OLAP.
 	\item Desenvolver um modelo OLAP baseado em um banco de dados utilizado para armazenamento de resultados de docagem molecular.
 	\item Permitir aos especialistas de domínio o cruzamento das informações de uma simulação por agrupamento de conformações.
 	\item Contribuir para que os resultados das simulações de docagem molecular possam ser analisados multidimensionalmente, facilitando a identificação de complexos receptor-ligantes estáveis.
-\end{enumerate}
+\end{itemize}
 
-\section{Organização deste Documento}
+\section{Organização do documento}
+
+Este documento está organizado da seguinte maneira:
+
+\begin{itemize} 
+	\item O Capítulo 2 apresenta os conceitos fundamentais para entendimento do trabalho desenvolvido, como: processo de RDD, dinâmica molecular e o processo de docagem molecular. Ainda neste capítulo são apresentados conceitos de modelos multidimensionais OLAP e processo de ETL.
+	\item No Capítulo 3 são apresentadas breves descrições das ferramentas que foram empregadas para o desenvolvimento deste trabalho, como a linguagem Python e o Microsoft SQL Analysis Services respectivamente.
+	\item O Capítulo 4 descreve os elementos envolvidos na modelagem deste trabalho, bem como a fonte de dados utilizada para extração das informações.
+	\item No Capítulo 5 são apresentadas todas as etapas envolvidas no processo de desenvolvimento do trabalho, desde identificação de métricas utilizadas, desenvolvimento de scripts para processo de ETL, concepção e definição das dimensões do modelo multidimensional, até por fim apresentar a construção do modelo OLAP em si.
+	\item O Capítulo 6 apresenta as questões de negócio que foram possíveis responder utilizando o modelo OLAP desenvolvido e também as possibilidades de consultas e análise multidimensional dos dados.
+	\item No Capítulo 7 são apresentadas as conclusões deste trabalho.
+	\item O Capítulo 8 sugere algumas possibilidades para trabalhos futuros.
