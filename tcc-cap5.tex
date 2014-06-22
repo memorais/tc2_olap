@@ -63,14 +63,13 @@ A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as 
 
 Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvedo os ligantes TCL e ETH com o receptor InhA. 
 
-A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre átomos do resíduo e o ligante. No \emph{dataset} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
+A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{dataset} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
 
-De acordo com o especialista de domínio, para ser considerado contato do resíduo com o ligante é preciso estar em uma distância entre 2{\AA} e 4{\AA}. Valores inferiores a 2{\AA} são descartados por serem considerados uma sobreposição, enquanto valores superiores a 4{\AA} indicam que não foi estabelecido contato. 
+De acordo com o especialista de domínio, a interação entre um átomo do resíduo e o ligante só deve ser considerada como contato quando a distância entre ambos seja entre 2{\AA} e 4{\AA}. Valores inferiores a 2{\AA} são descartados por serem considerados uma sobreposição, enquanto valores superiores a 4{\AA} indicam que não foi estabelecido contato. 
 
-Desta forma, para se obter os valores de todo o conjunto presente no \emph{dataset} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio pois devem ser tratados de outra forma.
+Desta forma, para se obter os valores de todo o conjunto presente no \emph{dataset} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio, pois estes devem ser tratados de outra forma.
 
-Quanto maior o número de contatos estabelecidos entre os átomos do resíduo e o ligante, mais relevante o resíduo se torna para o experimento de 
-docagem. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
+Portanto, a relevância de um resíduo para um experimento de docagem aumenta em função do número de contatos estabelecidos entre seus átomos e o ligante. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 
 \begin{enumerate}
 	\item São considerados contatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
@@ -79,11 +78,10 @@ docagem. As regras de classificação de relevância de um resíduo podem ser su
 	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
 \end{enumerate}
 
-Além disso, um outro artefato foi utilizado para identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. 
-A Tabela \ref{tab:listaOsmar} apresenta a listagem dos resíduos representados pela sua sigla e seu número de ordem na enzima.
+Além disso, um outro artefato foi utilizado para auxiliar na identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. A Tabela \ref{tab:listaOsmar} lista os resíduos representados pela sua sigla e seu número de ordem na enzima.
 
 \begin{table}[h]
-\caption{Lista dos principais resíduos para experimentos de docagem utilizando a enzima InhA.}
+\caption{Lista elaborada pelo especialista de domínio com os principais resíduos para experimentos de docagem utilizando a enzima InhA.}
 \label{tab:listaOsmar}
 \centering
 \begin{tabular}{@{}lllllll@{}}
@@ -98,38 +96,56 @@ ALA\_21 &	GLY\_95	&	ASP\_147 &	GLY\_191 &	ALA\_200 &	GLU\_208 &					\\
 \end{tabular}
 \end{table}
 
-Após execução dos algoritmos elaborados dentro do trabalho para coletar estas informações, foram identificados 15 resíduos mais relevantes que posteriormente foram avaliados pelos especialistas e reduzidos a uma lista de 10 resíduos. Com base em uma lista anteriormente elaborada por um especialista de domínio, conforme mostrado na Figura \ref{fig:ListaOsmar}, os 5 resíduos que sobraram dos 15 iniciais foram identificados como casos onde a proteína, devido a flexibilidade, abriu uma cavidade acima da cavidade do substrato, permitindo ligações do ligante fora da cavidade do substrato.
+%----------------------
+%  TO DO: REFERENCIAR ALGORITMO ---------------------------------------
+%----------------------
+Definido este cenário, foram executados os algoritmos descritos em ######## para o cálculo das distâncias e sumarização dos dados. Então, após a execução foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
 
-\begin{figure}[h]
-        \center
-        \includegraphics[width=12cm]{images/ListaProfOsmar.png}
-        \label{fig:ListaOsmar}
-        \caption{Lista dos principais resíduos do Professor Osmar}
-\end{figure}
+\begin{table}[h]
+\caption{Resíduos identificados pelo algoritmo de classificação por relevância.}
+\label{tab:listaProvavelRelevantes}
+\centering
+\begin{tabular}{@{}lll@{}}
+ILE\_15  & ASP\_149 & MET\_160 \\
+SER\_19  & ARG\_152 & ILE\_193 \\
+ILE\_94  & ALA\_153 & THR\_195 \\
+GLY\_95  & MET\_154 & MET\_198 \\
+PHE\_148 & TYR\_157 & TRP\_221 \\
+\end{tabular}
+\end{table}
 
-A Figura \ref{fig:PlotResiduos} mostra os 15 resíduos que foram identificados inicialmente. Aqueles indicados em vermelho são os considerados importantes e os indicados em branco foram descartados porque ficaram fora do sítio de ligação.
+Com posse destes dados, os resíduos resultantes (apresentados na Tabela \ref{tab:listaRelevantes}) foram comparados com a lista feita pelo especialista de domínio (apresentados na Tabela \ref{tab:listaOsmar}) a fim de identificar os elementos que eram comuns aos dois grupos. 
+
+Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio do LABIO e estão ilustrados pela Figura \ref{fig:PlotResiduos}. Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na lista do especialista de domínio e foram classificados como sendo relevantes para os experimentos de docagem. Os 5 resíduos que não estavam presentes na lista do especialista foram identificados como casos onde a proteína apresentou ligações fora da cavidade do substrato e, por este motivo, não foram considerados como sendo relevantes.
 
 \begin{figure}[h]
         \center
         \includegraphics[width=10cm]{images/avaliacao_Residuos_nomes.png}
         \label{fig:PlotResiduos}
-        \caption{Lista inicial dos 15 resíduos mais relevantes}
+        \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
 \end{figure}
 
-Com base nestas prerrogativas foram selecionados os 10 principais resíduos mais relevantes para responder às questões dos especialistas conforme mostrado.
+Por fim, com base nestas comparações e nos experimentos realizados foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela
 
-\begin{itemize}
-	\item PHE\_148 (Phenylalanine)
-	\item ILE\_193 (Isoleucine)
-	\item GLY\_95 (Glycine)
-	\item THR\_195 (Threonine)
-	\item ILE\_94 (Isoleucine)
-	\item MET\_198 (Methionine)
-	\item MET\_160 (Methionine)
-	\item SER\_19 (Serine)
-	\item ILE\_15 (Isoleucine)
-	\item TYR\_157 (Tyrosine)
-\end{itemize}
+\begin{table}[h]
+\caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
+\label{tab:listaProvavelRelevantes}
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\multicolumn{1}{c}{Resíduo} & \multicolumn{1}{c}{Nome} \\ \midrule
+SER\_19                     & Serine                   \\
+ILE\_15                     & Isoleucine               \\
+ILE\_94                     & Isoleucine               \\
+GLY\_95                     & Glycine                  \\
+PHE\_148                    & Phenylalanine            \\
+TYR\_157                    & Tyrosine                 \\
+MET\_160                    & Methionine               \\
+ILE\_193                    & Isoleucine               \\
+THR\_195                    & Threonine                \\
+MET\_198                    & Methionine               \\ \bottomrule
+\end{tabular}
+\end{table}
 
 \section{Scripts para preparação dos dados}
 \label{sec:ScriptsParaPreparacaoDosDados}
