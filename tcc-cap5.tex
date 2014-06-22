@@ -147,7 +147,7 @@ MET\_198                    & Metionina                \\ \bottomrule
 \section{Scripts para preparação dos dados}
 \label{sec:ScriptsParaPreparacaoDosDados}
 
-Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python e Bash. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI e exibem seus resultados diretamente em STDOUT. Estes resultados podem ser redirecionados para outro arquivo através de um \emph{pipe}.
+Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI, exibem seus resultados diretamente em STDOUT e trabalham em cima de arquivos CSV. Os resultados podem ser redirecionados para outro arquivo ou outro \emph{script} através de um \emph{pipe}.
 
 O primeiro \emph{script} criado foi chamado de calculaDistancia, ele foi elaborado com o objetivo de elencar quais são os resíduos mais relevantes, atendendo assim a uma necessidade dos especialistas de domínio. O número de contatos do resíduo com o ligante é a medida qualitativa para elencar quais são estes melhores resíduos. Para identificar se houve contato ou não é necessário realizar o cálculo da distância euclidiana entre resíduo e ligante, conforme descrito na fórmula \ref{eqt:distEuclid}. O calculaDistancia recebe três parâmetros na sua execução, o primeiro é um arquivo texto contendo a lista de resíduos, o segundo é um arquivo texto contendo a lista de ligantes e o terceiro é a base de dados das simulações de docagem molecular no formato CSV. A saída do calculaDistancia é também no formato CSV e é composta do número do snapshot, nome do resíduo, nome do ligante e o resultado do cálculo da distância euclidiana. Um último campo foi adicionado a pedido dos especialistas para classificação da distância euclidiana, se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons. O algoritmo \ref{alg:CalculoDistancia} demonstra o funcionamento do calculaDistancia.
 
@@ -175,7 +175,7 @@ O primeiro \emph{script} criado foi chamado de calculaDistancia, ele foi elabora
 		\FOR{cada r em R}
 			\FOR{cada l em L faça}
 			\IF{r não conter átomo de hidrogênio}
-			\STATE Distância $\gets \sqrt{(x - a)^{2} +(y - b)^{2} + (z - c)^{2}}$ 
+			\STATE Distância $\gets \sqrt{(rx - lx)^{2} +(ry - ly)^{2} + (rz - lz)^{2}}$ 
 			\ENDIF
 			\IF{Distância menor que 4}
 				\IF{Distância menor ou igual a 2}
@@ -251,7 +251,9 @@ O terceiro script está relacionado com o processo de carga dos dados e foi cham
 }
 \end{algorithm}
 
-O quarto e último \emph{script} foi chamado de criaDados e é responsável por realizar a carga de todo o restante das informações dentro da base de dados. O criaDados recebe oito parâmetros de entrada para sua execução. Os 4 primeiros parâmetros são referentes a composição das dimensões, que será mais detalhadamente descrito na seção \ref{sec:Dimensoes}. O primeiro parâmetro é um arquivo CSV contendo a composição da dimensão ligante, o segundo referente a dimensão grupo, o terceiro referente a dimensão modelo dinâmico e o quarto referente a composição da dimensão experimento. O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes, o sexto é o arquivo com a relação do número de contatos de cada um dos resíduos. Estas informações foram extraídas após sumarização dos dados de saída do \emph{script} calculaDistancia. O sétimo parâmetro é o arquivo CSV contendo a base de resultados das simulações de docagem molecular. O último parâmetro é um arquivo contendo o agrupamento das conformações existentes no arquivo do parâmetro anterior. A saída do criaDados são os comandos \emph{INSERT} em SQL para popular as informações no banco de dados. O algoritmo \ref{alg:criaDadosFato} descreve o funcionamento do \emph{script} criaDados.
+O quarto e último \emph{script} foi chamado de criaDados e é responsável por realizar a carga de todo o restante das informações dentro da base de dados. O criaDados recebe oito parâmetros de entrada para sua execução. Os 4 primeiros parâmetros são referentes a composição das dimensões, que será mais detalhadamente descrito na seção \ref{sec:Dimensoes}. O primeiro parâmetro é um arquivo CSV contendo a composição da dimensão ligante, o segundo referente a dimensão grupo, o terceiro referente a dimensão modelo dinâmico e o quarto referente a composição da dimensão experimento. 
+
+O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes, o sexto é o arquivo com a relação do número de contatos de cada um dos resíduos. Estas informações foram extraídas após sumarização dos dados de saída do \emph{script} calculaDistancia. O sétimo parâmetro é o arquivo CSV contendo a base de resultados das simulações de docagem molecular. O último parâmetro é um arquivo contendo o agrupamento das conformações existentes no arquivo do parâmetro anterior. A saída do criaDados são os comandos \emph{INSERT} em SQL para popular as informações no banco de dados. O algoritmo \ref{alg:criaDadosFato} descreve o funcionamento do \emph{script} criaDados.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
