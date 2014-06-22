@@ -49,14 +49,14 @@ A estrutura do ETH consiste em uma pequena molécula composta por um conjunto de
 
 Primeiramente, os especialistas de domínio do LABIO executaram dois experimentos de docagem molecular, cada um deles envolvendo um ligante diferente. Para o primeiro experimento, foi considerado o TCL como ligante. Já para o segundo, foi utilizado o ligante ETH. Ambos experimentos empregaram a enzima InhA como receptora, e sua flexibilidade foi representada por um conjunto de 3.100 \emph{snapshots} resultantes de simulações por DM. 
 
-Cada ligante foi submetido a 3.100 simulações de docagem, uma para cada conformação do conjunto. Os atributos calculados por estes experimentos foram FEB e RMSD, e após a execução, os dados resultantes dos experimentos foram exportados para um \emph{dataset} em formato CSV (\emph{Comma-separated values}).
+Cada ligante foi submetido a 3.100 simulações de docagem, uma para cada conformação do conjunto. Os atributos calculados por estes experimentos foram FEB e RMSD, e após a execução, os dados resultantes dos experimentos foram exportados para um \emph{data set} em formato CSV (\emph{Comma-separated values}).
 
-Neste \emph{dataset} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
+Neste \emph{data set} os dados estão organizados da seguinte maneira: cada linha representa um dos 3.100 \emph{snapshots} da proteína receptora; nas colunas estão os valores das diferentes posições tridimensionais de cada um dos átomos da proteína e o posicionamento final de cada ligante com seus respectivos valores de FEB e RMSD.
 
-Cada átomo da proteína está representado no \emph{dataset} por três colunas, cada uma delas contém respectivamente as coordenadas X, Y e Z de seu posicionamento. As colunas finais apresentam os melhores valores para as métricas FEB e RMSD para cada ligante do experimento. A Tabela \ref{tab:dataset} apresenta a estrutura em que os dados estão organizados no \emph{dataset}.
+Cada átomo da proteína está representado no \emph{data set} por três colunas, cada uma delas contém respectivamente as coordenadas X, Y e Z de seu posicionamento. As colunas finais apresentam os melhores valores para as métricas FEB e RMSD para cada ligante do experimento. A Tabela \ref{tab:dataset} apresenta a estrutura em que os dados estão organizados no \emph{data set}.
 
 \begin{table}[h]
-\caption{Estrutura do \emph{dataset} contendo os dados resultantes de experimentos de docagem molecular para os ligantes TCL e ETH.}
+\caption{Estrutura do \emph{data set} contendo os dados resultantes de experimentos de docagem molecular para os ligantes TCL e ETH.}
 \label{tab:dataset}
 \scalebox{0.7}{
 \begin{tabular}{c|l|l|l|l|l|l|l|l}
@@ -72,4 +72,4 @@ Cada átomo da proteína está representado no \emph{dataset} por três colunas,
 }
 \end{table} 
 
-Relacionando com o processo de ETL, o \emph{dataset} recebido representa uma fonte de dados que deve ser utilizada para extração das informações relevantes para o negócio. Os dados contidos nele não possuem um tratamento, mas foi possível observar uma padronização de nomenclatura das colunas.
+Relacionando com o processo de ETL, o \emph{data set} recebido representa uma fonte de dados que deve ser utilizada para extração das informações relevantes para o negócio. Os dados contidos nele não possuem um tratamento, mas foi possível observar uma padronização de nomenclatura das colunas.
