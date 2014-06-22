@@ -72,13 +72,13 @@ Desta forma, para se obter os valores de todo o conjunto presente no \emph{data 
 Portanto, a relevância de um resíduo para um experimento de docagem aumenta em função do número de contatos estabelecidos entre seus átomos e o ligante. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 
 \begin{enumerate}
-	\item São considerados contatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
-	\item Distâncias inferiores a 2 {\AA}ngstr\"ons são desconsideradas.
-	\item Átomos de hidrogênio são descartados.
+	\item Considerar como ontatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
+	\item Desconsiderar distâncias inferiores a 2 {\AA}ngstr\"ons.
+	\item Desconsiderar átomos de hidrogênio.
 	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
 \end{enumerate}
 
-Além disso, um outro artefato foi utilizado para auxiliar na identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. A Tabela \ref{tab:listaOsmar} lista os resíduos representados pela sua sigla e seu número de ordem na enzima.
+Além do exposto, um outro artefato foi utilizado para auxiliar na identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. A Tabela \ref{tab:listaOsmar} lista os resíduos pela sua sigla e seu número de ordem na enzima.
 
 \begin{table}[h]
 \caption{Lista elaborada pelo especialista de domínio com os principais resíduos para experimentos de docagem utilizando a enzima InhA.}
@@ -96,10 +96,7 @@ ALA\_21 &	GLY\_95	&	ASP\_147 &	GLY\_191 &	ALA\_200 &	GLU\_208 &					\\
 \end{tabular}
 \end{table}
 
-%----------------------
-%  TO DO: REFERENCIAR ALGORITMO ---------------------------------------
-%----------------------
-Definido este cenário, foram executados os algoritmos descritos em \ref{alg:CalculoDistancia} para o cálculo das distâncias e sumarização dos dados. Então, após a execução foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
+Definido este cenário, foi executado o algoritmo de classificação por relevância, descrito em \ref{alg:CalculoDistancia}, para calcular as distâncias e os dados resultantes foram posteriormente sumarizados. Após isso, foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
 
 \begin{table}[h]
 \caption{Resíduos identificados pelo algoritmo de classificação por relevância.}
@@ -120,12 +117,12 @@ Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio d
 
 \begin{figure}[h]
         \center
-        \includegraphics[width=10cm]{images/avaliacao_Residuos_nomes.png}
+        \includegraphics[scale=0.55]{images/avaliacao_Residuos_nomes.png}
         \label{fig:PlotResiduos}
         \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
 \end{figure}
 
-Por fim, com base nestas comparações e nos experimentos realizados foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela
+Por fim, com base nestas comparações e nos experimentos realizados foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes} e foi utilizado como base para a modelagem OLAP.
 
 \begin{table}[h]
 \caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
