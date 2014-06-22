@@ -150,6 +150,144 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
     \item Sumarização dos resultados.
 \end{enumerate}
 
+% Algoritmos
+
+\floatname{algorithm}{Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo para cálculo da distância}
+\label{CalculoDistancia}
+\begin{algorithmic}[1]
+	\STATE Seja R uma lista de resíduos
+	\STATE Seja L uma lista de ligantes
+	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
+	\STATE Seja r um resíduo de R
+	\STATE Seja l um ligante de L
+	\STATE Seja d um \emph{snapshot} da conformação da base D
+	\FOR{cada d em D}
+		\FOR{cada r em R}
+			\FOR{cada l em L faça}
+			\IF{r não conter átomo de hidrogênio}
+			\STATE Distância $\gets \sqrt{(x - a)^{2} +(y - b)^{2} + (z - c)^{2}}$ 
+			\ENDIF
+			\IF{Distância menor que 4}
+				\IF{Distância menor ou igual a 2}
+				\STATE Gravar na saída d, r, l, distancia, classificação menor que 2
+				\ELSE
+				\STATE Gravar na saída d, r, l, distancia, classificação entre 2 e 4
+				\ENDIF
+			\ENDIF
+			\ENDFOR
+		\ENDFOR
+	\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\floatname{algorithm}{Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo para manipulação da base de dados da simulação de docagem molecular}
+\label{ajustaColunaDocking}
+\begin{algorithmic}[1]
+	\STATE Seja C a lista com o nome das colunas
+	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
+	\STATE Seja c uma coluna em C
+	\STATE Seja d uma linha em D
+	\STATE Seja M o modo de operação da execução
+	\IF{M for igual a manter as colunas em C}
+		\FOR{cada d em D}
+			\FOR{cada c em C}
+			\STATE Grave apenas c na saída
+			\ENDFOR
+		\ENDFOR
+	\ENDIF
+	\IF{M for igual a excluir as colunas em C}
+		\FOR{cada d em D}
+			\FOR{cada c em C}
+			\STATE Remove apenas c na saída
+			\ENDFOR
+		\ENDFOR
+	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\floatname{algorithm}{Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo para popular os dados na dimensão tempo}
+\label{criaDadosDIMTempo}
+\begin{algorithmic}[1]
+	\STATE Seja P um valor inteiro maior que 1
+	\STATE Seja L uma lista de valores
+	\STATE Seja c um contador
+	\FOR{iteração em P}
+		\STATE Incrementa mais um em c
+		\IF{c igual a 1000}
+			\STATE Armazena o valor de P em L
+			\STATE Grave o comando de inserção baseado em L
+			\STATE Esvazie L
+			\STATE Atribua zero em c
+		\ELSE
+			\STATE Armazena valor de P em L
+		\ENDIF
+	\ENDFOR
+	\IF{L não estiver vazia}
+		\STATE Grave o comando de inserção baseado em L
+	\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\floatname{algorithm}{Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo para popular os dados na fato}
+\label{ciraDadosFato}
+\begin{algorithmic}[1]
+	\STATE Seja L uma lista de ligantes
+	\STATE Seja l um ligante em L
+	\STATE Seja G uma lista de grupos
+	\STATE Seja g um grupo em G
+	\STATE Seja M uma lista de modelos dinâmicos
+	\STATE Seja m um modelo dinâmico em M
+	\STATE Seja E uma lista de experimentos
+	\STATE Seja e um experimento em E
+	\STATE Seja R uma lista de resíduos mais importantes
+	\STATE Seja r um resíduo em R
+	\STATE Seja S uma lista de numero de contato dos resíduos
+	\STATE Seja s o numero de um contato em S
+	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
+	\STATE Seja d uma conformação em D
+	\STATE Seja a um agrupamento de d
+	\STATE Seja C uma lista de comandos para inserção
+	\FOR{cada l em L}
+		\STATE Grave o comando de inserção baseado em l
+	\ENDFOR
+        \FOR{cada g em G}
+		\STATE Grave o comando de inserção baseado em g
+        \ENDFOR
+        \FOR{cada m em M}
+		\STATE Grave o comando de inserção baseado em m
+        \ENDFOR
+        \FOR{cada e em E}
+		\STATE Grave o comando de inserção baseado em e
+        \ENDFOR
+	\FOR{cada r em R}
+		\STATE Grave o comando de inserção baseado em r
+	\ENDFOR
+	\FOR{cada d em D}
+		\STATE Grave a em C
+		\FOR{cada l em L}
+			\FOR{cada s em S}
+				\STATE Gravar o valor de s em C para a composição baseando em d, l e r
+			\ENDFOR
+			\IF{FEB de d for positiva}
+				\STATE Gravar 0 para FEB de d em C
+			\ELSE
+				\STATE Gravar FEB de d em C
+			\ENDIF
+			\STATE Gravar RMSD de d em C
+			\STATE Gravar o comando de inserção baseado em C
+		\ENDFOR
+	\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
 %-------------------
 % TO DO:  mostrar tabela de exemplo do resultado de saída do script.
 %-------------------
