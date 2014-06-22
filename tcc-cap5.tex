@@ -71,12 +71,12 @@ Desta forma, para se obter os valores de todo o conjunto presente no \emph{data 
 
 Portanto, a relevância de um resíduo para um experimento de docagem aumenta em função do número de contatos estabelecidos entre seus átomos e o ligante. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 
-\begin{enumerate}
+\begin{itemize}
 	\item Considerar como ontatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
 	\item Desconsiderar distâncias inferiores a 2 {\AA}ngstr\"ons.
 	\item Desconsiderar átomos de hidrogênio.
 	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
-\end{enumerate}
+\end{itemize}
 
 Além do exposto, um outro artefato foi utilizado para auxiliar na identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. A Tabela \ref{tab:listaOsmar} lista os resíduos pela sua sigla e seu número de ordem na enzima.
 
@@ -111,9 +111,9 @@ PHE\_148 & TYR\_157 & TRP\_221 \\
 \end{tabular}
 \end{table}
 
-Com posse destes dados, os resíduos resultantes (apresentados na Tabela \ref{tab:listaRelevantes}) foram comparados com a lista feita pelo especialista de domínio (apresentados na Tabela \ref{tab:listaOsmar}) a fim de identificar os elementos que eram comuns aos dois grupos. 
+Com posse destes dados, os resíduos resultantes (apresentados na Tabela \ref{tab:listaProvavelRelevantes}) foram comparados com a lista feita pelo especialista de domínio (apresentados na Tabela \ref{tab:listaOsmar}) a fim de identificar os elementos que eram comuns aos dois grupos. 
 
-Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio do LABIO e estão ilustrados pela Figura \ref{fig:PlotResiduos}. Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na lista do especialista de domínio e foram classificados como sendo relevantes para os experimentos de docagem. Os 5 resíduos que não estavam presentes na lista do especialista foram identificados como casos onde a proteína apresentou ligações fora da cavidade do substrato e, por este motivo, não foram considerados como sendo relevantes.
+Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na lista do especialista de domínio e foram classificados como sendo relevantes para os experimentos de docagem. Os 5 resíduos que não estavam presentes na lista do especialista foram identificados como casos onde a proteína apresentou ligações fora da cavidade do substrato e, por este motivo, não foram considerados como sendo relevantes. Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio do LABIO e estão ilustrados pela Figura \ref{fig:PlotResiduos}. 
 
 \begin{figure}[h]
         \center
@@ -121,7 +121,7 @@ Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio d
         \label{fig:PlotResiduos}
         \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
 \end{figure}
-
+\newpage
 Por fim, com base nestas comparações e nos experimentos realizados foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes} e foi utilizado como base para a modelagem OLAP.
 
 \begin{table}[h]
