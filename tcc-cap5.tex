@@ -63,11 +63,11 @@ A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as 
 
 Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvedo os ligantes TCL e ETH com o receptor InhA. 
 
-A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{dataset} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
+A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{data set} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
 
 De acordo com o especialista de domínio, a interação entre um átomo do resíduo e o ligante só deve ser considerada como contato quando a distância entre ambos seja entre 2{\AA} e 4{\AA}. Valores inferiores a 2{\AA} são descartados por serem considerados uma sobreposição, enquanto valores superiores a 4{\AA} indicam que não foi estabelecido contato. 
 
-Desta forma, para se obter os valores de todo o conjunto presente no \emph{dataset} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio, pois estes devem ser tratados de outra forma.
+Desta forma, para se obter os valores de todo o conjunto presente no \emph{data set} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio, pois estes devem ser tratados de outra forma.
 
 Portanto, a relevância de um resíduo para um experimento de docagem aumenta em função do número de contatos estabelecidos entre seus átomos e o ligante. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 
