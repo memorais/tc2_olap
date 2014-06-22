@@ -99,7 +99,7 @@ ALA\_21 &	GLY\_95	&	ASP\_147 &	GLY\_191 &	ALA\_200 &	GLU\_208 &					\\
 %----------------------
 %  TO DO: REFERENCIAR ALGORITMO ---------------------------------------
 %----------------------
-Definido este cenário, foram executados os algoritmos descritos em ######## para o cálculo das distâncias e sumarização dos dados. Então, após a execução foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
+Definido este cenário, foram executados os algoritmos descritos em \ref{alg:CalculoDistancia} para o cálculo das distâncias e sumarização dos dados. Então, após a execução foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
 
 \begin{table}[h]
 \caption{Resíduos identificados pelo algoritmo de classificação por relevância.}
@@ -168,10 +168,19 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 
 % Algoritmos
 
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicendif}{\textbf{fim se}}
+\renewcommand{\algorithmicendfor}{\textbf{fim para}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para cálculo da distância}
-\label{CalculoDistancia}
+\label{alg:CalculoDistancia}
+{\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
 	\STATE Seja R uma lista de resíduos
 	\STATE Seja L uma lista de ligantes
@@ -196,12 +205,14 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 		\ENDFOR
 	\ENDFOR
 \end{algorithmic}
+}
 \end{algorithm}
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para manipulação da base de dados da simulação de docagem molecular}
-\label{ajustaColunaDocking}
+\label{alg:ajustaColunaDocking}
+{\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
 	\STATE Seja C a lista com o nome das colunas
 	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
@@ -223,12 +234,14 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 		\ENDFOR
 	\ENDIF
 \end{algorithmic}
+}
 \end{algorithm}
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para popular os dados na dimensão tempo}
-\label{criaDadosDIMTempo}
+\label{alg:criaDadosDIMTempo}
+{\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
 	\STATE Seja P um valor inteiro maior que 1
 	\STATE Seja L uma lista de valores
@@ -248,12 +261,14 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 		\STATE Grave o comando de inserção baseado em L
 	\ENDIF
 \end{algorithmic}
+}
 \end{algorithm}
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
 \caption{Algoritmo para popular os dados na fato}
 \label{ciraDadosFato}
+{\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
 	\STATE Seja L uma lista de ligantes
 	\STATE Seja l um ligante em L
@@ -302,6 +317,7 @@ O procedimento de execução destas rotinas pode ser definido na seguinte sequê
 		\ENDFOR
 	\ENDFOR
 \end{algorithmic}
+}
 \end{algorithm}
 
 %-------------------
