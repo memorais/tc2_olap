@@ -121,16 +121,16 @@ Durante a fase de desenvolvimento dos scripts necessários para processamento do
 
 Como no \emph{data set} original todas as informações estavam consolidadas em um único arquivo CSV contendo 3.100 linhas e 12.335 colunas, a manipulação destes dados em softwares como o Microsoft Excel se torna praticamente inviável.
 
-Dessa forma, foi desenvolvido um \emph{script} nomeado de "ajustaColunasDocking" para fazer a manipulação das colunas do \emph{data set}. O script recebe os seguintes parâmetros de entrada:
+Dessa forma, foi desenvolvido um \emph{script} nomeado de ``ajustaColunasDocking'' para fazer a manipulação das colunas do \emph{data set}. O script recebe os seguintes parâmetros de entrada:
 
 \begin{enumerate}
-	\item Sinal da operação a ser feita (-m mantém as colunas, e "-e" remove as colunas);
+	\item Sinal da operação a ser feita (`-m' mantém as colunas, e `-e' remove as colunas);
 	\item Nome das colunas que serão manipuladas separadas por vírgula;
 	\item Arquivo de entrada com dados de docagem (\emph{data set});
 	\item Arquivo de saída com as colunas manipuladas.
 \end{enumerate}
 
-O Algoritmo \ref{alg:ajustaColunaDocking} descreve o processo de funcionamento do script "ajustaColunasDocking".
+O Algoritmo \ref{alg:ajustaColunaDocking} descreve o processo de funcionamento do script ``ajustaColunasDocking''.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
@@ -161,16 +161,17 @@ O Algoritmo \ref{alg:ajustaColunaDocking} descreve o processo de funcionamento d
 }
 \end{algorithm}
 
-O algoritmo "ajustaColunasDocking" foi utilizado para remover os dados referentes aos átomos do resíduo NAH do \emph{data set} original e separá-los em outro arquivo de dados distinto. Após a manipulação, os arquivos de dados ficaram da seguinte forma:
+O algoritmo ``ajustaColunasDocking'' foi utilizado para remover os dados referentes aos átomos do resíduo NAH do \emph{data set} original e separá-los em outro arquivo de dados distinto. Após a manipulação, os arquivos de dados ficaram da seguinte forma:
 \begin{itemize}
 	\item \emph{Data set} 1: Removido todas as colunas dos átomos referentes ao resíduo NAH.
 	\item \emph{Data set} 2: Apenas dados dos átomos referentes ao resíduo NAH e do ligante TCL.
+\end{itemize}
 
 Neste ponto é importante ressaltar que ambos os arquivos tiveram somente suas colunas alteradas e mantiveram um total de 3.100 linhas, representando a trajetória das conformações da molécula receptora.
 
-Com os arquivos devidamente separados de acordo com os critérios estabelecidos, foi possível realizar o cálculo da distância Euclidiana. Para isso, foi desenvolvido um segundo script, nomeado "calculaDistancia", que realiza o cálculo de todo o conjunto de átomos existente em um \emph{data set} tendo como base os critérios definidos previamente para classificação da relevância dos resíduos.
+Com os arquivos devidamente separados de acordo com os critérios estabelecidos, foi possível realizar o cálculo da distância Euclidiana. Para isso, foi desenvolvido um segundo script, nomeado ``calculaDistancia'', que realiza o cálculo de todo o conjunto de átomos existente em um \emph{data set} tendo como base os critérios definidos previamente para classificação da relevância dos resíduos.
 
-Para execução do script "calculaDistancia", são necessários três parâmetros de entrada, sendo eles:
+Para execução do script ``calculaDistancia'', são necessários três parâmetros de entrada, sendo eles:
 \begin{enumerate}
 	\item Arquivo contendo lista de átomos da molécula;
 	\item Arquivo contendo lista de átomos do(s) ligante(s);
@@ -251,7 +252,7 @@ Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na list
         \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
 \end{figure}
 
-Com base nos algoritmos executados e nas comparações realizadas, foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes}, que foi utilizada como base para a modelagem OLAP.
+Com base nos algoritmos executados e nas comparações realizadas, foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes}, a qual foi utilizada como base para a modelagem OLAP.
 
 \begin{table}[h]
 \caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
@@ -259,7 +260,7 @@ Com base nos algoritmos executados e nas comparações realizadas, foi possível
 \centering
 \begin{tabular}{@{}ll@{}}
 \toprule
-\multicolumn{1}{c}{Resíduo} & \multicolumn{1}{c}{Nome} \\ \midrule
+\textbf{Resíduo} 		    & \textbf{Nome} 		 \\ \midrule
 SER\_19                     & Serina                   \\
 ILE\_15                     & Isoleucina               \\
 ILE\_94                     & Isoleucina               \\
@@ -282,22 +283,22 @@ A Figura \ref{fig:ConcepcaoModeloOLAP} ilustra o projeto inicial da modelagem OL
 
 \begin{figure}[h]
         \center
-        \includegraphics[scale=0.7]{images/Modelo_OLAP.PNG}
+        \includegraphics[scale=0.45]{images/Modelo_OLAP.png}
         \caption{Concepção inicial do modelo OLAP}
         \label{fig:ConcepcaoModeloOLAP}
 \end{figure}
 
-A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. Porém, como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{"NumeroConexoesR1", "NumeroConexoesR2", ..., "NumeroConexoesR10"}. Já as dimensões, foram representadas por "DIM\_R1" até "DIM\_R10".
+A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. Porém, como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}. Já as dimensões, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
 
-A dimensão "DIM\_Ligante" representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
+A dimensão ``DIM\_Ligante'' representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
 
-O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste cas o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão "DIM\_Tempo". 
+O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste cas o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão ``DIM\_Tempo''. 
 
-A dimensão "DIM\_Modelo\_Dinamico" serve para o especialista de domínio identificar qual foi a dinâmica utilizada no experimento. No caso deste trabalho, foi utilizada apenas uma dinâmica de 3.100 conformações.
+A dimensão ``DIM\_Modelo\_Dinamico'' serve para o especialista de domínio identificar qual foi a dinâmica utilizada no experimento. No caso deste trabalho, foi utilizada apenas uma dinâmica de 3.100 conformações.
 
-Um experimento de docagem utiliza agrupamentos para determinadas conformações, com base na semelhança existente entre elas. Dessa forma, foi necessário permitir a que estes agrupamentos fossem identificados, para possibilitar a análise por agrupamento. Esta necessidade foi representada pela dimensão "DIM\_Grupo".
+Um experimento de docagem utiliza agrupamentos para determinadas conformações, com base na semelhança existente entre elas. Dessa forma, foi necessário permitir a que estes agrupamentos fossem identificados, para possibilitar a análise por agrupamento. Esta necessidade foi representada pela dimensão ``DIM\_Grupo''.
 
-Por fim, a dimensão "DIM\_Experimento" serve para o especialista de domínio identificar as informações relacionadas ao experimento executado. Um mesmo experimento de docagem poder ser executado mais de uma vez utilizando modelos dinâmicos diferentes. Com esta dimensão os experimentos são separados com base nas informações providas pelo especialista de domínio.
+Por fim, a dimensão ``DIM\_Experimento'' serve para o especialista de domínio identificar as informações relacionadas ao experimento executado. Um mesmo experimento de docagem poder ser executado mais de uma vez utilizando modelos dinâmicos diferentes. Com esta dimensão os experimentos são separados com base nas informações providas pelo especialista de domínio.
 
 
 \section{Construção do modelo no Analisys Services}
@@ -306,51 +307,150 @@ A modelagem inicial do OLAP se mostrou apto para responder as questões de negó
 
 \begin{figure}[h]
         \center
-        \includegraphics[scale=0.7]{images/ModelagemOLAP.PNG}
+        \includegraphics[scale=1]{images/ModelagemOLAP.PNG}
         \caption{Modelo OLAP construído com uso do Microsoft Analysis Services.}
         \label{fig:ModeloOLAP}
 \end{figure}
 
-A seguir descrevem-se todas as definições e propriedades levadas em consideração durante a criação do modelo OLAP no Analysis Services, bem como a definição de cada campo.
+A seguir descrevem-se todas as definições e propriedades levadas em consideração durante a criação do modelo OLAP no Analysis Services, bem como a definição de cada campo:
+
+	
+\begin{itemize}
+	\item
+		\textbf{Tabela:} DIM\_Grupo \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa os agrupamentos de conformações por semelhança.
+\end{itemize}
+\begin{table}[h]
+	\caption{Dimensão DIM\_Grupo}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule
+	Id            & INT           & x           & Identificador da dimensão grupo   \\
+	Descricao     & VARCHAR       &             & Descrição do grupo           		\\
+	IdAgrupamento & INT           &             & Identificador do agrupamento 		\\ \bottomrule
+	\end{tabular}
+\end{table}
+
+% \begin{figure}[h]
+%         \center
+%         \includegraphics[scale=1]{images/A_DIM_Grupo.PNG}
+%         \caption{Hierarquia da dimensão DIM\_Grupo}
+%         \label{fig:ModeloOLAP}
+% \end{figure}
 
 \begin{itemize}
-\item 
-Tabela: DIM_Grupo
-Tipo: Dimensional.
-Descrição: Representa os agrupamentos de conformações por semelhança.
+	\item
+		\textbf{Tabela:} DIM\_Ligante \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa o ligante utilizado no experimento. \\
+\end{itemize}
 \begin{table}[h]
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           \\ \midrule
-Id            & INT           & x           & Identificador da dimensão grupo    \\
-Descricao     & VARCHAR       &             & Descrição do grupo           \\
-IdAgrupamento & INT           &             & Identificador do agrupamento \\ \bottomrule
-\end{tabular}
+	\caption{Dimensão DIM\_Ligante}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		   \\ \midrule
+	Id            & INT           & x           & Identificador da dimensão ligante    \\
+	Descricao     & VARCHAR       &             & Descrição do ligante           	   \\
+	Nome 		  & VARCHAR       &             & Nome do ligante 					   \\ \bottomrule
+	\end{tabular}
 \end{table}
 
-\item
-Tabela: DIM_Ligante
-Tipo: Dimensional.
-Descrição: Representa o ligante utilizado no experimento.
+% \begin{figure}[h]
+%         \center
+%         \includegraphics[scale=1]{images/A_DIM_Ligante.PNG}
+%         \caption{Hierarquia da dimensão DIM\_Ligante}
+%         \label{fig:ModeloOLAP}
+% \end{figure}
+
+\begin{itemize}
+	\item
+		\textbf{Tabela:} DIM\_Tempo \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa o tempo em picosegundo. \\
+\end{itemize}
 \begin{table}[h]
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           \\ \midrule
-Id            	& INT           & x           & Identificador da dimensão ligante   \\
-Descricao     	& VARCHAR       &             & Descrição do ligante           \\
-Nome 			& VARCHAR       &             & Nome do ligante \\ \bottomrule
-\end{tabular}
+	\caption{Dimensão DIM\_Tempo}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule			
+	Instante 		& INT 	       &  x           & Instante de tempo 					\\ \bottomrule
+	\end{tabular}
 \end{table}
 
+\begin{itemize}
+	\item
+		\textbf{Tabela:} DIM\_Experimento \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa o tipo do experimento executado. \\
 \end{itemize}
 
+\begin{table}[h]
+	\caption{Dimensão DIM\_Experimento}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           			\\ \midrule
+	Id            	& INT           & x           & Identificador da dimensão experimento   \\
+	Descricao     	& VARCHAR       &             & Descrição do tipo de experimento        \\
+	DataHora 		& INT 		    &             & Data e hora do experimento executado 	\\ \bottomrule
+	\end{tabular}
+\end{table}
 
+% \begin{figure}[h]
+%         \center
+%         \includegraphics[scale=1]{images/A_DIM_Experimento.PNG}
+%         \caption{Hierarquia da dimensão DIM\_Experimento}
+%         \label{fig:ModeloOLAP}
+% \end{figure}
 
+\begin{itemize}
+	\item
+		\textbf{Tabela:} DIM\_Modelo\_Dinamico \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa qual dinâmica utilizada no experimento. \\
+\end{itemize}
+\begin{table}[!htbp]
+	\caption{Dimensão DIM\_Modelo\_Dinamico}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           			\\ \midrule
+	Id            	& INT           & x           & Identificador da dimensão modelo dinamico   \\
+	Descricao     	& VARCHAR       &             & Descrição da dinamica utilizada        \\ \bottomrule
+	\end{tabular}
+\end{table}
 
+% \begin{figure}[h]
+%         \center
+%         \includegraphics[scale=1]{images/A_DIM_Modelo_Dinamico.PNG}
+%         \caption{Hierarquia da dimensão DIM\_Modelo\_Dinamico}
+%         \label{fig:ModeloOLAP}
+% \end{figure}
 
+\begin{itemize}
+	\item
+		\textbf{Tabelas:} DIM\_R1 a DIM\_R10 \\
+		\textbf{Tipo:} Dimensional. \\
+		\textbf{Descrição:} Representa um dos dez principais resíduos para o experimento. \\
+\end{itemize}
+\begin{table}[!htbp]
+	\caption{Dimensões DIM\_R1 a DIM\_R10}
+	\centering
+	\begin{tabular}{@{}llll@{}}
+	\toprule
+	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule
+	Id            	& INT           & x           & Identificador da dimensão residuo   \\
+	Nome 		  & VARCHAR       &             & Nome do residuo 					   	\\ 
+	Tipo          & VARCHAR       &             & Tipo do residuo           	   		\\ \bottomrule   
+	\end{tabular}
+\end{table}
+	
 
-
-A figura \ref{fig:hierarGrupoLiganteExperimentoModelo} mostra a composição das hierarquias para as dimensões DIM\_Grupo, DIM\_Experimento, DIM\_Ligante e DIM\_Modelo\_Dinamico respectivamente. Já a figura \ref{fig:HierarR1ateR10} apresenta a hierarquia para as dimensões dos resíduos de 1 à 10.
+A Figura \ref{fig:hierarGrupoLiganteExperimentoModelo} apresenta a composição das hierarquias para as dimensões DIM\_Grupo, DIM\_Experimento, DIM\_Ligante e DIM\_Modelo\_Dinamico respectivamente. Já a Figura \ref{fig:HierarR1ateR10} apresenta a hierarquia para as dimensões dos resíduos de 1 à 10.
 
 \begin{figure}[h]
         \center
@@ -364,27 +464,15 @@ A figura \ref{fig:hierarGrupoLiganteExperimentoModelo} mostra a composição das
         \includegraphics[scale=0.6]{images/Hierar_DIMR1_ate_10.png}
         \caption{Hierarquia das dimensões R1, R2, R3, R4, R5, R6, R7, R8, R9 e R10}
         \label{fig:HierarR1ateR10}
-\end{figure}
-
-mostrar hierarquias de dimensoes
-	
+\end{figure}	
 
 
+\section{Carga de dados no Analysis Services}
+\label{sec:CargaDeDadosNoAnalysisServices}
 
+Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste na execução de ambos. O primeiro deles nomeado como ``criaDadosDIMTempo'' tem como objetivo fornecer um \emph{script} SQL para inserção dos dados para a dimensão tempo. 
 
-\section{Scripts para preparação dos dados}
-\label{sec:ScriptsParaPreparacaoDosDados}
-
-Para o processo de extração, transformação e carga dos dados deste trabalho, foram desenvolvidos quatro \emph{scripts} utilizando a linguagem Python Cada um deles foi desenvolvido para atender a uma necessidade específica, as quais foram sendo idenficada no decorrer do projeto.
-
-Todos os \emph{scripts} são executados através da CLI
-
-
-Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI, exibem seus resultados diretamente em STDOUT e trabalham em cima de arquivos CSV. Os resultados podem ser redirecionados para outro arquivo ou outro \emph{script} através de um \emph{pipe}.
-
-
-
-O terceiro script está relacionado com o processo de carga dos dados e foi chamado de criaDadosDIMTempo. O objetivo dele é fornecer o \emph{script} SQL para inserção dos dados na dimensão tempo. O detalhamento a respeito das dimensões será visto na seção \ref{sec:Dimensoes}. O criaDadosDIMTempo recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela dentro do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do criaDadosDIMTempo.
+O \emph{script} ``criaDadosDIMTempo'' recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O Algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do \emph{script} ``criaDadosDIMTempo''. 
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
@@ -413,14 +501,21 @@ O terceiro script está relacionado com o processo de carga dos dados e foi cham
 }
 \end{algorithm}
 
+O segundo \emph{script} desenvolvido, nomeado de ``criaDados'' é responsável por extrair e realizar a carga de todo o restante das informações contidas no \emph{data set} para a base de dados. Para sua execução são necessários 8 parâmetros de entrada, sendo 4 deles referentes às dimensões que serão populadas, e os outros 4 são arquivos distintos gerados pelos scripts executados previamente.
 
+Os parâmetros de entrada para execução do script ``criaDados'' são os seguintes:
+\begin{enumerate}
+	\item CSV de entrada contendo os campos da dimensão DIM\_Grupo;
+	\item CSV de entrada contendo os campos da dimensão DIM\_Ligante;
+	\item CSV de entrada contendo os campos da dimensão DIM\_Experimento;
+	\item CSV de entrada contendo os campos da dimensão DIM\_Modelo\_Dinamico;
+	\item Arquivo de entrada contendo a lista dos resíduos relevantes;
+	\item Arquivo de entrada contendo a relação de contatos por resíduo (gerado pelo Algoritmo \ref{alg:CalculoDistancia});
+	\item Arquivo de entrada com dados de docagem (\emph{data set});
+	\item Arquivo de entrada com o agrupamento das conformações;
+\end{enumerate}
 
-
-
-
-O quarto e último \emph{script} foi chamado de criaDados e é responsável por realizar a carga de todo o restante das informações dentro da base de dados. O criaDados recebe oito parâmetros de entrada para sua execução. Os 4 primeiros parâmetros são referentes a composição das dimensões, que será mais detalhadamente descrito na seção \ref{sec:Dimensoes}. O primeiro parâmetro é um arquivo CSV contendo a composição da dimensão ligante, o segundo referente a dimensão grupo, o terceiro referente a dimensão modelo dinâmico e o quarto referente a composição da dimensão experimento. 
-
-O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes, o sexto é o arquivo com a relação do número de contatos de cada um dos resíduos. Estas informações foram extraídas após sumarização dos dados de saída do \emph{script} calculaDistancia. O sétimo parâmetro é o arquivo CSV contendo a base de resultados das simulações de docagem molecular. O último parâmetro é um arquivo contendo o agrupamento das conformações existentes no arquivo do parâmetro anterior. A saída do criaDados são os comandos \emph{INSERT} em SQL para popular as informações no banco de dados. O algoritmo \ref{alg:criaDadosFato} descreve o funcionamento do \emph{script} criaDados.
+Por fim, após a execução completa do \emph{script}, é gerado os comandos de \emph{INSERT} em SQL para popular as informações no banco de dados. O Algoritmo \ref{alg:criaDadosFato} descreve o funcionamento do \emph{script} ``criaDados''.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
@@ -478,16 +573,12 @@ O quinto parâmetro é o arquivo com a relação dos resíduos mais importantes,
 }
 \end{algorithm}
 
-Desta forma o procedimento de execução destas rotinas neste projeto pode ser definido na seguinte sequência:
-
+Em suma, os scripts desenvolvidos para auxiliar no processo de ETL utilizados durante este trabalho foram executados na seguinte sequência:
 \begin{enumerate}
-    \item Execução do ajustaColunasDocking para criação de dois arquivos CSV, separando o NAH do restante.
-    \item Execução do calculaDistancia para cada um dos arquivos CSV.
-    \item Execução do criaDadosDIMTempo para popular a dimensão tempo no banco de dados.
-    \item Execução do criaDados para popular o restante das informações no banco de dados.
+    \item Execução do \emph{script} ``ajustaColunasDocking'' - Separar o resíduo NAH e cria um \emph{data set} auxiliar.
+    \item Execução do \emph{script} ``calculaDistancia'' - Calcular distância Euclidiana par os dois \emph{data sets}.
+    \item Execução do \emph{script} ``criaDadosDIMTempo'' - Popular a dimensão tempo no banco de dados.
+    \item Execução do \emph{script} ``criaDados'' - Popular o restante das informações no banco de dados.
 \end{enumerate}
 
-%-------------------
-% TO DO:  mostrar tabela de exemplo do resultado de saída do script.
-%-------------------
 
