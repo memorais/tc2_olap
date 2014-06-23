@@ -163,7 +163,7 @@ O Algoritmo \ref{alg:ajustaColunaDocking} descreve o processo de funcionamento d
 
 O algoritmo ``ajustaColunasDocking'' foi utilizado para remover os dados referentes aos átomos do resíduo NAH do \emph{data set} original e separá-los em outro arquivo de dados distinto. Após a manipulação, os arquivos de dados ficaram da seguinte forma:
 \begin{itemize}
-	\item \emph{Data set} 1: Removido todas as colunas dos átomos referentes ao resíduo NAH.
+	\item \emph{Data set} 1: Removidas todas as colunas dos átomos referentes ao resíduo NAH.
 	\item \emph{Data set} 2: Apenas dados dos átomos referentes ao resíduo NAH e do ligante TCL.
 \end{itemize}
 
@@ -173,7 +173,7 @@ Com os arquivos devidamente separados de acordo com os critérios estabelecidos,
 
 Para execução do script ``calculaDistancia'', são necessários três parâmetros de entrada, sendo eles:
 \begin{enumerate}
-	\item Arquivo contendo lista de átomos da molécula;
+	\item Arquivo contendo lista de átomos do resíduo da molécula;
 	\item Arquivo contendo lista de átomos do(s) ligante(s);
 	\item Arquivo de entrada com dados de docagem (\emph{data set}).
 \end{enumerate}
@@ -185,7 +185,8 @@ Para execução do script ``calculaDistancia'', são necessários três parâmet
 %       
 %-----------------------------------
 
-A partir dos três arquivos de entrada é gerado um arquivo de saída em formato CSV contendo as seguintes informações: número do snapshot, nome do átomo, nome do ligante, resultado do cálculo da distância, classificação da distância (se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons). O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do script "calculaDistancia.
+A partir dos três arquivos de entrada é gerado um arquivo de saída em formato CSV contendo as seguintes informações: número do snapshot, nome do resíduo, nome do ligante, resultado do cálculo da distância, classificação da distância (se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons).
+O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do script "calculaDistancia.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
