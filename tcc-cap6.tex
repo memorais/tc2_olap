@@ -1,55 +1,67 @@
 \chapter{Resultados Obtidos}
 \label{cap:ResultadosObtidos}
 
-Conforme visto no capítulo 5 através da tabela \ref{tab:questaoNegocio}, foram elencadas 5 questões que os especialistas de domínio entenderam ser necessárias. A partir do desenvolvimento do modelo OLAP, detalhado na primeira seção do capítulo 5, e dos processos de carga através dos \emph{scripts} de ETL elaborados dentro do trabalho, foi possível a criação do cubo e suas respectivas dimensões dentro do \emph{Microsoft Analysis Services}. Durante o período de criação das dimensões e do próprio cubo, foram realizadas reuniões com os especialistas para adequar o modelo OLAP de maneira que fosse possível endereçar todos os pontos levantados. 
+Como resultado do desenvolvimento do modelo OLAP e dos processos de ETL através dos \emph{scripts} em Python descritos nos capítulos anteriores, após a carga de inicial das informações, foi possível executar a criação do cubo de dados e suas respectivas dimensões dentro do \emph{Microsoft Analysis Services}. 
 
-Após a primeira execução e exibição dos resultados no cubo, os especialistas observaram que a FEB média para o ligante Triclosano estava positiva. Inicialmente acreditou-se que era um problema da carga mas, depois de avaliar os resultados da docagem diretamente na base de dados das conformações, viu-se que boa parte dos resultados da melhor FEB para o ligante Triclosano era realmente positivo. Os especialistas então pediram que todo e qualquer FEB positivo fosse substituído pelo valor 0, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Com esta alteração foi necessário realizar uma nova carga dos dados.
+Nos primeiros testes realizados no cubo de dados, em conjunto com os especialistas de domínio, foi identificado que através da análise da FEB média utilizando como ligante o TCL o resultado agregado apresentava um valor positivo. 
 
-Para exibir os resultados e para realizar a composição dos valores e dimensões afim de responder às questões de negócio, foi utilizado o \emph{plug-in} do \emph{Microsoft Excel} para o \emph{Analysis Services}. A figura \ref{fig:questao1} mostra a associação dos agrupamentos para cada uma das conformações, respondendo assim a primeira questão. 
+Inicialmente acreditou-se que poderia ter sido algum problema durante o processo de ETL ou alguma regra de negócio que não estava sendo devidamente contemplada. Porém, ao avaliar o \emph{data set} original contendo os dados de experimentos de docagem molecular, viu-se que grande parte dos melhores valores resultantes de FEB para o ligante TCL eram posivitos.
+
+Com isso, os especialistas de domínio definiram que qualquer resultado de FEB que apresentasse valor positivo poderia ser desconsiderado. Neste caso, foi sugerido que tivessem seus valores alterados para zero, conforme descrito na seção \ref{\ref{sec:IdentificacaoDeMetricas}. Em função desta definição os \emph{scripts} impactados foram devidamente alterados, sendo necessário realizar uma nova carga de dados e gerar novamente o cubo de dados. 
+
+Enfim, após a segunda carga o valor agregado médio de FEB para o experimento estava sendo apresentado corretamente. A tabela fato foi populada com um total de 6.200 registros, sendo 3.100 deles relacionados aos dados do experimento de docagem executado com o ligante TCL e os outros 3.100 relacionados ao experimento para o ETH. A Figura \ref{fig:TabPivotante} ilusta a tabela pivotante após a carga de dados.
 
 \begin{figure}[h]
         \center
-        \includegraphics[scale=0.8]{images/Questao1.PNG}
-        \caption{Resultado para a primeira questão}
+        \includegraphics[scale=0.9]{images/TabelaPivotante.PNG}
+        \caption{Tabela pivotante do modelo OLAP.}
+        \label{fig:TabPivotante}
+\end{figure}
+
+Apartir deste momento, foi utilizada a integração da ferramenta Microsoft Excel, servindo como \emph{front-end} para realizar a consulta e análise dos dados presentes no cubo. Como resultado, foi possível navegar entre as dimensões e em suas hierarquias, selecionar os elementos disponíveis e montar os relatórios de dados conforme as necessidades identificadas no início deste projeto. 
+
+Para responder a primeira questão de negócio, foram selecionados os elementos ``Grupo'' e ``Conformações''. Desta forma é possível visualizar o total de conformações separadas por tipo de agrupamento. A Figura \ref{fig:questao1} ilustra o resultado desta consulta.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=1]{images/Questao1.PNG}
+        \caption{Questão 1 - Visualização das conformações por agrupamento.}
         \label{fig:questao1}
 \end{figure}
 
-\newpage
-
-A figura \ref{fig:questao2} exibe o comportamento de cada agrupamento das conformações, levando em consideração a FEB e RMSD médios, respondendo assim a segunda questão levantada pelos especialistas de domínio.
+Para responder a segunda questão de negócio, foram selecionados os elementos ``Grupo'', ``Conformações'', ``FEBMedio'' e ``RMSDMedio''. Para este caso, é possível obter o comportamento das conformações baseado nas métricas de FEB e RMSD, podendo ser agregadas por agrupamento ou não. A Figura \ref{fig:questao2} ilusta o resultado desta consulta.
 
 \begin{figure}[h]
         \center
         \includegraphics[scale=0.8]{images/Questao2.PNG}
-        \caption{Resultado para a segunda questão}
+        \caption{Questão 2 - Métricas de FEB e RMSD agregadas por agrupamento}
         \label{fig:questao2}
 \end{figure}
 
-A figura \ref{fig:questao3} mostra os agrupamentos das conformações por cada número de contato dos resíduos com o ligante, possibilitando levantar qual ou quais possuem maior número de contatos estabelecidos e desta forma respondendo a terceira questão de negócio. 
+Para responder a terceira questão de negócio, foram selecionados os elementos ``Grupo'', ``Ligantes'', e ``Numero Contatos R1'' até ``Numero Contatos R10''. Dessa forma, é possível avaliar as conformações e grupos que possuem o maior número de contatos que os ligantes estabeleceram com os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao3} ilustra o resultado desta consulta exibindo apenas sete dos dez principais resíduos.
 
 \begin{figure}[h]
         \center
         \includegraphics[scale=0.62]{images/Questao3.PNG}
-        \caption{Resultado para a terceira questão}
+        \caption{Questão 3 - Número de contatos dos principais resíduos agregados por conformações/grupo.}
         \label{fig:questao3}
 \end{figure}
 
-\newpage
-
-A figura \ref{fig:questao4} mostra qual foi o número de contatos de cada um dos principais resíduos em relação aos agrupamentos das conformações. Esta composição permite identificar quais são os resíduos mais importantes por agrupamento, respondendo assim a quarta questão da tabela \ref{tab:questaoNegocio}.
+Para responder a quarta questão de negócio, foram selecionados os elementos ``Grupo'' e ``Numero Contatos R1'' até ``Numero Contatos R10''. Neste caso, é possível identificar quais são os resíduos mais importantes baseado nas conformações/grupos que os estabeleceram um maior numero de contatos entre os ligantes e os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao4} ilustra esta consulta, exibindo apenas para dois agrupamentos. 
 
 \begin{figure}[h]
         \center
         \includegraphics[scale=0.7]{images/Questao4.PNG}
-        \caption{Resultado para a quarta questão}
+        \caption{Questão 4 - Resíduos mais importantes agregados por conformações/grupo que estabeleceram maior número de ligações.}
         \label{fig:questao4}
 \end{figure}
 
-Para a quinta e última questão, a figura \ref{fig:questao5} exibe qual foi o FEB e RMSD médios para cada um dos agrupamentos, permitindo avaliar quais grupos possuem os melhores resultados para estas métricas.
+Enfim, para responder a quinta questão de negócio, foram selecionados os elementos ``Grupo'', ``FEBMedio'', ``RMSDMedio'' e ``Experimento''. Com isso, é possível identificar quais agrupamentos possuem melhores valores de FEB e RMSD de acordo com o tipo de experimento realizado. A Figura \ref{fig:questao5} ilustra esta consulta.
 
 \begin{figure}[h]
         \center
         \includegraphics[scale=0.8]{images/Questao5.PNG}
-        \caption{Resultado para a quinta questão}
+        \caption{Questão 5 - Valores de FEB e RMSD agregados por agrupamento e tipo de experimento.}
         \label{fig:questao5}
 \end{figure}
+
