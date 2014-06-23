@@ -1,3 +1,14 @@
+%-------------------------------------------------------
+% Comandos para os algoritmos:
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicendif}{\textbf{fim se}}
+\renewcommand{\algorithmicendfor}{\textbf{fim para}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+%-------------------------------------------------------
+
 \chapter{Desenvolvimento do modelo OLAP}
 \label{cap:DesenvolvimentoDoModeloOLAP}
 %-------------------------------------------------------
@@ -6,6 +17,8 @@
 %  Encontrou se casos que estavam e nao estavam na lista, os que nao apareciam na lista constituem de residuos que se ficam ˜proximos”ao sitio de ligação, mas que na realidade estão fora do sítio.
 % descrever como  adicionar novas dimensoes baseadas em novos residuos
 %-------------------------------------------------------
+\section{Levantamento de questões de negócio}
+\label{sec:LevantamentoDeQuestoesDeNegocio}
 
 Para possibilitar a construção do modelo OLAP, primeiramente foi necessário identificar e definir as questões de negócio que seriam relevantes sob o ponto de vista do especialista de domínio. Em virtude disso, o levantamento destes dados foi feito por meio de entrevistas com os especialistas do LABIO.
 
@@ -59,18 +72,19 @@ A Figura \ref{fig:PIFvsGLY} ilustra este conceito, apresentando como exemplo as 
 	\label{fig:PIFvsGLY}
 \end{figure} 
 
-\section{Identificação dos resíduos relevantes}
+\section{Definição de relevância para os resíduos}
 
-Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos mais relevantes para os experimentos de docagem envolvendo os ligantes TCL e ETH com o receptor InhA. 
+Um dos pontos mais importantes para responder aos questionamentos dos especialistas de domínio e fundamental para composição das dimensões, consiste em definir os resíduos que são mais relevantes para os experimentos de docagem envolvendo os ligantes TCL e ETH com o receptor InhA. 
 
-A enzima InhA é composta de 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{data set} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
+A enzima InhA é composta por 268 resíduos, e o processo de identificação dos mais importantes leva em consideração o número de contatos estabelecidos entre os átomos do resíduo e o ligante. No \emph{data set} que foi resultado do processo de simulação de docagem, cada átomo do resíduo está representado por uma tripla, contendo a sua localização espacial nos eixos \emph{x, y }e \emph{z}.
 
 De acordo com o especialista de domínio, a interação entre um átomo do resíduo e o ligante só deve ser considerada como contato quando a distância entre ambos seja entre 2{\AA} e 4{\AA}. Valores inferiores a 2{\AA} são descartados por serem considerados uma sobreposição, enquanto valores superiores a 4{\AA} indicam que não foi estabelecido contato. 
 
-Desta forma, para se obter os valores de todo o conjunto presente no \emph{data set} foi calculado a distância Euclidiana tridimensional dos átomos através da equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Porém, o cálculo foi desconsiderado para todos os átomos de hidrogênio, pois estes devem ser tratados de outra forma.
+Além disso, uma outra restrição se aplica para os átomos de hidrogênio dos resíduos da molécula receptora. Por apresentarem um comportamento diferente, os átomos de hidrogênio são desconsiderados e não têm suas distâncias calculadas.
 
-Portanto, a relevância de um resíduo para um experimento de docagem aumenta em função do número de contatos estabelecidos entre seus átomos e o ligante. As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
+Dessa forma, para cada resíduo do receptor deve ser calculada a distância Euclidiana tridimensional de seus átomos utilizando a equação \ref{eqt:distEuclid}, conforme descrito na seçÃo \ref{sec:IdentificacaoDeMetricas}. A partir daí, identifica-se a relevância de um resíduo para o experimento de docagem conforme o número de contatos que são estabelecidos entre seus átomos e o ligante. Quanto mais contatos, mais relevante o resíduo é para o experimento.
 
+As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 \begin{itemize}
 	\item Considerar como ontatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
 	\item Desconsiderar distâncias inferiores a 2 {\AA}ngstr\"ons.
@@ -78,7 +92,11 @@ Portanto, a relevância de um resíduo para um experimento de docagem aumenta em
 	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
 \end{itemize}
 
-Além do exposto, um outro artefato foi utilizado para auxiliar na identificação de resíduos relevantes. Baseado em análises e estudos de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. A Tabela \ref{tab:listaOsmar} lista os resíduos pela sua sigla e seu número de ordem na enzima.
+Assim que foram definidas as limitações e regras de classificação, o esforço foi aplicado na obtenção destes dados. 
+
+Com base em estudos e análises de experimentos anteriores utilizando a InhA como molécula receptora, um especialista de domínio elaborou uma lista dos 52 principais resíduos que possuem relevância para os experimentos de docagem baseados no mesmo cenário. Este artefato foi levado em consideração e serviu como base para identificar os resíduos que fossem relevantes. 
+
+A Tabela \ref{tab:listaOsmar} apresenta a lista elaborada pelo especialista contendo os resíduos representados pela sua sigla e seu número de ordem na enzima.
 
 \begin{table}[h]
 \caption{Lista elaborada pelo especialista de domínio com os principais resíduos para experimentos de docagem utilizando a enzima InhA.}
@@ -96,68 +114,77 @@ ALA\_21 &	GLY\_95	&	ASP\_147 &	GLY\_191 &	ALA\_200 &	GLU\_208 &					\\
 \end{tabular}
 \end{table}
 
-Definido este cenário, foi executado o algoritmo de classificação por relevância, descrito em \ref{alg:CalculoDistancia}, para calcular as distâncias e os dados resultantes foram posteriormente sumarizados. Após isso, foi possível obter uma listagem de 15 resíduos com maior número de contatos que eram comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
+\section{Identificação dos resíduos relevantes}
+\label{sec:IdentificacaoDosResiduosRelevantes}
 
-\begin{table}[h]
-\caption{Resíduos identificados pelo algoritmo de classificação por relevância.}
-\label{tab:listaProvavelRelevantes}
-\centering
-\begin{tabular}{@{}lll@{}}
-ILE\_15  & ASP\_149 & MET\_160 \\
-SER\_19  & ARG\_152 & ILE\_193 \\
-ILE\_94  & ALA\_153 & THR\_195 \\
-GLY\_95  & MET\_154 & MET\_198 \\
-PHE\_148 & TYR\_157 & TRP\_221 \\
-\end{tabular}
-\end{table}
+Durante a fase de desenvolvimento dos scripts necessários para processamento dos dados de docagem e extração das informações relevantes, foi identificada a necessidade de dividir o \emph{data set}. De acordo com os especialistas de domínio, o resíduo NAH deveria ter sua distância euclidiana calculada apenas com o ligante TCL.
 
-Com posse destes dados, os resíduos resultantes (apresentados na Tabela \ref{tab:listaProvavelRelevantes}) foram comparados com a lista feita pelo especialista de domínio (apresentados na Tabela \ref{tab:listaOsmar}) a fim de identificar os elementos que eram comuns aos dois grupos. 
+Como no \emph{data set} original todas as informações estavam consolidadas em um único arquivo CSV contendo 3.100 linhas e 12.335 colunas, a manipulação destes dados em softwares como o Microsoft Excel se torna praticamente inviável.
 
-Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na lista do especialista de domínio e foram classificados como sendo relevantes para os experimentos de docagem. Os 5 resíduos que não estavam presentes na lista do especialista foram identificados como casos onde a proteína apresentou ligações fora da cavidade do substrato e, por este motivo, não foram considerados como sendo relevantes. Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio do LABIO e estão ilustrados pela Figura \ref{fig:PlotResiduos}. 
+Dessa forma, foi desenvolvido um \emph{script} nomeado de "ajustaColunasDocking" para fazer a manipulação das colunas do \emph{data set}. O script recebe os seguintes parâmetros de entrada:
 
-\begin{figure}[h]
-        \center
-        \includegraphics[scale=0.55]{images/avaliacao_Residuos_nomes.png}
-        \label{fig:PlotResiduos}
-        \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
-\end{figure}
-\newpage
-Por fim, com base nestas comparações e nos experimentos realizados foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes} e foi utilizado como base para a modelagem OLAP.
+\begin{enumerate}
+	\item Sinal da operação a ser feita (-m mantém as colunas, e "-e" remove as colunas);
+	\item Nome das colunas que serão manipuladas separadas por vírgula;
+	\item Arquivo de entrada com dados de docagem (\emph{data set});
+	\item Arquivo de saída com as colunas manipuladas.
+\end{enumerate}
 
-\begin{table}[h]
-\caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
-\label{tab:listaProvavelRelevantes}
-\centering
-\begin{tabular}{@{}ll@{}}
-\toprule
-\multicolumn{1}{c}{Resíduo} & \multicolumn{1}{c}{Nome} \\ \midrule
-SER\_19                     & Serina                   \\
-ILE\_15                     & Isoleucina               \\
-ILE\_94                     & Isoleucina               \\
-GLY\_95                     & Glicina                  \\
-PHE\_148                    & Fenilalanina             \\
-TYR\_157                    & Tirosina                 \\
-MET\_160                    & Metionina                \\
-ILE\_193                    & Isoleucina               \\
-THR\_195                    & Treonina                 \\
-MET\_198                    & Metionina                \\ \bottomrule
-\end{tabular}
-\end{table}
+O Algoritmo \ref{alg:ajustaColunaDocking} descreve o processo de funcionamento do script "ajustaColunasDocking".
 
-\section{Scripts para preparação dos dados}
-\label{sec:ScriptsParaPreparacaoDosDados}
+\floatname{algorithm}{Algoritmo}
+\begin{algorithm}[H]
+\caption{Algoritmo para manipulação da base de dados da simulação de docagem molecular}
+\label{alg:ajustaColunaDocking}
+{\fontsize{10}{10}\selectfont
+\begin{algorithmic}[1]
+	\STATE Seja C a lista com o nome das colunas
+	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
+	\STATE Seja c uma coluna em C
+	\STATE Seja d uma linha em D
+	\STATE Seja M o modo de operação da execução
+	\IF{M for igual a manter as colunas em C}
+		\FOR{cada d em D}
+			\FOR{cada c em C}
+			\STATE Grave apenas c na saída
+			\ENDFOR
+		\ENDFOR
+	\ENDIF
+	\IF{M for igual a excluir as colunas em C}
+		\FOR{cada d em D}
+			\FOR{cada c em C}
+			\STATE Remove apenas c na saída
+			\ENDFOR
+		\ENDFOR
+	\ENDIF
+\end{algorithmic}
+}
+\end{algorithm}
 
-Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI, exibem seus resultados diretamente em STDOUT e trabalham em cima de arquivos CSV. Os resultados podem ser redirecionados para outro arquivo ou outro \emph{script} através de um \emph{pipe}.
+O algoritmo "ajustaColunasDocking" foi utilizado para remover os dados referentes aos átomos do resíduo NAH do \emph{data set} original e separá-los em outro arquivo de dados distinto. Após a manipulação, os arquivos de dados ficaram da seguinte forma:
+\begin{itemize}
+	\item \emph{Data set} 1: Removido todas as colunas dos átomos referentes ao resíduo NAH.
+	\item \emph{Data set} 2: Apenas dados dos átomos referentes ao resíduo NAH e do ligante TCL.
 
-O primeiro \emph{script} criado foi chamado de calculaDistancia, ele foi elaborado com o objetivo de elencar quais são os resíduos mais relevantes, atendendo assim a uma necessidade dos especialistas de domínio. O número de contatos do resíduo com o ligante é a medida qualitativa para elencar quais são estes melhores resíduos. Para identificar se houve contato ou não é necessário realizar o cálculo da distância euclidiana entre resíduo e ligante, conforme descrito na fórmula \ref{eqt:distEuclid}. O calculaDistancia recebe três parâmetros na sua execução, o primeiro é um arquivo texto contendo a lista de resíduos, o segundo é um arquivo texto contendo a lista de ligantes e o terceiro é a base de dados das simulações de docagem molecular no formato CSV. A saída do calculaDistancia é também no formato CSV e é composta do número do snapshot, nome do resíduo, nome do ligante e o resultado do cálculo da distância euclidiana. Um último campo foi adicionado a pedido dos especialistas para classificação da distância euclidiana, se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons. O algoritmo \ref{alg:CalculoDistancia} demonstra o funcionamento do calculaDistancia.
+Neste ponto é importante ressaltar que ambos os arquivos tiveram somente suas colunas alteradas e mantiveram um total de 3.100 linhas, representando a trajetória das conformações da molécula receptora.
 
-\renewcommand{\algorithmicfor}{\textbf{para}}
-\renewcommand{\algorithmicif}{\textbf{se}}
-\renewcommand{\algorithmicthen}{\textbf{então}}
-\renewcommand{\algorithmicelse}{\textbf{senão}}
-\renewcommand{\algorithmicendif}{\textbf{fim se}}
-\renewcommand{\algorithmicendfor}{\textbf{fim para}}
-\renewcommand{\algorithmicdo}{\textbf{faça}}
+Com os arquivos devidamente separados de acordo com os critérios estabelecidos, foi possível realizar o cálculo da distância Euclidiana. Para isso, foi desenvolvido um segundo script, nomeado "calculaDistancia", que realiza o cálculo de todo o conjunto de átomos existente em um \emph{data set} tendo como base os critérios definidos previamente para classificação da relevância dos resíduos.
+
+Para execução do script "calculaDistancia", são necessários três parâmetros de entrada, sendo eles:
+\begin{enumerate}
+	\item Arquivo contendo lista de átomos da molécula;
+	\item Arquivo contendo lista de átomos do(s) ligante(s);
+	\item Arquivo de entrada com dados de docagem (\emph{data set}).
+\end{enumerate}
+
+%-----------------------------------
+% 
+%    TO DO: verificar as informações de saída do script
+%
+%       
+%-----------------------------------
+
+A partir dos três arquivos de entrada é gerado um arquivo de saída em formato CSV contendo as seguintes informações: número do snapshot, nome do átomo, nome do ligante, resultado do cálculo da distância, classificação da distância (se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons). O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do script "calculaDistancia.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
@@ -191,38 +218,171 @@ O primeiro \emph{script} criado foi chamado de calculaDistancia, ele foi elabora
 }
 \end{algorithm}
 
-O segundo \emph{script} criado foi batizado de ajustaColunasDocking e tem como objetivo realizar a manipulação das colunas contidas no CSV resultante da simulação do processo de docagem molecular. Como o arquivo CSV utilizado possui 12335 colunas, fica difícil realizar a manipulação das mesas através de um software de planilha eletrônica como o \emph{Microsoft Excel}, por exemplo. A necessidade de manipulação destas colunas surgiu após os especialistas de domínio identificarem que o resíduo NAH deveria ter a sua distância euclidiana calculada apenas com o ligante Triclosano. Desta forma foi necessário dividir o arquivo CSV original em dois, um contendo apenas as informações do resíduo NAH e o ligante Triclosano, e o segundo contendo todo o conteúdo original exceto o resíduo NAH. Para esta manipulação o ajustaColunasDocking foi desenvolvido e ele recebe quarto parâmetros de entrada para execução. O primeiro parâmetro é a respeito de qual operação será executada, se serão mantidas apenas as colunas descritas (-m) ou se serão excluída apenas as colunas descritas. O segundo parâmetro é a lista de colunas separadas por vírgula, o terceiro é o arquivo CSV de entrada e o último parâmetro é onde será gravado o novo arquivo. O algoritmo \ref{alg:ajustaColunaDocking} descreve o comportamento do ajustaColunasDocking.
+%-----------------------------------
+% 
+%    TO DO: colocar screenshot do output do script
+%
+%       
+%-----------------------------------
 
-\floatname{algorithm}{Algoritmo}
-\begin{algorithm}[H]
-\caption{Algoritmo para manipulação da base de dados da simulação de docagem molecular}
-\label{alg:ajustaColunaDocking}
-{\fontsize{10}{10}\selectfont
-\begin{algorithmic}[1]
-	\STATE Seja C a lista com o nome das colunas
-	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
-	\STATE Seja c uma coluna em C
-	\STATE Seja d uma linha em D
-	\STATE Seja M o modo de operação da execução
-	\IF{M for igual a manter as colunas em C}
-		\FOR{cada d em D}
-			\FOR{cada c em C}
-			\STATE Grave apenas c na saída
-			\ENDFOR
-		\ENDFOR
-	\ENDIF
-	\IF{M for igual a excluir as colunas em C}
-		\FOR{cada d em D}
-			\FOR{cada c em C}
-			\STATE Remove apenas c na saída
-			\ENDFOR
-		\ENDFOR
-	\ENDIF
-\end{algorithmic}
-}
-\end{algorithm}
+Após a execução do algoritmo para calcular as distâncias os dados de saída foram sumarizados. Como resultado, foi obtida uma listagem de 15 resíduos com maior número de contatos comuns para os experimentos de docagem envolvendo ambos ligantes TCL e ETH. A Tabela \ref{tab:listaProvavelRelevantes} lista os resíduos obtidos pelo algoritmo, que estão representados pela sua sigla e seu número de ordem na enzima.
 
-\newpage
+\begin{table}[h]
+	\caption{Resíduos identificados pelo algoritmo de cálculo.}
+	\label{tab:listaProvavelRelevantes}
+	\centering
+	\begin{tabular}{@{}lll@{}}
+	ILE\_15  & ASP\_149 & MET\_160 \\
+	SER\_19  & ARG\_152 & ILE\_193 \\
+	ILE\_94  & ALA\_153 & THR\_195 \\
+	GLY\_95  & MET\_154 & MET\_198 \\
+	PHE\_148 & TYR\_157 & TRP\_221 \\
+	\end{tabular}
+\end{table}
+
+Com posse destes dados, os resíduos resultantes (apresentados na Tabela \ref{tab:listaProvavelRelevantes}) foram comparados com a lista feita pelo especialista de domínio (apresentados na Tabela \ref{tab:listaOsmar}) a fim de identificar os elementos que eram comuns aos dois grupos. 
+
+Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na lista do especialista de domínio e foram classificados como sendo relevantes para os experimentos de docagem. Os 5 resíduos que não estavam presentes na lista do especialista foram identificados como casos onde a proteína apresentou ligações fora da cavidade do substrato e, por este motivo, não foram considerados como sendo relevantes. Os resíduos do conjunto obtido foram plotados pelos especialistas de domínio do LABIO e estão ilustrados pela Figura \ref{fig:PlotResiduos}. 
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.55]{images/avaliacao_Residuos_nomes.png}
+        \label{fig:PlotResiduos}
+        \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
+\end{figure}
+
+Com base nos algoritmos executados e nas comparações realizadas, foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes}, que foi utilizada como base para a modelagem OLAP.
+
+\begin{table}[h]
+\caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
+\label{tab:listaProvavelRelevantes}
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\multicolumn{1}{c}{Resíduo} & \multicolumn{1}{c}{Nome} \\ \midrule
+SER\_19                     & Serina                   \\
+ILE\_15                     & Isoleucina               \\
+ILE\_94                     & Isoleucina               \\
+GLY\_95                     & Glicina                  \\
+PHE\_148                    & Fenilalanina             \\
+TYR\_157                    & Tirosina                 \\
+MET\_160                    & Metionina                \\
+ILE\_193                    & Isoleucina               \\
+THR\_195                    & Treonina                 \\
+MET\_198                    & Metionina                \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Dimensões}
+\label{sec:Dimensoes}
+
+Para atender às questões de negócio levantadas pelos especialistas de domínio conforme descrito na Tabela \ref{tab:questaoNegocio}, foi proposto um modelo de dados do tipo estrela contendo uma tabela fato e quinze dimensões. A modelagem proposta foi baseada na resolução das questões de negócio específicas para o cenário descrito neste trabalho, porém este mesmo modelo pode ser empregado em outros tipos de experimentos.
+
+A Figura \ref{fig:ConcepcaoModeloOLAP} ilustra o projeto inicial da modelagem OLAP.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.7]{images/Modelo_OLAP.PNG}
+        \caption{Concepção inicial do modelo OLAP}
+        \label{fig:ConcepcaoModeloOLAP}
+\end{figure}
+
+A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. Porém, como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{"NumeroConexoesR1", "NumeroConexoesR2", ..., "NumeroConexoesR10"}. Já as dimensões, foram representadas por "DIM\_R1" até "DIM\_R10".
+
+A dimensão "DIM\_Ligante" representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
+
+O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste cas o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão "DIM\_Tempo". 
+
+A dimensão "DIM\_Modelo\_Dinamico" serve para o especialista de domínio identificar qual foi a dinâmica utilizada no experimento. No caso deste trabalho, foi utilizada apenas uma dinâmica de 3.100 conformações.
+
+Um experimento de docagem utiliza agrupamentos para determinadas conformações, com base na semelhança existente entre elas. Dessa forma, foi necessário permitir a que estes agrupamentos fossem identificados, para possibilitar a análise por agrupamento. Esta necessidade foi representada pela dimensão "DIM\_Grupo".
+
+Por fim, a dimensão "DIM\_Experimento" serve para o especialista de domínio identificar as informações relacionadas ao experimento executado. Um mesmo experimento de docagem poder ser executado mais de uma vez utilizando modelos dinâmicos diferentes. Com esta dimensão os experimentos são separados com base nas informações providas pelo especialista de domínio.
+
+
+\section{Construção do modelo no Analisys Services}
+
+A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysys Services e o banco de dados Microsoft SQL Server. A Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.7]{images/ModelagemOLAP.PNG}
+        \caption{Modelo OLAP construído com uso do Microsoft Analysis Services.}
+        \label{fig:ModeloOLAP}
+\end{figure}
+
+A seguir descrevem-se todas as definições e propriedades levadas em consideração durante a criação do modelo OLAP no Analysis Services, bem como a definição de cada campo.
+
+\begin{itemize}
+\item 
+Tabela: DIM_Grupo
+Tipo: Dimensional.
+Descrição: Representa os agrupamentos de conformações por semelhança.
+\begin{table}[h]
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           \\ \midrule
+Id            & INT           & x           & Identificador da dimensão grupo    \\
+Descricao     & VARCHAR       &             & Descrição do grupo           \\
+IdAgrupamento & INT           &             & Identificador do agrupamento \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\item
+Tabela: DIM_Ligante
+Tipo: Dimensional.
+Descrição: Representa o ligante utilizado no experimento.
+\begin{table}[h]
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           \\ \midrule
+Id            	& INT           & x           & Identificador da dimensão ligante   \\
+Descricao     	& VARCHAR       &             & Descrição do ligante           \\
+Nome 			& VARCHAR       &             & Nome do ligante \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+
+
+
+
+
+
+A figura \ref{fig:hierarGrupoLiganteExperimentoModelo} mostra a composição das hierarquias para as dimensões DIM\_Grupo, DIM\_Experimento, DIM\_Ligante e DIM\_Modelo\_Dinamico respectivamente. Já a figura \ref{fig:HierarR1ateR10} apresenta a hierarquia para as dimensões dos resíduos de 1 à 10.
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.6]{images/Hierar_Grupo_Ligante_Experimento_Modelo.png}
+        \caption{Hierarquias das dimensões Grupo, Ligante, Experimento e Modelo Dinâmico}
+        \label{fig:hierarGrupoLiganteExperimentoModelo}
+\end{figure}
+
+\begin{figure}[h]
+        \center
+        \includegraphics[scale=0.6]{images/Hierar_DIMR1_ate_10.png}
+        \caption{Hierarquia das dimensões R1, R2, R3, R4, R5, R6, R7, R8, R9 e R10}
+        \label{fig:HierarR1ateR10}
+\end{figure}
+
+mostrar hierarquias de dimensoes
+	
+
+
+
+
+\section{Scripts para preparação dos dados}
+\label{sec:ScriptsParaPreparacaoDosDados}
+
+Para o processo de extração, transformação e carga dos dados deste trabalho, foram desenvolvidos quatro \emph{scripts} utilizando a linguagem Python Cada um deles foi desenvolvido para atender a uma necessidade específica, as quais foram sendo idenficada no decorrer do projeto.
+
+Todos os \emph{scripts} são executados através da CLI
+
+
+Com objetivo de realizar todo processo de extração, transformação e carga dos dados de simulações de docagem molecular, foram criados quatro \emph{scripts} utilizando as linguagens Python. Cada script foi criado para atender a uma necessidade específica que surgiu ao longo do projeto. Todos os \emph{scripts} são executados através da CLI, exibem seus resultados diretamente em STDOUT e trabalham em cima de arquivos CSV. Os resultados podem ser redirecionados para outro arquivo ou outro \emph{script} através de um \emph{pipe}.
+
+
 
 O terceiro script está relacionado com o processo de carga dos dados e foi chamado de criaDadosDIMTempo. O objetivo dele é fornecer o \emph{script} SQL para inserção dos dados na dimensão tempo. O detalhamento a respeito das dimensões será visto na seção \ref{sec:Dimensoes}. O criaDadosDIMTempo recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela dentro do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do criaDadosDIMTempo.
 
@@ -252,6 +412,11 @@ O terceiro script está relacionado com o processo de carga dos dados e foi cham
 \end{algorithmic}
 }
 \end{algorithm}
+
+
+
+
+
 
 O quarto e último \emph{script} foi chamado de criaDados e é responsável por realizar a carga de todo o restante das informações dentro da base de dados. O criaDados recebe oito parâmetros de entrada para sua execução. Os 4 primeiros parâmetros são referentes a composição das dimensões, que será mais detalhadamente descrito na seção \ref{sec:Dimensoes}. O primeiro parâmetro é um arquivo CSV contendo a composição da dimensão ligante, o segundo referente a dimensão grupo, o terceiro referente a dimensão modelo dinâmico e o quarto referente a composição da dimensão experimento. 
 
@@ -326,37 +491,3 @@ Desta forma o procedimento de execução destas rotinas neste projeto pode ser d
 % TO DO:  mostrar tabela de exemplo do resultado de saída do script.
 %-------------------
 
-\section{Dimensões}
-\label{sec:Dimensoes}
-
-Para atender o processo de análise das simulações de docagem molecular e principalmente para atender às questões de negócio levantadas pelos especialistas de domínio conforme descrito na tabela \ref{tab:questaoNegocio}, foram construídas 15 dimensões. O modelo OLAP proposto teve o foco na resolução das questões apresentadas pelos especialistas mas, este mesmo modelo também pode ser utilizado para outros experimentos.
-
-A figura \ref{fig:DiagModeloOLAP} mostra o modelo OLAP completo que foi desenvolvido, com as dimensões e a tabela FATO. As primeiras 10 dimensões (DIM\_R1 até DIM\_R10) são os 10 resíduos mais importantes, levando em consideração o número de contatos entre o resíduo e o ligante. As outras dimensões são, a DIM\_Grupo criada para identificar os tipos de agrupamento realizados para as conformações de uma determinada simulação, a DIM\_Ligante que compreende os ligantes utilizados naquele experimento, a DIM\_Tempo que apresenta o instante de tempo de execução da simulação em picosegundos, a DIM\_Experimento responsável pela identificação do experimento executado e por fim a DIM\_Modelo\_Dinamico.
-
-\begin{figure}[h]
-        \center
-        \includegraphics[scale=0.7]{images/ModelagemOLAP.PNG}
-        \caption{Diagrama do modelo OLAP}
-        \label{fig:DiagModeloOLAP}
-\end{figure}
-
-A figura \ref{fig:hierarGrupoLiganteExperimentoModelo} mostra a composição das hierarquias para as dimensões DIM\_Grupo, DIM\_Experimento, DIM\_Ligante e DIM\_Modelo\_Dinamico respectivamente. Já a figura \ref{fig:HierarR1ateR10} apresenta a hierarquia para as dimensões dos resíduos de 1 à 10.
-
-\begin{figure}[h]
-        \center
-        \includegraphics[scale=0.6]{images/Hierar_Grupo_Ligante_Experimento_Modelo.png}
-        \caption{Hierarquias das dimensões Grupo, Ligante, Experimento e Modelo Dinâmico}
-        \label{fig:hierarGrupoLiganteExperimentoModelo}
-\end{figure}
-
-\begin{figure}[h]
-        \center
-        \includegraphics[scale=0.6]{images/Hierar_DIMR1_ate_10.png}
-        \caption{Hierarquia das dimensões R1, R2, R3, R4, R5, R6, R7, R8, R9 e R10}
-        \label{fig:HierarR1ateR10}
-\end{figure}
-
-mostrar hierarquias de dimensoes
-	
-\section{Construção do modelo no Analisys Services}
-	exibir a tabela pivotante com os valores medios (feb,rmsd)
