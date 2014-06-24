@@ -291,7 +291,17 @@ A modelagem proposta foi baseada na resolução das questões de negócio espec�
         \label{fig:ConcepcaoModeloOLAP}
 \end{figure}
 
-A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. As métricas de FEB e RMSD foram representadas na tabela fato pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo de valor médio.
+A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. As outras métricas de FEB médio e RMSD médio foram criadas no cubo e representadas pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo de valor médio conforme descrito na fórmula \ref{eqt:febMedia} e \ref{eqt:rmsdMedia} criadas dentro do \emph{Microsoft Analisys Services}.
+
+\begin{equation}
+\label{eqt:febMedia}
+        RMSDMedio = [RMSD]/[Measures].[FATO Count]
+\end{equation}
+
+\begin{equation}
+\label{eqt:rmsdMedia}
+        FEBMedio = [FEB]/[Measures].[FATO Count]
+\end{equation}
 
 Como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}, estes realizando apenas o cálculo de somatório. Já as dimensões para os resíduos, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
 
@@ -358,8 +368,8 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} & \textbf{Tipo} & \textbf{FK} & \textbf{Descrição}           				\\ \midrule
-	FEB            			 & Numeric        &             & Valor médio de FEB			    \\
-	RMSD    				 & Numeric        &             & Valor médio de RMSD          		\\
+	FEB            			 & Numeric        &             & Valor de FEB			    \\
+	RMSD    				 & Numeric        &             & Valor de RMSD          		\\
 	NumeroConexoesR1 	     & Numeric        &             & Numero de ligações do resíduo 1   \\
 	NumeroConexoesR2 	     & Numeric        &             & Numero de ligações do resíduo 2   \\
 	NumeroConexoesR3 	     & Numeric        &             & Numero de ligações do resíduo 3   \\
@@ -466,8 +476,8 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           			\\ \midrule
-	Id            	& Numeric           & x           & Identificador da dimensão modelo dinamico   \\
-	Descricao     	& Char       &             & Descrição da dinamica utilizada        \\ \bottomrule
+	Id            	& Numeric           & x           & Identificador da dimensão modelo dinâmico   \\
+	Descricao     	& Char       &             & Descrição da dinâmica utilizada        \\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -490,9 +500,9 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule
-	Id            	& Numeric           & x           & Identificador da dimensão residuo   \\
-	Nome 		  & Char       &             & Nome do residuo 					   	\\ 
-	Tipo          & Char       &             & Tipo do residuo           	   		\\ \bottomrule   
+	Id            	& Numeric           & x           & Identificador da dimensão resíduo   \\
+	Nome 		  & Char       &             & Nome do resíduo 					   	\\ 
+	Tipo          & Char       &             & Tipo do resíduo           	   		\\ \bottomrule   
 	\end{tabular}
 \end{table}
 	
