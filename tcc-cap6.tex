@@ -7,7 +7,7 @@ Nos primeiros testes realizados no cubo de dados, em conjunto com os especialist
 
 Inicialmente acreditou-se que poderia ter sido algum problema durante o processo de ETL ou alguma regra de negócio que não estava sendo devidamente contemplada. Porém, ao avaliar o \emph{data set} original contendo os dados de experimentos de docagem molecular, viu-se que grande parte dos melhores valores resultantes de FEB para o ligante TCL eram posivitos.
 
-Com isso, os especialistas de domínio definiram que qualquer resultado de FEB que apresentasse valor positivo poderia ser desconsiderado. Neste caso, foi sugerido que tivessem seus valores alterados para zero, conforme descrito na seção \ref{\ref{sec:IdentificacaoDeMetricas}. Em função desta definição os \emph{scripts} impactados foram devidamente alterados, sendo necessário realizar uma nova carga de dados e gerar novamente o cubo de dados. 
+Com isso, os especialistas de domínio definiram que qualquer resultado de FEB que apresentasse valor positivo poderia ser desconsiderado. Neste caso, foi sugerido que tivessem seus valores alterados para zero, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Em função desta definição os \emph{scripts} impactados foram devidamente alterados, sendo necessário realizar uma nova carga de dados e gerar novamente o cubo de dados. 
 
 Enfim, após a segunda carga o valor agregado médio de FEB para o experimento estava sendo apresentado corretamente. A tabela fato foi populada com um total de 6.200 registros, sendo 3.100 deles relacionados aos dados do experimento de docagem executado com o ligante TCL e os outros 3.100 relacionados ao experimento para o ETH. A Figura \ref{fig:TabPivotante} ilusta a tabela pivotante após a carga de dados.
 

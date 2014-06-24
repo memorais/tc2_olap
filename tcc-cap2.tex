@@ -4,7 +4,7 @@
 \chapter{Referencial Teórico}
 
 \section{Planejamento Racional de Fármacos}
-Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolvimento de novos compostos químicos capazes de prevenir ou curar doenças passou a seguir um planejamento racional, com embasamento lógico e teórico \cite{rdd}. Esse processo é denominado “Planejamento Racional de Fármacos” (do inglês RDD - \emph{Rational Drug Design}) e, de acordo com Kuntz \cite{kun92}, ele se divide em quatro etapas e está reprensentados através do \emph{workflow} da Figura \ref{fig:rddworkflow} \cite{kar11}: 
+Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolvimento de novos compostos químicos capazes de prevenir ou curar doenças passou a seguir um planejamento racional, com embasamento lógico e teórico \cite{rdd}. Esse processo é denominado “Planejamento Racional de Fármacos” (do inglês RDD - \emph{Rational Drug Design}) e, de acordo com Kuntz \cite{kun92}, ele se divide em quatro etapas reprensentados através do \emph{workflow} da Figura \ref{fig:rddworkflow} \cite{kar11}: 
 
 \begin{figure}[h]
 	\center
@@ -15,7 +15,7 @@ Devido aos avanços da biologia, atualmente o processo de descoberta e desenvolv
 
 
 \begin{enumerate}
-  \item O primeiro passo é definir um receptor (normalmente uma proteína) \cite{dre00} e analisar computacionalmente sua estrutura 3D. A estrutura da proteína é determinada por cristalografia por difração de raios X ou ressonância magnética nuclear \cite{far99}, sendo as informações resultantes armazenadas em um banco de dados como o Protein Data Bank - PDB \cite{ber00}. Essa análise tem por objetivo localizar possíveis regiões de ligação onde um ligante pode estabelecer ligações (atividades 1 e 2 do \emph{workflow} da Figura \ref{fig:rddworkflow});
+  \item O primeiro passo é definir um receptor (normalmente uma proteína) \cite{dre00} e analisar computacionalmente sua estrutura 3D. A estrutura da proteína é determinada por cristalografia por difração de raios X ou por ressonância magnética nuclear (NMR)\cite{far99}, sendo as informações resultantes armazenadas em um banco de dados como o Protein Data Bank - PDB \cite{ber00}. Essa análise tem por objetivo localizar possíveis regiões de ligação onde um ligante pode estabelecer ligações (atividades 1 e 2 do \emph{workflow} da Figura \ref{fig:rddworkflow});
   
   \item Baseado nas prováveis regiões de ligação identificadas no passo anterior, é selecionado um conjunto de possíveis candidatos, chamados ligantes (usualmente pequenas moléculas que podem ser buscadas em Banco de Dados de compostos como o ZINC \cite{irw05}) que podem se ligar a essa região no receptor (atividade 3 \emph{workflow} da Figura \ref{fig:rddworkflow}). As diferentes conformações que determinado ligante pode assumir dentro do sítio de ligação de uma determinada proteína são simuladas por softwares de \emph{docking} como AutoDock 3.05 \cite{mor98} (atividade 4 do \emph{workflow} da Figura \ref{fig:rddworkflow});
   
@@ -49,7 +49,7 @@ A Tabela \ref{tab:rddtempo} apresenta, de uma forma geral, as etapas que envolve
 	\end{tabular}
 \end{table}
 
-O desenvolvimento de fármacos auxiliado por computador (do inglês CADD - \emph{Computer-aided drug design}) consiste na utilização de recursos, ferramentas e técnicas computacionais contribui de forma significativa para as etapas de desenvolvimento de um fármaco.  Diferentes estágios deste processo podem ser beneficiados pelo uso da computação, podendo ser aplicado na identificação da molécula-alvo, planejamento, análise e melhoramento de ligantes.
+O desenvolvimento de fármacos auxiliado por computador (do inglês \emph{Computer-aided drug design}) consiste na utilização de recursos, ferramentas e técnicas computacionais contribui de forma significativa para as etapas de desenvolvimento de um fármaco.  Diferentes estágios deste processo podem ser beneficiados pelo uso da computação, podendo ser aplicado na identificação da molécula-alvo, planejamento, análise e melhoramento de ligantes.
 
 
 \section{Dinâmica Molecular}
@@ -84,7 +84,7 @@ A simulação por DM se mostra um método versátil e acessível, sendo consider
 
 \section{Docagem Molecular}
 
-A Docagem Molecular é considerada um dos principais processo do CADD, e é através dela que são produzidos os dados detalhados sobre a interação entre receptores e seus ligantes \cite{LEN96}. 
+A Docagem Molecular é considerada um dos principais processos do CADD, e é através dela que são produzidos os dados detalhados sobre a interação entre receptores e seus ligantes \cite{LEN96}. 
 
 No processo de Docagem Molecular, algoritmos de docagem são executados para testar e analisar virtualmente a interação entre um ligante e um receptor. Estes algoritmos geram um grande número de interações, onde em todas elas, o ligante é testado em diferentes orientações e conformações dentro do sítio de ligação do receptor, de modo a formar um complexo estável. 
 Usualmente o receptor é uma proteína ou uma molécula de ácido nucléico, e o ligante pode ser uma pequena molécula ou até mesmo outra proteína. A Figura \ref{fig:docking} \cite{ALE13} ilustra cada um destes elementos e apresenta como é feita a interação entre eles.
@@ -105,13 +105,13 @@ Diversas interações devem ser testadas para que seja identificado o melhor enc
 	\label{fig:tcldock}
 \end{figure}
 
-As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como sendo corpos rígidos. O modelo conhecido como ``chave e fechadura'' (do inglês \emph{lock-and-key}, proposto por Emil Fisher em 1894, prevê um encaixe perfeito do ligante no sítio de ligação do receptor, tal como uma chave encaixa em sua fechadura correspondente \cite{kar07}. 
+As primeiras abordagens envolvendo a docagem entre proteínas e ligantes consideravam ambos elementos como sendo corpos rígidos. O modelo conhecido como ``chave e fechadura'' (do inglês \emph{lock-and-key}, proposto por Emil Fisher em 1894), prevê um encaixe perfeito do ligante no sítio de ligação do receptor, tal como uma chave encaixa em sua fechadura correspondente \cite{kar07}. 
 
 No entanto, ambos proteína e ligante são moléculas flexíveis. Desta forma, o modelo histórico de ``chave e fechadura'' deu seu lugar à novas teorias, as quais passaram a considerar totalmente ou parcialmente a flexibilidade do ligante e do receptor \cite{SOU06}. Atualmente um dos maiores desafios na área de docagem molecular é conseguir manipular, de forma eficience, a flexibilidade do receptor da proteína. A eficiência da busca pela melhor conformação é determinada pelo número de graus de liberdade  \cite{SOU06}. 
 
 Considerar a flexibilidade do ligante não requer um grande esforço computacional, pois geralmente são moléculas pequenas que possuem poucos átomos em sua estrutura \cite{COH10}. No entanto, a consideração da flexibilidade de ambos receptor e ligante se torna um complicador para os cálculos da docagem molecular, se tornando um problema computacional devido a complexidade e ao tamanho da proteína receptora \cite{art08}.
 
-Existem diversos estudos e abordagens que contemplam a flexibilidade do receptor em simulações de docagem molecular. Entretanto, no presente trabalho, os dados utilizados foram previamente desenvolvidos no LABIO (Laboratório de Bioinformática, Modelagem e Simulação de Biossistemas) combinando técnicas de docagem molecular com dados resultantes de simulações por DM. A partir disso, foi gerado um conjunto de \emph{snapshots} sequenciais que representam as diferentes conformações da proteína receptora InhA em um intervalo de tempo.bilidade do ligante \cite{kar11}.
+Existem diversos estudos e abordagens que contemplam a flexibilidade do receptor em simulações de docagem molecular. Entretanto, no presente trabalho, os dados utilizados foram previamente desenvolvidos no LABIO combinando técnicas de docagem molecular com dados resultantes de simulações por DM. A partir disso, foi gerado um conjunto de \emph{snapshots} sequenciais que representam as diferentes conformações da proteína receptora InhA em um intervalo de tempo \cite{kar11}.
 
 \section{Modelagem OLAP}
 
@@ -119,7 +119,7 @@ Com o desenvolvimento tecnológico, ficou cada vez mais fácil a obtenção de d
 
 Um sistema de suporte à decisão (do inglês OLAP - \emph{On-line Analytical Processing}) é uma ferramenta que permite analisar os dados \emph{on-line} de forma multidimensional, auxiliando a tomada de decisão nos mais diversos níveis, sejam eles operacionais, táticos e estratégicos. De acordo com com Turban \emph{et al.} \cite{TUR05}, o OLAP se define em “uma categoria ampla de aplicações e técnicas para coletar, armazenar, analisar, fornecer acesso aos dados e ajudar os usuários da empresa a fazerem melhores negócios e tomarem melhores decisões estratégicas”. 
 
-A representação dos dados em um modelo OLAP é como uma matriz. Cada dimensão é caracterizada por uma questão de negócio e sempre considera-se uma dimensão para o tempo. Também é possível que uma dimensão possua hierarquia, por exemplo, a dimensão tempo pode ter: ano, semestre, mês, dia, etc. Nestas dimensões os dados são agregados, mas é possível navegar entre as hierarquias de modo que os dados sejam exibidos com um maior nível de granularidade. A ação de ir de um nível genérico para um mais detalhado é chamado de \emph{drill-down}. A ação inversa é chamada de \emph{drill-up}.
+A representação dos dados em um modelo OLAP é como uma matriz. Cada dimensão é caracterizada por uma questão de negócio e sempre considera-se uma dimensão para o tempo. Também é possível que uma dimensão possua hierarquia. Por exemplo, a dimensão tempo pode ter: ano, semestre, mês, dia, etc. Nestas dimensões os dados são agregados e, é possível navegar entre as hierarquias de modo que os dados sejam exibidos com um maior nível de granularidade. A ação de ir de um nível genérico para um mais detalhado é chamado de \emph{drill-down}. A ação inversa é chamada de \emph{drill-up} ou \emph{roll-up} \cite{KIM13}.
 
 Um modelo dimensional implementado em um banco de dados relacional é representado fisicamente por tabelas, e caracteriza-se pelo modelo do tipo estrela (do inglês \emph{Star Schema}) devido à forma que a sua estrutura está organizada. Este tipo de modelo possui como principal característica o relacionamento entre diversas tabelas de dimensão e uma tabela de fatos centralizada \cite{KIM13}.
 
@@ -145,7 +145,7 @@ A tabela fato é onde as informações produzidas pela execução de um processo
 
 Os dados armazenados em um cubo OLAP passam por algoritmos de indexação, técnicas de armazenamento e outras otimizações que fazem com que as consultas realizadas nesta estrutura de dados, mesmo sendo complexas, tenham um alto desempenho no tempo de resposta para o usuário.
 
-Um dos processo que fazem parte da modelagem de dados OLAP é o de extração, transformação e carga (do inglês ETL - \emph{Extract, Transform and Load}). Este processo consiste na extração de dados de fontes externas e na transformação dos mesmos, para que possam atender às necessidades de negócio. Posteriormente, estes dados são carregados em um \emph{Data Warehouse} ou em outros ambientes de banco de dados.
+Um dos processos que fazem parte da modelagem de dados OLAP é o de extração, transformação e carga (do inglês ETL - \emph{Extract, Transform and Load}). Este processo consiste na extração de dados de fontes externas e na transformação dos mesmos, para que possam atender às necessidades de negócio. Posteriormente, estes dados são carregados em um \emph{Data Warehouse} ou em outros ambientes de banco de dados.
 
 O processo de ETL é considerado o mais complexo e que consome mais tempo durante a criação de um ambiente de \emph{Data Warehouse/Business Intelligence}, pois consiste em movimentar e transformar os dados que irão servir como base para futuras decisões gerenciais. Portanto, os dados precisam estar precisos e consistentes. 
 Muitas vezes as informações estão armazenadas em diferentes fontes de dados e não possuem um padrão de estrutural de dados \cite{KIM13}. Nestes casos, as etapas de extração e transformação precisam de um esforço para que os dados sejam tratados de forma homogênea.

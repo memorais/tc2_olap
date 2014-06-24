@@ -14,16 +14,14 @@ tuberculosis}) e seus resíduos, que possam apresentar ligações receptor-ligan
 
 Dentro do processo de desenvolvimento de fármacos, a docagem molecular pode ser considerada como o principal método para avaliar a eficácia das combinações químicas entre as conformações. A docagem molecular é um método a qual prediz a orientação preferencial de encaixe de uma molécula à outra, com o objetivo de formar um complexo receptor-ligante estável. Este método pode ser simulado computacionalmente através dos algoritmos de docagem. 
 
-A docagem basicamente envolve duas moléculas, uma chamada de receptor, que normalmente é uma proteína, e um ligante que á a molécula complementar que se conecta ao receptor. A avaliação do resultado da ligação estabelecida entre as duas moleculas se dá pelo cálculo de duas propriedades, uma é chamada de energia livre de ligação (Free energy of binding) e a outra é chamada de RMSD (Root mean square deviation). Analisar esta interação entre o receptor e o ligante não é uma tarefa simples visto que estes são influenciados por uma série de fatores ambientais.
-
-Os algoritmos de docagem precisam levar em consideração todas as formas de ligação entre o ligante e o receptor, o que inclui a exploração de todos os graus de liberdade translacionais e rotacionais do ligante, além dos graus de liberdade conformacionais do receptor.
+A docagem basicamente envolve duas moléculas, uma chamada de receptor, que normalmente é uma proteína, e um ligante que á a molécula complementar que se conecta ao receptor. A avaliação do resultado da ligação estabelecida entre as duas moleculas se dá pelo cálculo de duas propriedades, uma é chamada de energia livre de ligação (Free energy of binding) e a outra é chamada de RMSD (Root mean square deviation). Analisar esta interação entre o receptor e o ligante não é uma tarefa simples visto que estes são influenciados por uma série de fatores ambientais. Os algoritmos de docagem precisam levar em consideração todas as formas de ligação entre o ligante e o receptor, o que inclui a exploração de todos os graus de liberdade translacionais e rotacionais do ligante, além dos graus de liberdade conformacionais do receptor.
 
 O principal desafio da realização de testes \emph{in-silico} é quando a flexibilidade da molécula receptora passa a ser considerada. Devido ao tamanho da molécula e sua complexidade, as simulações com receptores flexíveis requerem um grande esforço computacional para realização dos cálculos necessários \cite{art08}.
-Existem diversas abordagens para contornar este problema, e uma delas é a utilização de conjuntos de conformações gerados em simulações por Dinâmica Molecular (DM). Esta técnica consiste em gerar um conjunto de conformações de uma proteina em um intervalo de tempo, tendo como objetivo principal o estudo do comportamento dinâmico e também da geometria de uma proteína. Cada conformação em um instante de tempo específico é denominada como \emph{snapshot} e possui propriedades que podem ser calculadas. Com isso, é executado uma simulação de docagem molecular para cada \emph{snapshot} do conjunto gerado por DM.
+Existem diversas abordagens para contornar este problema, e uma delas é a utilização de conjuntos de conformações gerados em simulações por Dinâmica Molecular (DM). Esta técnica consiste em gerar um conjunto de conformações de uma proteina em um intervalo de tempo, tendo como objetivo principal o estudo do comportamento dinâmico e também da geometria de uma proteína. Cada conformação em um instante de tempo específico é denominada \emph{snapshot} e possui propriedades que podem ser calculadas. Com isso, é executado uma simulação de docagem molecular para cada \emph{snapshot} do conjunto gerado por DM.
 
 Todavia, apesar das metologias que geram um conjunto de conformações representativas do comportamento dinâmico de um receptor, a análise dos dados resultantes das simulações de docagem molecular ainda se faz de forma manual pelo especialista de domíno. A análise das interações ligante-receptor acaba se tornando humanamente inviável de ser feita para todos os resultados da docagem, pois o especialista possui um protocolo utilizado para avaliar de forma manual estes resultados, através dos valores de FEB (Free Energy of Binding) e RMSD (Root-mean-square Deviation), e também a geometria resultante.
 
-Estima-se que a análise dos dados resultantes, seguindo o protocolo utilizado pelo especialista, necessitaria de aproximadamente 516 horas (mais de 21 dias) para ser concluída para todos os resultados de apenas uma molécula ligante, se fosse utilizado uma dinâmica molecular de 3.100 conformações (levando em consideração o tempo médio de análise de 10 minutos por conformação). Este número se torna ainda mais expressivo para uma simulação utilizando uma dinâmica molecular de 20.000 conformações.
+Estima-se que a análise dos dados resultantes, seguindo o protocolo utilizado pelo especialista, necessitaria de aproximadamente 516 horas (mais de 21 dias) para ser concluída para todos os resultados de apenas uma molécula ligante, se fosse utilizado uma dinâmica molecular de 3.100 conformações (levando em consideração o tempo médio de análise de 10 minutos por conformação). Este número se torna ainda mais expressivo para uma simulação utilizando uma dinâmica molecular de 20.000 conformações, atualmente em uso no LABIO.
 
 
 \section{Motivação}
@@ -32,11 +30,11 @@ Dados da Organização Mundial da Saúde confirmam que a Tuberculose (TB) é a s
 
 Atualmente existem programas governamentais que se esforçam no controle e no combate à TB, que tem como objetivo principal evitar que a doença seja difundida entre a população. Para o tratamento da doença, existem três principais fármacos que são utilizados: isoniazida (INH), rifampicina (RMP) e pirazinamida (PZA). O tratamento realizado com estes fármacos tem duração, em média, de 6 meses. Se não houver colaboração do paciente e o tratamento for interrompido de forma precoce, pode gerar bactérias resistentes à estes compostos químicos, sendo mais difíceis de combater. Devido aos efeitos colaterais destes medicamentos, muitas vezes o tratamento não é concluído adaquadamente, criando bactérias mais resistentes.
 
-O desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose. O processo de CADD, desenvolvimento de fármacos auxiliado por computador (do inglês CADD - \emph{Computer-aided drug design}), é utilizado em larga escala para testes \emph{in-silico}, com objetivo de identificar novos compostos que mostrem eficácia e minimizem os efetos colaterais usados aos pacientes.
+O desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose. O processo de CADD, desenvolvimento de fármacos auxiliado por computador (do inglês \emph{Computer-aided drug design}), é utilizado em larga escala para testes \emph{in-silico}, com objetivo de identificar novos compostos que mostrem eficácia e minimizem os efeitos colaterais aos pacientes.
 
 Além da motivação relacionada ao receptor InhA que está sendo utilizado neste trabalho, uma das principais motivações está em contribuir com a comunidade de bioinformática e com o LABIO da PUCRS na pesquisa e desenvolvimento de métodos para cura e controle desta doença, através do desenvolvimento de uma ferramenta que auxilie a análise dos dados resultantes de experimentos realizados. 
 
-A utilização da ferramenta desenvolvida neste trabalho permitirá ao especialista de domínio uma maior chance de identificar ligações estáveis em um menor período de tempo, sem que haja conhecimentos avançados de informática e sem necessitar de recursos computacionais de alta capacidade.
+Poranto, a utilização da ferramenta desenvolvida neste trabalho permitirá ao especialista de domínio uma maior chance de identificar ligações estáveis em um menor período de tempo, sem que haja conhecimentos avançados de informática e sem necessitar de recursos computacionais de alta capacidade.
 
 \section{Objetivos}
 \subsection{Objetivo geral}
@@ -44,7 +42,7 @@ O objetivo deste trabalho é contribuir com a análise dos resultados de simula�
 
 \subsection{Objetivos específicos}
 \begin{itemize}
-	\item Desenvolver uma ferramenta para preparação de dados de simulações de docagem molecular para carga no modelo OLAP.
+	\item Desenvolver um conjunto de scripts para preparação de dados de simulações de docagem molecular para carga no modelo OLAP.
 	\item Desenvolver um modelo OLAP baseado em um banco de dados utilizado para armazenamento de resultados de docagem molecular.
 	\item Permitir aos especialistas de domínio o cruzamento das informações de uma simulação por agrupamento de conformações.
 	\item Contribuir para que os resultados das simulações de docagem molecular possam ser analisados multidimensionalmente, facilitando a identificação de complexos receptor-ligantes estáveis.
@@ -55,11 +53,11 @@ O objetivo deste trabalho é contribuir com a análise dos resultados de simula�
 Este documento está organizado da seguinte maneira:
 
 \begin{itemize} 
-	\item O Capítulo 2 apresenta os conceitos fundamentais para entendimento do trabalho desenvolvido, como: processo de RDD, dinâmica molecular e o processo de docagem molecular. Ainda neste capítulo são apresentados conceitos de modelos multidimensionais OLAP e processo de ETL.
+	\item O Capítulo 2 apresenta os conceitos fundamentais para entendimento do trabalho desenvolvido, como: planejamento racional de fármacos, dinâmica molecular e o processo de docagem molecular. Ainda neste capítulo são apresentados conceitos de modelos multidimensionais OLAP e processo de ETL.
 	\item No Capítulo 3 são apresentadas breves descrições das ferramentas que foram empregadas para o desenvolvimento deste trabalho, como a linguagem Python e o Microsoft SQL Analysis Services respectivamente.
 	\item O Capítulo 4 descreve os elementos envolvidos na modelagem deste trabalho, bem como a fonte de dados utilizada para extração das informações.
 	\item No Capítulo 5 são apresentadas todas as etapas envolvidas no processo de desenvolvimento do trabalho, desde identificação de métricas utilizadas, desenvolvimento de scripts para processo de ETL, concepção e definição das dimensões do modelo multidimensional, até por fim apresentar a construção do modelo OLAP em si.
 	\item O Capítulo 6 apresenta as questões de negócio que foram possíveis responder utilizando o modelo OLAP desenvolvido e também as possibilidades de consultas e análise multidimensional dos dados.
-	\item No Capítulo 7 são apresentadas as conclusões deste trabalho.
-	\item O Capítulo 8 sugere algumas possibilidades para trabalhos futuros.
+	\item No Capítulo 7 são apresentadas as conclusões deste trabalho e também sugere algumas possibilidades para trabalhos futuros.
+	
 \end{itemize} 

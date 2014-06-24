@@ -2,9 +2,7 @@
 
 \section{Receptor Investigado}
 
-A Tuberculose, causada pela bactéria \emph{Mycobacterium tuberculosis}, é a segunda doença infecciosa que mais causa mortes em todo o mundo. 
-
-O tratamento com os principais fármacos utilizados atualmente tem duração, em média, de 6 meses e apresenta diversos efeitos colaterais. Muitas vezes o paciente interrompe precocemente o tratamento, propiciando o surgimento de bactérias resistentes aos compostos químicos. Em função disso, o desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose.
+A Tuberculose, causada pela bactéria \emph{Mycobacterium tuberculosis}, é a segunda doença infecciosa que mais causa mortes em todo o mundo. O tratamento com os principais fármacos utilizados atualmente tem duração, em média, de 6 meses e apresenta diversos efeitos colaterais. Muitas vezes o paciente interrompe precocemente o tratamento, propiciando o surgimento de bactérias resistentes aos compostos químicos. Em função disso, o desenvolvimento de novos fármacos ou a melhoria de compostos químicos já existentes é um esforço necessário para controle e combate a Tuberculose.
 
 Dentro deste cenário, o LABIO da PUCRS realiza pesquisas e estudos \emph{in-silico} utilizando como receptor a enzima InhA da \emph{Mycobacterium tuberculosis} e através de experimentos de docagem molecular procura identificar potenciais candidatos à fármaco. A Figura \ref{fig:inha} ilustra a estrutura 3D em formato de fita da proteína InhA.
 
@@ -60,18 +58,18 @@ Cada átomo da proteína está representado no \emph{data set} por três colunas
 \begin{table}[h]
 \caption{Estrutura do \emph{data set} contendo os dados resultantes de experimentos de docagem molecular para os ligantes TCL e ETH.}
 \label{tab:dataset}
-\scalebox{0.7}{
-\begin{tabular}{c|l|l|l|l|l|l|l|l}
-\hline
-\textbf{SS}   & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_x}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_y}} & \multicolumn{1}{c|}{\textbf{ALA\_1\_N\_z}} & \multicolumn{1}{c|}{\textbf{...}} & \multicolumn{1}{c|}{\textbf{ETHBESTFEB}} & \multicolumn{1}{c|}{\textbf{ETHBESTRMSD}} & \multicolumn{1}{c|}{\textbf{TCLBESTFEB}} & \multicolumn{1}{c}{\textbf{TCLBESTRMSD}} \\ \hline
-\textbf{1}    & 15.834                                     & -20.243                                    & 8.161                                      & ...                               & -8.74                                    & 3.79                                      & -10.52                                   & 5.52                                     \\ \hline
-\textbf{2}    & 15.641                                     & -20.046                                    & 8.011                                      & ...                               & -9.34                                    & 3.86                                      & -9.71                                    & 5.77                                     \\ \hline
-\textbf{3}    & 15.954                                     & -20.459                                    & 7.796                                      & ...                               & -9.38                                    & 3.60                                      & -9.86                                    & 5.45                                     \\ \hline
-\textbf{4}    & 16.321                                     & -20.608                                    & 7.448                                      & ...                               & -9.28                                    & 3.72                                      & -9.23                                    & 5.18                                     \\ \hline
-\textbf{...}  & ...                                        & ...                                        & ...                                        & ...                                         & ...                               & ...                                      & ...                                       & ...                                   \\ \hline
-\textbf{3100} & 18.591                                     & -17.334                                    & 11.449                                     & ...                               & -9.28                                    & 5.28                                      & 1.25                                     & 7.50                                     \\ \hline
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{cllllllll}
+\toprule
+\textbf{SS}   & \textbf{ALA\_1\_N\_x} & \textbf{ALA\_1\_N\_y} & \textbf{ALA\_1\_N\_z} & \textbf{...} & \textbf{ETHFEB} & \textbf{ETHRMSD} & \textbf{TCLFEB} & \textbf{TCLRMSD} \\ \midrule
+\textbf{1}    & 15.834                                     & -20.243                                    & 8.161                                      & ...                               & -8.74                                    & 3.79                                      & -10.52                                   & 5.52                                     \\ 
+\textbf{2}    & 15.641                                     & -20.046                                    & 8.011                                      & ...                               & -9.34                                    & 3.86                                      & -9.71                                    & 5.77                                     \\ 
+\textbf{3}    & 15.954                                     & -20.459                                    & 7.796                                      & ...                               & -9.38                                    & 3.60                                      & -9.86                                    & 5.45                                     \\ 
+\textbf{4}    & 16.321                                     & -20.608                                    & 7.448                                      & ...                               & -9.28                                    & 3.72                                      & -9.23                                    & 5.18                                     \\ 
+\textbf{...}  & ...                                        & ...                                        & ...                                        & ...                                         & ...                               & ...                                      & ...                                       & ...                                   \\ 
+\textbf{3100} & 18.591                                     & -17.334                                    & 11.449                                     & ...                               & -9.28                                    & 5.28                                      & 1.25                                     & 7.50                                     \\ \bottomrule 
 \end{tabular}
 }
-\end{table} 
+\end{table}
 
 Relacionando com o processo de ETL, o \emph{data set} recebido representa uma fonte de dados que deve ser utilizada para extração das informações relevantes para o negócio. Os dados contidos nele não possuem um tratamento, mas foi possível observar uma padronização de nomenclatura das colunas.

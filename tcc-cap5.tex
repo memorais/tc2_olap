@@ -28,6 +28,7 @@ A Tabela \ref{tab:questaoNegocio} descreve as questões de negócio que foram id
 \caption{Questões de negócio identificadas pelos especialistas com maior relevância para análise de experimentos de docagem}
 \label{tab:questaoNegocio}
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{@{}ll@{}}
 \toprule
 \textbf{ } & \multicolumn{1}{c}{\textbf{Questões de maior relevância para a análise de docagem}}		\\ \midrule
@@ -37,12 +38,13 @@ A Tabela \ref{tab:questaoNegocio} descreve as questões de negócio que foram id
 \textbf{4.} & Com base no item 3, identificar quais são os resíduos mais importantes;					\\
 \textbf{5.} & Com base no item 3, identificar quais grupos possuem melhores valores de FEB e RMSD.		\\ \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \section{Identificação de métricas}
 \label{sec:IdentificacaoDeMetricas}
 
-Durante as entrevistas realizadas, pode-se perceber que informações baseadas nas métricas de FEB e RMSD possuíam grande relevância para responder as questões de negócio. Entretanto foi necessário definir certas propriedades e limitações de valores para adequar os cálculos às necessidades do negócio. Dessa maneira, todas as definições citadas nesta seção foram estabelecidas em conjunto com os especialistas de domínio do LABIO, para que os resultados apresentados pudessem representar a realidade.
+Durante as entrevistas realizadas, pode-se perceber que informações baseadas nas métricas FEB e RMSD possuíam grande relevância para responder as questões de negócio. Entretanto foi necessário definir certas propriedades e limitações de valores para adequar os cálculos às necessidades do negócio. Dessa maneira, todas as definições citadas nesta seção foram estabelecidas em conjunto com os especialistas de domínio do LABIO, para que os resultados apresentados pudessem representar a realidade.
 
 O cálculo da FEB é um dos métodos utilizados pelos softwares de docagem que permite avaliar a interação receptor-ligante. Quanto menor for o resultado deste cálculo, mais favorável é a ligação estabelecida. Portanto, o valor estimado da FEB é utilizado como uma das métricas do modelo.
 
@@ -82,11 +84,11 @@ De acordo com o especialista de domínio, a interação entre um átomo do resí
 
 Além disso, uma outra restrição se aplica para os átomos de hidrogênio dos resíduos da molécula receptora. Por apresentarem um comportamento diferente, os átomos de hidrogênio são desconsiderados e não têm suas distâncias calculadas.
 
-Dessa forma, para cada resíduo do receptor deve ser calculada a distância Euclidiana tridimensional de seus átomos utilizando a equação \ref{eqt:distEuclid}, conforme descrito na seçÃo \ref{sec:IdentificacaoDeMetricas}. A partir daí, identifica-se a relevância de um resíduo para o experimento de docagem conforme o número de contatos que são estabelecidos entre seus átomos e o ligante. Quanto mais contatos, mais relevante o resíduo é para o experimento.
+Dessa forma, para cada resíduo do receptor deve ser calculada a distância Euclidiana tridimensional de seus átomos utilizando a equação \ref{eqt:distEuclid}, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. A partir daí, identifica-se a relevância de um resíduo para o experimento de docagem conforme o número de contatos que são estabelecidos entre seus átomos e o ligante. Quanto mais contatos, mais relevante o resíduo é para o experimento.
 
 As regras de classificação de relevância de um resíduo podem ser sumarizadas da seguinte forma:
 \begin{itemize}
-	\item Considerar como ontatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
+	\item Considerar como contatos somente as distâncias entre 2 e 4 {\AA}ngstr\"ons.
 	\item Desconsiderar distâncias inferiores a 2 {\AA}ngstr\"ons.
 	\item Desconsiderar átomos de hidrogênio.
 	\item Quanto maior for o número de contatos estabelecidos de um resíduo, mais relevante ele se torna para o experimento.
@@ -289,7 +291,9 @@ A modelagem proposta foi baseada na resolução das questões de negócio espec�
         \label{fig:ConcepcaoModeloOLAP}
 \end{figure}
 
-A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. Porém, como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}. Já as dimensões, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
+A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. As métricas de FEB e RMSD foram representadas na tabela fato pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo de valor médio.
+
+Como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}, estes realizando apenas o cálculo de somatório. Já as dimensões para os resíduos, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
 
 A dimensão ``DIM\_Ligante'' representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
 
@@ -513,9 +517,7 @@ A Figura \ref{fig:hierarGrupoLiganteExperimentoModelo} apresenta a composição 
 \section{Carga de dados no Analysis Services}
 \label{sec:CargaDeDadosNoAnalysisServices}
 
-Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste na execução de ambos. O primeiro deles nomeado como ``criaDadosDIMTempo'' tem como objetivo fornecer um \emph{script} SQL para inserção dos dados para a dimensão tempo. 
-
-O \emph{script} ``criaDadosDIMTempo'' recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O Algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do \emph{script} ``criaDadosDIMTempo''. 
+Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste na execução de ambos. O primeiro deles nomeado como ``criaDadosDIMTempo'' tem como objetivo fornecer um \emph{script} SQL para inserção dos dados para a dimensão tempo. O \emph{script} ``criaDadosDIMTempo'' recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O Algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do \emph{script} ``criaDadosDIMTempo''. 
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
