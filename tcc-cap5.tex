@@ -196,10 +196,10 @@ O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do \
 \label{alg:CalculoDistancia}
 {\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
-	\STATE Seja R uma lista composta por resíduos e seus átomos
+	\STATE Seja R uma lista composta por resíduos, número de ordem e seus átomos
 	\STATE Seja L uma lista de ligantes
 	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
-	\STATE Seja r uma tupla com a posição x, y e z de um resíduo juntamente com seu átomo em R
+	\STATE Seja r uma tupla com a posição x, y e z de um resíduo juntamente com o número de ordem e seu átomo em R
 	\STATE Seja l um ligante de L
 	\STATE Seja d um \emph{snapshot} da conformação da base D
 	\FOR{cada d em D}
