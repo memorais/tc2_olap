@@ -307,7 +307,7 @@ Como foi elencado um conjunto contendo 10 resíduos mais importantes para o expe
 
 A dimensão ``DIM\_Ligante'' representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
 
-O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste caso o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão ``DIM\_Tempo''. 
+O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molécula durante 3.100 picosegundos (ps). Neste caso o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptora no instante de 500ps. Com isso, o tempo foi representado pela dimensão ``DIM\_Tempo''. 
 
 A dimensão ``DIM\_Modelo\_Dinamico'' serve para o especialista de domínio identificar qual foi a dinâmica utilizada no experimento. No caso deste trabalho, foi utilizada apenas uma dinâmica de 3.100 conformações.
 
@@ -540,7 +540,7 @@ Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste n
 	\STATE Seja c um contador
 	\FOR{iteração em P}
 		\STATE Incrementa mais um em c
-		\IF{c igual a 3100}
+		\IF{c igual a 1000}
 			\STATE Armazena o valor de P em L
 			\STATE Grave o comando de inserção baseado em L
 			\STATE Esvazie L
@@ -628,7 +628,7 @@ Por fim, após a execução completa do \emph{script}, é gerado os comandos de 
 }
 \end{algorithm}
 
-Em suma, os scripts desenvolvidos para auxiliar no processo de ETL utilizados durante este trabalho foram executados na seguinte sequência:
+Em suma, os \emph{scripts} desenvolvidos para auxiliar no processo de ETL utilizados durante este trabalho foram executados na seguinte sequência:
 \begin{enumerate}
     \item Execução do \emph{script} ``ajustaColunasDocking'' - Separar o resíduo NAH e cria um \emph{data set} auxiliar.
     \item Execução do \emph{script} ``calculaDistancia'' - Calcular distância Euclidiana par os dois \emph{data sets}.
