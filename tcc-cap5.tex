@@ -171,9 +171,9 @@ O algoritmo ``ajustaColunasDocking'' foi utilizado para remover os dados referen
 
 Neste ponto é importante ressaltar que ambos os arquivos tiveram somente suas colunas alteradas e mantiveram um total de 3.100 linhas, representando a trajetória das conformações da molécula receptora.
 
-Com os arquivos devidamente separados de acordo com os critérios estabelecidos, foi possível realizar o cálculo da distância Euclidiana. Para isso, foi desenvolvido um segundo script, nomeado ``calculaDistancia'', que realiza o cálculo de todo o conjunto de átomos existente em um \emph{data set} tendo como base os critérios definidos previamente para classificação da relevância dos resíduos.
+Com os arquivos devidamente separados de acordo com os critérios estabelecidos, foi possível realizar o cálculo da distância Euclidiana. Para isso, foi desenvolvido um segundo \emph{script}, nomeado ``calculaDistancia'', que realiza o cálculo de todo o conjunto de átomos existente em um \emph{data set} tendo como base os critérios definidos previamente para classificação da relevância dos resíduos.
 
-Para execução do script ``calculaDistancia'', são necessários três parâmetros de entrada, sendo eles:
+Para execução do \emph{script} ``calculaDistancia'', são necessários três parâmetros de entrada, sendo eles:
 \begin{enumerate}
 	\item Arquivo contendo lista de átomos do resíduo da molécula;
 	\item Arquivo contendo lista de átomos do(s) ligante(s);
@@ -187,8 +187,8 @@ Para execução do script ``calculaDistancia'', são necessários três parâmet
 %       
 %-----------------------------------
 
-A partir dos três arquivos de entrada é gerado um arquivo de saída em formato CSV contendo as seguintes informações: número do snapshot, nome do resíduo, nome do ligante, resultado do cálculo da distância, classificação da distância (se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons).
-O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do script "calculaDistancia.
+A partir dos três arquivos de entrada é gerado um arquivo de saída em formato CSV contendo as seguintes informações: número do \emph{snapshot}, nome do resíduo, nome do ligante, resultado do cálculo da distância, classificação da distância (se foi menor que 2 ou está entre 2 e 4 {\AA}ngstr\"ons).
+O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do \emph{script} "calculaDistancia.
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
@@ -196,10 +196,10 @@ O Algoritmo \ref{alg:CalculoDistancia} descreve o processo de funcionamento do s
 \label{alg:CalculoDistancia}
 {\fontsize{10}{10}\selectfont
 \begin{algorithmic}[1]
-	\STATE Seja R uma lista de resíduos
+	\STATE Seja R uma lista composta por resíduos e seus átomos
 	\STATE Seja L uma lista de ligantes
 	\STATE Seja D a base de dados dos resultados da simulação de docagem molecular
-	\STATE Seja r um resíduo de R
+	\STATE Seja r uma tupla com a posição x, y e z de um resíduo juntamente com seu átomo em R
 	\STATE Seja l um ligante de L
 	\STATE Seja d um \emph{snapshot} da conformação da base D
 	\FOR{cada d em D}
@@ -331,9 +331,9 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule
-	Id            & INT           & x           & Identificador da dimensão grupo   \\
-	Descricao     & TEXT       &             & Descrição do grupo           		\\
-	IdAgrupamento & INT           &             & Identificador do agrupamento 		\\ \bottomrule
+	Id            & Numeric           & x           & Identificador da dimensão grupo   \\
+	Descricao     & Char       &             & Descrição do grupo           		\\
+	IdAgrupamento & Numeric          &             & Identificador do agrupamento 		\\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -358,32 +358,32 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} & \textbf{Tipo} & \textbf{FK} & \textbf{Descrição}           				\\ \midrule
-	FEB            			 & INT        &             & Valor médio de FEB			    \\
-	RMSD    				 & INT        &             & Valor médio de RMSD          		\\
-	NumeroConexoesR1 	     & INT        &             & Numero de ligações do resíduo 1   \\
-	NumeroConexoesR2 	     & INT        &             & Numero de ligações do resíduo 2   \\
-	NumeroConexoesR3 	     & INT        &             & Numero de ligações do resíduo 3   \\
-	NumeroConexoesR4 	     & INT        &             & Numero de ligações do resíduo 4   \\
-	NumeroConexoesR5 	     & INT        &             & Numero de ligações do resíduo 5   \\
-	NumeroConexoesR6 	     & INT        &             & Numero de ligações do resíduo 6   \\
-	NumeroConexoesR7 	     & INT        &             & Numero de ligações do resíduo 7   \\
-	NumeroConexoesR8 	     & INT        &             & Numero de ligações do resíduo 8   \\
-	NumeroConexoesR9 	     & INT        &             & Numero de ligações do resíduo 9   \\
-	NumeroConexoesR10 	     & INT        &             & Numero de ligações do resíduo 10  \\
-	Instante 	    		 & INT        &  x          & Identificador do instante de tempo  \\
-	IdLigante 	    		 & INT        &  x          & Identificador do Ligante 			\\
-	IdR1 				     & INT        &  x          & Identificador do resíduo 1   	\\
-	IdR2 				     & INT        &  x          & Identificador do resíduo 2   	\\
-	IdR3 				     & INT        &  x          & Identificador do resíduo 3   	\\
-	IdR4 				     & INT        &  x          & Identificador do resíduo 4   	\\
-	IdR5 				     & INT        &  x          & Identificador do resíduo 5   	\\
-	IdR6 				     & INT        &  x          & Identificador do resíduo 6   	\\
-	IdR7 				     & INT        &  x          & Identificador do resíduo 7   	\\
-	IdR8 				     & INT        &  x          & Identificador do resíduo 8   	\\
-	IdR9 				     & INT        &  x          & Identificador do resíduo 9   	\\
-	IdR10			 	     & INT        &  x          & Identificador do resíduo 10  	\\	
-	IdGrupo			 	     & INT        &  x          & Identificador do grupo  		\\	
-	IdExperimento 			 & INT        &  x          & Identificador do experimento 	\\ \bottomrule
+	FEB            			 & Numeric        &             & Valor médio de FEB			    \\
+	RMSD    				 & Numeric        &             & Valor médio de RMSD          		\\
+	NumeroConexoesR1 	     & Numeric        &             & Numero de ligações do resíduo 1   \\
+	NumeroConexoesR2 	     & Numeric        &             & Numero de ligações do resíduo 2   \\
+	NumeroConexoesR3 	     & Numeric        &             & Numero de ligações do resíduo 3   \\
+	NumeroConexoesR4 	     & Numeric        &             & Numero de ligações do resíduo 4   \\
+	NumeroConexoesR5 	     & Numeric        &             & Numero de ligações do resíduo 5   \\
+	NumeroConexoesR6 	     & Numeric        &             & Numero de ligações do resíduo 6   \\
+	NumeroConexoesR7 	     & Numeric        &             & Numero de ligações do resíduo 7   \\
+	NumeroConexoesR8 	     & Numeric        &             & Numero de ligações do resíduo 8   \\
+	NumeroConexoesR9 	     & Numeric        &             & Numero de ligações do resíduo 9   \\
+	NumeroConexoesR10 	     & Numeric        &             & Numero de ligações do resíduo 10  \\
+	Instante 	    		 & Numeric        &  x          & Identificador do instante de tempo  \\
+	IdLigante 	    		 & Numeric        &  x          & Identificador do Ligante 			\\
+	IdR1 				     & Numeric        &  x          & Identificador do resíduo 1   	\\
+	IdR2 				     & Numeric        &  x          & Identificador do resíduo 2   	\\
+	IdR3 				     & Numeric        &  x          & Identificador do resíduo 3   	\\
+	IdR4 				     & Numeric        &  x          & Identificador do resíduo 4   	\\
+	IdR5 				     & Numeric        &  x          & Identificador do resíduo 5   	\\
+	IdR6 				     & Numeric        &  x          & Identificador do resíduo 6   	\\
+	IdR7 				     & Numeric        &  x          & Identificador do resíduo 7   	\\
+	IdR8 				     & Numeric        &  x          & Identificador do resíduo 8   	\\
+	IdR9 				     & Numeric        &  x          & Identificador do resíduo 9   	\\
+	IdR10			 	     & Numeric        &  x          & Identificador do resíduo 10  	\\	
+	IdGrupo			 	     & Numeric        &  x          & Identificador do grupo  		\\	
+	IdExperimento 			 & Numeric        &  x          & Identificador do experimento 	\\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -399,7 +399,7 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule			
-	Instante 		& INT 	       &  x           & Instante de tempo 					\\ \bottomrule
+	Instante 		& Numeric 	       &  x           & Instante de tempo 					\\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -415,9 +415,9 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} & \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		   \\ \midrule
-	Id            & INT           & x           & Identificador da dimensão ligante    \\
-	Descricao     & TEXT       &             & Descrição do ligante           	   \\
-	Nome 		  & TEXT       &             & Nome do ligante 					   \\ \bottomrule
+	Id            & Numeric           & x           & Identificador da dimensão ligante    \\
+	Descricao     & Char      &             & Descrição do ligante           	   \\
+	Nome 		  & Char       &             & Nome do ligante 					   \\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -441,9 +441,9 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           			\\ \midrule
-	Id            	& INT           & x           & Identificador da dimensão experimento   \\
-	Descricao     	& TEXT       &             & Descrição do tipo de experimento        \\
-	DataHora 		& INT 		    &             & Data e hora do experimento executado 	\\ \bottomrule
+	Id            	& Numeric           & x           & Identificador da dimensão experimento   \\
+	Descricao     	& Char       &             & Descrição do tipo de experimento        \\
+	DataHora 		& Date 		    &             & Data e hora do experimento executado 	\\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -466,8 +466,8 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           			\\ \midrule
-	Id            	& INT           & x           & Identificador da dimensão modelo dinamico   \\
-	Descricao     	& TEXT       &             & Descrição da dinamica utilizada        \\ \bottomrule
+	Id            	& Numeric           & x           & Identificador da dimensão modelo dinamico   \\
+	Descricao     	& Char       &             & Descrição da dinamica utilizada        \\ \bottomrule
 	\end{tabular}
 \end{table}
 
@@ -490,9 +490,9 @@ A seguir descrevem-se todas as definições e propriedades levadas em considera�
 	\begin{tabular}{@{}llll@{}}
 	\toprule
 	\textbf{Nome} 	& \textbf{Tipo} & \textbf{PK} & \textbf{Descrição}           		\\ \midrule
-	Id            	& INT           & x           & Identificador da dimensão residuo   \\
-	Nome 		  & TEXT       &             & Nome do residuo 					   	\\ 
-	Tipo          & TEXT       &             & Tipo do residuo           	   		\\ \bottomrule   
+	Id            	& Numeric           & x           & Identificador da dimensão residuo   \\
+	Nome 		  & Char       &             & Nome do residuo 					   	\\ 
+	Tipo          & Char       &             & Tipo do residuo           	   		\\ \bottomrule   
 	\end{tabular}
 \end{table}
 	
@@ -517,7 +517,7 @@ A Figura \ref{fig:hierarGrupoLiganteExperimentoModelo} apresenta a composição 
 \section{Carga de dados no Analysis Services}
 \label{sec:CargaDeDadosNoAnalysisServices}
 
-Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste na execução de ambos. O primeiro deles nomeado como ``criaDadosDIMTempo'' tem como objetivo fornecer um \emph{script} SQL para inserção dos dados para a dimensão tempo. O \emph{script} ``criaDadosDIMTempo'' recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela do banco de dados. A saída é um comando de \emph{INSERT} do SQL para gravação na base de dados. O Algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do \emph{script} ``criaDadosDIMTempo''. 
+Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste na execução de ambos. O primeiro deles nomeado como ``criaDadosDIMTempo'' tem como objetivo fornecer um \emph{script} SQL para inserção dos dados para a dimensão tempo. O \emph{script} ``criaDadosDIMTempo'' recebe apenas um parâmetro de entrada para execução que é o número de picosegundos que vão ser populados na tabela do banco de dados. A saída é um comando de \emph{INSERT} em SQL para gravação na base de dados, obedecendo a limitação do \emph{SQL Server} de 1000 linhas para cada inserção de múltiplas linhas. O Algoritmo \ref{alg:criaDadosDIMTempo} descreve o funcionamento do \emph{script} ``criaDadosDIMTempo''. 
 
 \floatname{algorithm}{Algoritmo}
 \begin{algorithm}[H]
