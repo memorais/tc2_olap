@@ -297,7 +297,7 @@ Como foi elencado um conjunto contendo 10 resíduos mais importantes para o expe
 
 A dimensão ``DIM\_Ligante'' representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
 
-O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste cas o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão ``DIM\_Tempo''. 
+O conjunto de conformações utilizado é de 3.100 conformações, a qual representa a trajetória dinâmica da molecula durante 3.100 picosegundos (ps). Neste caso o número da conformação se equivale ao instante de tempo, por exemplo, o snapshot 500 refere-se a conformação da molécula receptorna no instante de 500ps. Com isso, o tempo foi representado pela dimensão ``DIM\_Tempo''. 
 
 A dimensão ``DIM\_Modelo\_Dinamico'' serve para o especialista de domínio identificar qual foi a dinâmica utilizada no experimento. No caso deste trabalho, foi utilizada apenas uma dinâmica de 3.100 conformações.
 
@@ -306,9 +306,9 @@ Um experimento de docagem utiliza agrupamentos para determinadas conformações,
 Por fim, a dimensão ``DIM\_Experimento'' serve para o especialista de domínio identificar as informações relacionadas ao experimento executado. Um mesmo experimento de docagem poder ser executado mais de uma vez utilizando modelos dinâmicos diferentes. Com esta dimensão os experimentos são separados com base nas informações providas pelo especialista de domínio.
 
 
-\section{Construção do modelo no Analisys Services}
+\section{Construção do modelo no Analysis Services}
 
-A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysys Services e o banco de dados Microsoft SQL Server. A Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
+A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysis Services e o banco de dados Microsoft SQL Server. A Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
 
 \begin{figure}[h]
         \center
@@ -530,7 +530,7 @@ Para o processo de carga dos dados foram desenvolvidos dois scripts e consiste n
 	\STATE Seja c um contador
 	\FOR{iteração em P}
 		\STATE Incrementa mais um em c
-		\IF{c igual a 1000}
+		\IF{c igual a 3100}
 			\STATE Armazena o valor de P em L
 			\STATE Grave o comando de inserção baseado em L
 			\STATE Esvazie L
