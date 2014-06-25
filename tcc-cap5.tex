@@ -291,19 +291,7 @@ A modelagem proposta foi baseada na resolução das questões de negócio espec�
         \label{fig:ConcepcaoModeloOLAP}
 \end{figure}
 
-A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. As outras métricas de FEB médio e RMSD médio foram criadas no cubo e representadas pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo de valor médio conforme descrito na fórmula \ref{eqt:febMedia} e \ref{eqt:rmsdMedia} criadas dentro do \emph{Microsoft Analisys Services}.
-
-\begin{equation}
-\label{eqt:febMedia}
-        RMSDMedio = [RMSD]/[Measures].[FATO Count]
-\end{equation}
-
-\begin{equation}
-\label{eqt:rmsdMedia}
-        FEBMedio = [FEB]/[Measures].[FATO Count]
-\end{equation}
-
-Como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}, estes realizando apenas o cálculo de somatório. Já as dimensões para os resíduos, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
+A tabela fato foi projetada tendo como base as métricas identificadas na Seção \ref{sec:IdentificacaoDeMetricas}, ou seja: FEB, RMSD e número de contatos. Porém, como foi elencado um conjunto contendo 10 resíduos mais importantes para o experimento, a métrica de número de contatos deve valer para cada um dos resíduos, apresentando o número de ligações entre o resíduo e o ligante. Para representar isso na fato, foram criadas as métricas \emph{``NumeroConexoesR1'', ``NumeroConexoesR2'', ..., ``NumeroConexoesR10''}, estes realizando apenas o cálculo de somatório. Já as dimensões para os resíduos, foram representadas por ``DIM\_R1'' até ``DIM\_R10''.
 
 A dimensão ``DIM\_Ligante'' representa os ligantes utilizados no experimento, neste caso o TCL e ETH.
 
@@ -318,7 +306,19 @@ Por fim, a dimensão ``DIM\_Experimento'' serve para o especialista de domínio 
 
 \section{Construção do modelo no Analysis Services}
 
-A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysis Services e o banco de dados Microsoft SQL Server. A Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
+A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysis Services e o banco de dados Microsoft SQL Server. 
+
+Inicialmente as métricas derivadas de FEB médio e RMSD médio foram criadas e representadas pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo da média aritmética. As fórmulas utilizadas para os cálculos dos atributos ``FEBMedio'' e ``RMSDMedio'' estão representadas em \ref{eqt:febMedia} e \ref{eqt:rmsdMedia} respectivamete, enquanto a Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
+
+\begin{equation}
+\label{eqt:febMedia}
+        RMSDMedio = [RMSD]/[Measures].[FATO Count]
+\end{equation}
+
+\begin{equation}
+\label{eqt:rmsdMedia}
+        FEBMedio = [FEB]/[Measures].[FATO Count]
+\end{equation}
 
 \begin{figure}[h]
         \center
