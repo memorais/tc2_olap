@@ -17,15 +17,15 @@
 %  Encontrou se casos que estavam e nao estavam na lista, os que nao apareciam na lista constituem de residuos que se ficam ˜proximos”ao sitio de ligação, mas que na realidade estão fora do sítio.
 % descrever como  adicionar novas dimensoes baseadas em novos residuos
 %-------------------------------------------------------
-\section{Levantamento de questões de negócio}
+\section{Levantamento de questões de pesquisa}
 \label{sec:LevantamentoDeQuestoesDeNegocio}
 
-Para possibilitar a construção do modelo OLAP, primeiramente foi necessário identificar e definir as questões de negócio que seriam relevantes sob o ponto de vista do especialista de domínio. Em virtude disso, o levantamento destes dados foi feito por meio de entrevistas com os especialistas do LABIO.
+Para possibilitar a construção do modelo OLAP, primeiramente foi necessário identificar e definir as questões de pesquisa que seriam relevantes sob o ponto de vista do especialista de domínio. Em virtude disso, o levantamento destes dados foi feito por meio de entrevistas com os especialistas do LABIO.
 
-A Tabela \ref{tab:questaoNegocio} descreve as questões de negócio que foram identificadas como sendo mais relevantes para execução de análise de experimentos de docagem realizados no LABIO. 
+A Tabela \ref{tab:questaoNegocio} descreve as questões de pesquisa que foram identificadas como sendo mais relevantes para execução de análise de experimentos de docagem realizados no LABIO. 
 
 \begin{table}[h]
-\caption{Questões de negócio identificadas pelos especialistas com maior relevância para análise de experimentos de docagem}
+\caption{Questões de pesquisa identificadas pelos especialistas com maior relevância para análise de experimentos de docagem}
 \label{tab:questaoNegocio}
 \centering
 \resizebox{\textwidth}{!}{%
@@ -44,7 +44,7 @@ A Tabela \ref{tab:questaoNegocio} descreve as questões de negócio que foram id
 \section{Identificação de métricas}
 \label{sec:IdentificacaoDeMetricas}
 
-Durante as entrevistas realizadas, pode-se perceber que informações baseadas nas métricas FEB e RMSD possuíam grande relevância para responder as questões de negócio. Entretanto foi necessário definir certas propriedades e limitações de valores para adequar os cálculos às necessidades do negócio. Dessa maneira, todas as definições citadas nesta seção foram estabelecidas em conjunto com os especialistas de domínio do LABIO, para que os resultados apresentados pudessem representar a realidade.
+Durante as entrevistas realizadas, pode-se perceber que informações baseadas nas métricas FEB e RMSD possuíam grande relevância para responder as questões de pesquisa. Entretanto foi necessário definir certas propriedades e limitações de valores para adequar os cálculos às necessidades do negócio. Dessa maneira, todas as definições citadas nesta seção foram estabelecidas em conjunto com os especialistas de domínio do LABIO, para que os resultados apresentados pudessem representar a realidade.
 
 O cálculo da FEB é um dos métodos utilizados pelos softwares de docagem que permite avaliar a interação receptor-ligante. Quanto menor for o resultado deste cálculo, mais favorável é a ligação estabelecida. Portanto, o valor estimado da FEB é utilizado como uma das métricas do modelo.
 
@@ -255,7 +255,7 @@ Dos 15 resíduos identificados pelo algoritmo, 10 deles estão presentes na list
         \caption{Plotagem dos 15 resíduos identificados pelo algoritmo de classificação por relevância. A cor cinza representa os resíduos que são relevantes e aparecem na listagem do especialista de domínio, já os resíduos que estão em vermelho não estão presentes na lista.}
 \end{figure}
 
-Com base nos algoritmos executados e nas comparações realizadas, foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de negócio. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes}, a qual foi utilizada como base para a modelagem OLAP.
+Com base nos algoritmos executados e nas comparações realizadas, foi possível elencar os 10 principais resíduos mais relevantes para responder às questões de pesquisa. O conjunto final está listado na Tabela \ref{tab:listaProvavelRelevantes}, a qual foi utilizada como base para a modelagem OLAP.
 
 \begin{table}[h]
 \caption{Conjunto final de resíduos relevantes para experimentos de docagem molecular considerando como receptor a enzima da InhA e ligantes TCL e ETH.}
@@ -280,9 +280,9 @@ MET\_198                    & Metionina                \\ \bottomrule
 \section{Modelagem da solução}
 \label{sec:ModelagemDaSolucao}
 
-Para atender às questões de negócio levantadas pelos especialistas de domínio conforme descrito na Tabela \ref{tab:questaoNegocio}, foi proposto um modelo de dados do tipo estrela contendo uma tabela fato e quinze dimensões. 
+Para atender às questões de pesquisa levantadas pelos especialistas de domínio conforme descrito na Tabela \ref{tab:questaoNegocio}, foi proposto um modelo de dados do tipo estrela contendo uma tabela fato e quinze dimensões. 
 
-A modelagem proposta foi baseada na resolução das questões de negócio específicas para o cenário descrito neste trabalho, porém este mesmo modelo pode ser empregado em outros tipos de experimentos. A Figura \ref{fig:ConcepcaoModeloOLAP} ilustra o projeto inicial da modelagem OLAP.
+A modelagem proposta foi baseada na resolução das questões de pesquisa específicas para o cenário descrito neste trabalho, porém este mesmo modelo pode ser empregado em outros tipos de experimentos. A Figura \ref{fig:ConcepcaoModeloOLAP} ilustra o projeto inicial da modelagem OLAP.
 
 \begin{figure}[h]
         \center
@@ -306,7 +306,7 @@ Por fim, a dimensão ``DIM\_Experimento'' serve para o especialista de domínio 
 
 \section{Construção do modelo no Analysis Services}
 
-A modelagem inicial do OLAP se mostrou apto para responder as questões de negócio que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysis Services e o banco de dados Microsoft SQL Server. 
+A modelagem inicial do OLAP se mostrou apto para responder as questões de pesquisa que foram levantadas no início do projeto. Com isso, modelo foi construído utilizando as ferramentas Microsoft Analysis Services e o banco de dados Microsoft SQL Server. 
 
 Inicialmente as métricas derivadas de FEB médio e RMSD médio foram criadas e representadas pelos atributos ``FEBMedio'' e ``RMSDMedio'', ambos utilizando o cálculo da média aritmética. As fórmulas utilizadas para os cálculos dos atributos ``FEBMedio'' e ``RMSDMedio'' estão representadas em \ref{eqt:febMedia} e \ref{eqt:rmsdMedia} respectivamete. A Figura \ref{fig:ModeloOLAP} ilustra o modelo já criado no Analysis Services.
 
