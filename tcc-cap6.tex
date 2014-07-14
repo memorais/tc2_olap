@@ -5,7 +5,7 @@ Como resultado do desenvolvimento do modelo OLAP e dos processos de ETL através
 
 Nos primeiros testes realizados no cubo de dados, em conjunto com os especialistas de domínio, foi identificado que através da análise da FEB média utilizando como ligante o TCL o resultado agregado apresentava um valor positivo. 
 
-Inicialmente acreditou-se que poderia ter sido algum problema durante o processo de ETL ou alguma regra de negócio que não estava sendo devidamente contemplada. Porém, ao avaliar o \emph{data set} original contendo os dados de experimentos de docagem molecular, viu-se que grande parte dos melhores valores resultantes de FEB para o ligante TCL eram posivitos.
+Inicialmente acreditou-se que poderia ter sido algum problema durante o processo de ETL ou alguma regra que não estava sendo devidamente contemplada. Porém, ao avaliar o \emph{data set} original contendo os dados de experimentos de docagem molecular, viu-se que grande parte dos melhores valores resultantes de FEB para o ligante TCL eram posivitos.
 
 Com isso, os especialistas de domínio definiram que qualquer resultado de FEB que apresentasse valor positivo poderia ser desconsiderado. Neste caso, foi sugerido que tivessem seus valores alterados para zero, conforme descrito na seção \ref{sec:IdentificacaoDeMetricas}. Em função desta definição os \emph{scripts} impactados foram devidamente alterados, sendo necessário realizar uma nova carga de dados e gerar novamente o cubo de dados. 
 
@@ -27,7 +27,7 @@ Apartir deste momento, foi utilizada a integração da ferramenta Microsoft Exce
         \label{fig:excelFull}
 \end{figure}
 
-Para responder a primeira questão de negócio, foram selecionados os elementos ``Grupo'' e ``Conformações''. Desta forma é possível visualizar o total de conformações separadas por tipo de agrupamento. A Figura \ref{fig:questao1} ilustra o resultado desta consulta.
+Para responder a primeira questão de pesquisa, foram selecionados os elementos ``Grupo'' e ``Conformações''. Desta forma é possível visualizar o total de conformações separadas por tipo de agrupamento. A Figura \ref{fig:questao1} ilustra o resultado desta consulta.
 
 \begin{figure}[h]
         \center
@@ -36,7 +36,7 @@ Para responder a primeira questão de negócio, foram selecionados os elementos 
         \label{fig:questao1}
 \end{figure}
 
-Para responder a segunda questão de negócio, foram selecionados os elementos ``Grupo'', ``Conformações'', ``FEBMedio'' e ``RMSDMedio''. Para este caso, é possível obter o comportamento das conformações baseado nas métricas de FEB e RMSD, podendo ser agregadas por agrupamento ou não. A Figura \ref{fig:questao2} ilusta o resultado desta consulta.
+Para responder a segunda questão de pesquisa, foram selecionados os elementos ``Grupo'', ``Conformações'', ``FEBMedio'' e ``RMSDMedio''. Para este caso, é possível obter o comportamento das conformações baseado nas métricas de FEB e RMSD, podendo ser agregadas por agrupamento ou não. A Figura \ref{fig:questao2} ilusta o resultado desta consulta.
 
 \begin{figure}[h]
         \center
@@ -45,7 +45,7 @@ Para responder a segunda questão de negócio, foram selecionados os elementos `
         \label{fig:questao2}
 \end{figure}
 
-Para responder a terceira questão de negócio, foram selecionados os elementos ``Grupo'', ``Ligantes'', e ``Numero Contatos R1'' até ``Numero Contatos R10''. Dessa forma, é possível avaliar as conformações e grupos que possuem o maior número de contatos que os ligantes estabeleceram com os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao3} ilustra o resultado desta consulta exibindo apenas sete dos dez principais resíduos.
+Para responder a terceira questão de pesquisa, foram selecionados os elementos ``Grupo'', ``Ligantes'', e ``Numero Contatos R1'' até ``Numero Contatos R10''. Dessa forma, é possível avaliar as conformações e grupos que possuem o maior número de contatos que os ligantes estabeleceram com os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao3} ilustra o resultado desta consulta exibindo apenas sete dos dez principais resíduos.
 
 \begin{figure}[h]
         \center
@@ -54,7 +54,7 @@ Para responder a terceira questão de negócio, foram selecionados os elementos 
         \label{fig:questao3}
 \end{figure}
 
-Para responder a quarta questão de negócio, foram selecionados os elementos ``Grupo'' e ``Numero Contatos R1'' até ``Numero Contatos R10''. Neste caso, é possível identificar quais são os resíduos mais importantes baseado nas conformações/grupos que os estabeleceram um maior numero de contatos entre os ligantes e os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao4} ilustra esta consulta, exibindo apenas para dois agrupamentos. 
+Para responder a quarta questão de pesquisa, foram selecionados os elementos ``Grupo'' e ``Numero Contatos R1'' até ``Numero Contatos R10''. Neste caso, é possível identificar quais são os resíduos mais importantes baseado nas conformações/grupos que os estabeleceram um maior numero de contatos entre os ligantes e os dez resíduos mais relevantes para o experimento. A Figura \ref{fig:questao4} ilustra esta consulta, exibindo apenas para dois agrupamentos. 
 
 \begin{figure}[h]
         \center
@@ -63,7 +63,7 @@ Para responder a quarta questão de negócio, foram selecionados os elementos ``
         \label{fig:questao4}
 \end{figure}
 
-Enfim, para responder a quinta questão de negócio, foram selecionados os elementos ``Grupo'', ``FEBMedio'', ``RMSDMedio'' e ``Experimento''. Com isso, é possível identificar quais agrupamentos possuem melhores valores de FEB e RMSD de acordo com o tipo de experimento realizado. A Figura \ref{fig:questao5} ilustra esta consulta.
+Enfim, para responder a quinta questão de pesquisa, foram selecionados os elementos ``Grupo'', ``FEBMedio'', ``RMSDMedio'' e ``Experimento''. Com isso, é possível identificar quais agrupamentos possuem melhores valores de FEB e RMSD de acordo com o tipo de experimento realizado. A Figura \ref{fig:questao5} ilustra esta consulta.
 
 \begin{figure}[h]
         \center
